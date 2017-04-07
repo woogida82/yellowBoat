@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+    
+    <select id="selectMenu" resultType="kr.co.fishing.bko.beans.MenuBean">
+        SELECT DISTINCT M.MENU_IDX, M.MENU_ID, M.SUB_ID, M.MENU_NM, M.URI
+          FROM T_MENU M
+            INNER JOIN T_MENU_RULE MR ON MR.MENU_IDX = M.MENU_IDX
+         WHERE
+               M.USE_YN     = 'Y'
+           AND MR.AUTH_TYPE IN
+           <foreach item="item" index="index" collection="adminBean.menuAuthList" open="(" separator="," close=")">
+             #{item}
+           </foreach>
+         ORDER BY M.MENU_ID, M.VIEW_NO
+    </select>
+    
+    
+    <select id="selectInfo" resultType="kr.co.fishing.bko.common.beans.AdminBean">
+        SELECT
+             ADMIN_NM
+            ,ADMIN_ID
+            ,DEPT
+            ,TEAM
+            ,POST
+            ,DUTY
+            ,MENU_AUTH
+        FROM T_ADMIN
+        WHERE ADMIN_ID = #{adminBean.adminId}
+    </select>
+    
+    <update id="updateInfo">
+        UPDATE T_ADMIN SET
+             ADMIN_NM = #{adminNm}
+            ,DEPT = #{dept}
+            ,TEAM = #{team}
+            ,POST = #{post}
+            ,DUTY = #{duty}
+            ,MENU_AUTH = #{menuAuth}
+            ,UPDATE_ID = #{adminBean.adminId}
+            ,UPDATE_TIME = NOW()
+        WHERE ADMIN_ID = #{adminBean.adminId}
+    </update>
+    
+    <select id="matchPass" resultType="int">
+        SELECT COUNT(1) FROM T_ADMIN WHERE ADMIN_ID = #{adminBean.adminId} AND AES128_DECRYPT(ADMIN_PW) = #{adminPw}
+    </select>
+    
+    <update id="updatePass">
+        UPDATE T_ADMIN SET
+             ADMIN_PW = AES128_ENCRYPT(#{newPw})
+            ,UPDATE_ID = #{adminBean.adminId}
+            ,UPDATE_TIME = NOW()
+        WHERE ADMIN_ID = #{adminBean.adminId}
+    </update>
+</mapper>

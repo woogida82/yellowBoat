@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/jsee/web-jsptagLibrary_2_0.xsd" version="2.0">
+    <tlib-version>1.0</tlib-version>
+    
+    <!-- 
+    description : 속성에 대한 설명 
+    name        : 속성명
+    required    : 필수여부. 기본값은 false
+    rtexprvalue : JSP식 사용여부. 기본값은 false
+    type        : rtexprvalue이 true인 경우 사용. 기본값은 java.lang.String
+    -->
+    
+    <tag>
+        <name>makeSelect</name>
+        <tag-class>kr.co.fishing.bko.common.tags.SelectTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>boxName</name>
+            <required>true</required>﻿
+        </attribute>
+        <attribute>
+            <name>masterCd</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>dataList</name>
+            <required>false</required>
+            <type>java.util.List</type>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>selected</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>selectDefault</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>selectDefaultName</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>include</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>makeDefault</name>
+            <required>false</required>﻿
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>makeCheck</name>
+        <tag-class>kr.co.fishing.bko.common.tags.CheckTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>boxName</name>
+            <required>true</required>﻿
+        </attribute>
+        <attribute>
+            <name>masterCd</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>dataList</name>
+            <required>false</required>
+            <type>java.util.List</type>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>selected</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>include</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>subInclude</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>valid</name>
+            <required>false</required>﻿
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>makeRadio</name>
+        <tag-class>kr.co.fishing.bko.common.tags.RadioTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>boxName</name>
+            <required>true</required>﻿
+        </attribute>
+        <attribute>
+            <name>masterCd</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>dataList</name>
+            <required>false</required>
+            <type>java.util.List</type>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>selected</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>﻿
+        </attribute>
+        <attribute>
+            <name>include</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>subInclude</name>
+            <required>false</required>﻿
+        </attribute>
+        <attribute>
+            <name>valid</name>
+            <required>false</required>﻿
+        </attribute>
+    </tag>
+    
+</taglib>

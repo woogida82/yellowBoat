@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="file">
+    
+    <sql id='fileWhere'>
+        AND DEL_YN = 'N'
+        
+        <if test='searchWordType != null and searchWordType != "" and searchWord != null and searchWord != ""'>
+            <!-- 제조번호 -->
+            <if test='searchWordType == "eventId"'>
+                AND EVENT_ID LIKE CONCAT('%',#{searchWord},'%')
+            </if>
+            <!-- 파일명 -->
+            <if test='searchWordType == "orgFileNm"'>
+                AND ORG_FILE_NM LIKE CONCAT('%',#{searchWord},'%')
+            </if>
+            <!-- 등록자 -->
+            <if test='searchWordType == "createId"'>
+                AND EXISTS (
+                    SELECT 1 FROM T_ADMIN
+                    WHERE T_ADMIN.ADMIN_ID = T_FILE_IMAGE_FISH.CREATE_ID
+                      AND T_ADMIN.ADMIN_NM LIKE CONCAT('%',#{searchWord},'%')
+                )
+            </if>
+            <!-- 수정자 -->
+            <if test='searchWordType == "updateId"'>
+                AND EXISTS (
+                    SELECT 1 FROM T_ADMIN
+                    WHERE T_ADMIN.ADMIN_ID = T_FILE_IMAGE_FISH.UPDATE_ID
+                      AND T_ADMIN.ADMIN_NM LIKE CONCAT('%',#{searchWord},'%')
+                )
+            </if>
+        </if>
+    </sql>
+    
+    <select id="selectFilePhoneNo" resultType="int">
+        SELECT COUNT(1) 
+        FROM T_FILE_IMAGE_FISH
+        WHERE EVENT_ID = #{eventId}
+         AND DEL_YN = 'N'
+        <if test='idx != null and idx != ""'>
+         AND IDX != #{idx}
+        </if>
+    </select>
+    
+    <select id="selectFileListCnt" resultType="int">
+        SELECT COUNT(1) 
+        FROM T_FILE_IMAGE_FISH
+        WHERE 1=1
+        <include refid="fileWhere"/>
+    </select>
+    
+    <select id="selectFileList" resultType="kr.co.fishing.bko.beans.FileBean">
+        SELECT
+             IDX
+            ,EVENT_ID
+            ,ORG_FILE_PATH
+            ,ORG_FILE_NM
+            ,THUM_FILE_PATH
+            ,THUM_FILE_SIZE_CD            
+            ,DEL_YN
+            ,(SELECT ADMIN_NM FROM T_ADMIN WHERE ADMIN_ID = T_FILE_IMAGE_FISH.UPDATE_ID) UPDATE_ID
+            ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+            ,(SELECT ADMIN_NM FROM T_ADMIN WHERE ADMIN_ID = T_FILE_IMAGE_FISH.CREATE_ID) CREATE_ID
+            ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+        FROM T_FILE_IMAGE_FISH
+        WHERE 1=1
+         
+        <include refid="fileWhere"/>
+        <if test='sortColumn == null or sortColumn == ""'>
+            ORDER BY CREATE_TIME DESC
+        </if>
+        <include refid="common.paging" />
+    </select>
+    
+    <select id="selectFile" resultType="kr.co.fishing.bko.beans.FileBean">
+        SELECT
+             IDX
+            ,EVENT_ID
+            ,ORG_FILE_PATH
+            ,ORG_FILE_NM
+            ,THUM_FILE_PATH
+            ,THUM_FILE_SIZE_CD              
+            ,DEL_YN
+            ,(SELECT ADMIN_NM FROM T_ADMIN WHERE ADMIN_ID = T_FILE_IMAGE_FISH.UPDATE_ID) UPDATE_ID
+            ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+            ,(SELECT ADMIN_NM FROM T_ADMIN WHERE ADMIN_ID = T_FILE_IMAGE_FISH.CREATE_ID) CREATE_ID
+            ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+        FROM T_FILE_IMAGE_FISH
+        WHERE IDX = #{idx}
+    </select>
+    
+    
+    <insert id="insertFile" parameterType="kr.co.fishing.bko.beans.FileBean">
+        INSERT INTO T_FILE_IMAGE_FISH (
+        	DEL_YN
+            <if test='eventId != null and eventId != ""'>
+            ,EVENT_ID
+            </if>
+            <if test='orgFilePath != null and orgFilePath != ""'>
+            ,ORG_FILE_PATH
+            </if>
+            <if test='orgFileNm != null and orgFileNm != ""'>
+            ,ORG_FILE_NM
+            </if>
+            <if test='thumFilePath != null and thumFilePath != ""'>
+            ,THUM_FILE_PATH
+            </if>            
+            <if test='thumFileSizeCd != null and thumFileSizeCd != ""'>
+            ,THUM_FILE_SIZE_CD
+            </if>            
+            ,UPDATE_ID
+            ,UPDATE_TIME
+            ,CREATE_ID
+            ,CREATE_TIME
+        ) VALUES (
+            'N'
+            <if test='eventId != null and eventId != ""'>
+            ,#{eventId}
+            </if>
+            <if test='orgFilePath != null and orgFilePath != ""'>
+            ,#{orgFilePath}
+            </if>
+            <if test='orgFileNm != null and orgFileNm != ""'>
+            ,#{orgFileNm}
+            </if>
+            <if test='thumFilePath != null and thumFilePath != ""'>
+            ,#{thumFilePath}
+            </if>            
+            <if test='thumFileSizeCd != null and thumFileSizeCd != ""'>
+            ,#{thumFileSizeCd}
+            </if>             
+            ,#{adminBean.adminId}
+            ,NOW()
+            ,#{adminBean.adminId}
+            ,NOW()
+        )
+    </insert>
+    
+    <update id="updateFile" parameterType="kr.co.fishing.bko.beans.FileBean">
+        UPDATE T_FILE_IMAGE_FISH SET
+            UPDATE_ID = #{adminBean.adminId}
+            ,UPDATE_TIME = NOW()
+            <if test='eventId != null and eventId != ""'>
+            ,EVENT_ID = #{eventId}
+            </if>
+            <if test='orgFilePath != null and orgFilePath != ""'>
+            ,ORG_FILE_PATH = #{orgFilePath}
+            </if>
+            <if test='orgFileNm != null and orgFileNm != ""'>
+            ,ORG_FILE_NM = #{orgFileNm}
+            </if>
+            <if test='thumFilePath != null and thumFilePath != ""'>
+            ,THUM_FILE_PATH = #{thumFilePath}
+            </if>            
+            <if test='thumFileSizeCd != null and thumFileSizeCd != ""'>
+            ,THUM_FILE_SIZE_CD = #{thumFileSizeCd}
+            </if>             
+        WHERE IDX = #{idx}
+    </update>
+    
+    <delete id="deleteFile" parameterType="kr.co.fishing.bko.beans.FileBean">
+        DELETE FROM T_FILE_IMAGE_FISH
+        WHERE IDX = #{idx}
+    </delete>
+    
+    <update id="updateFileStatus" parameterType="kr.co.fishing.bko.beans.FileBean">
+        UPDATE T_FILE_IMAGE_FISH SET
+            UPDATE_ID = #{adminBean.adminId}
+            ,UPDATE_TIME = NOW()
+            ,DEL_YN = #{status}
+        WHERE IDX IN
+        <foreach item="item" index="index" collection="idxs" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

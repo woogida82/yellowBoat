@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+    
+    <select id="selectAdminInfo" resultType="AdminBean">
+        SELECT ADMIN_ID, AES128_DECRYPT(ADMIN_PW) ADMIN_PW, ADMIN_NM, MENU_AUTH, DEPT, TEAM, POST, DUTY, ADMIN_NM, DEL_YN
+          FROM T_ADMIN
+         WHERE
+           ADMIN_ID = #{adminId}
+           AND ADMIN_PW = AES128_ENCRYPT(#{adminPw})
+    </select>
+    
+</mapper>

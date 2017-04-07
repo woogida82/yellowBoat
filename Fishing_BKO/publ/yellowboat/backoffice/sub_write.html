@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="js/script.js"></script>
+    <title>옐로우보트</title>
+</head>
+
+<body>
+    <div class="header_wrap">
+        <h1>
+            <a href="#"><img src="images/logo.png" alt="대원낚시" /></a>
+        </h1>
+    </div>
+    <!--end header_wrap-->
+
+    <div class="content_wrap">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="images/photo.png" />
+                <p class="title">최종관리자님</p>
+                <p>좋은 하루 되세요!</p>
+                <p class="date">Today 2017.04.01</p>
+            </div>
+            <!--end profile-->
+
+            <div class="gnb_box">
+                <div id='cssmenu'>
+                    <ul>
+                        <li class='has-sub'><a href='#'><span class="list1"><i class="material-icons">settings</i> 기초자료관리</span></a>
+                            <ul>
+                                <li><a href='#'><span>출조형태</span></a></li>
+                                <li><a href='#'><span>지역구분</span></a></li>
+                            </ul>
+                        </li>
+                        <li class='has-sub'><a href='#'><span class="list2"><i class="material-icons">person</i> 회원관리</span></a>
+                            <ul>
+                                <li><a href='#'><span>전체회원</span></a></li>
+                            </ul>
+                        </li>
+                        <li class='has-sub'><a href='#'><span class="list3"><i class="material-icons">receipt</i> 게시판관리</span></a>
+                            <ul>
+                                <li><a href='#'><span>낚신 뉴스</span></a></li>
+                                <li><a href='#'><span>낚신 조황정보</span></a></li>
+                                <li><a href='#'><span>낚신 공지사항</span></a></li>
+                                <li><a href='#'><span>낚신 이벤트</span></a></li>
+                                <li><a href='#'><span>낚신 베스트갤러리</span></a></li>
+                                <li><a href='#'><span>낚신 갤러리</span></a></li>
+                                <li><a href='#'><span>낚신 쪽지</span></a></li>
+                                <li><a href='#'><span>낚신 예약</span></a></li>
+                                <li><a href='#'><span>낚신 추천배</span></a></li>
+                                <li><a href='#'><span>낚신 특별할인</span></a></li>
+                                <li><a href='#'><span>낚신 자주하는질문</span></a></li>
+                                <li><a href='#'><span>낚신 환불규정</span></a></li>
+                            </ul>
+                        </li>
+                        <li><a href='sub_schedule_view.html'><span class="list3"><i class="material-icons">event_available</i> 일정관리</span></a>
+                        </li>
+                        <li><a href='#'><span class="list3"><i class="material-icons">close</i> 로그아웃</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--end gnb_box-->
+        </div>
+        <!--end sidebar-->
+
+        <div class="content_box">
+            <div class="util">
+                <ul>
+                    <li class="list1">Home</li>
+                    <li>기초자료관리</li>
+                    <li>출조형태</li>
+                </ul>
+            </div>
+            <!--end util-->
+
+            <div class="top_img">
+                <h2>기초자료관리</h2>
+                <img src="images/top_img1.png" />
+            </div>
+            <!--end top_img-->
+
+            <div class="content">
+                <h3>출조형태</h3>
+
+                <div class="table_write">
+                    <table width="100%">
+                
+                        <tr>
+                            <td class="title">번호</td>
+                            <td colspan="3"><input type="text" style="width:150px;" /></td>
+                        </tr>
+                        <tr>
+                            <td class="title">대분류</td>
+                            <td><select style="width:200px; margin:0 5px 0 0;"></select></td>
+                            <td class="title">소분류</td>
+                            <td><select style="width:200px; margin:0 5px 0 0;"></select></td>
+                        </tr>
+                        <tr>
+                            <td class="title">분류명</td>
+                            <td colspan="3"><input type="text" style="width:100%;" /></td>
+                        </tr>
+                        <tr>
+                            <td class="title">제목</td>
+                            <td colspan="3"><input type="text" style="width:100%;"/></td>
+                        </tr>
+                        <tr>
+                            <td class="title">옵션</td>
+                            <td colspan="3"><input type="checkbox"/> 관리자에게만 공개합니다.</td>
+                        </tr>
+                        <tr>
+                            <td class="title">비밀번호</td>
+                            <td colspan="3"><input type="password" style="width:100%;"/></td>
+                        </tr>
+                        <tr>
+                            <td class="title">종류</td>
+                            <td colspan="3"><input type="radio"/>선상낚시 <input type="radio"/>좌대낚시</td>
+                        </tr>
+                        <tr>
+                            <td class="title">파일첨부</td>
+                            <td colspan="3"><input type="text" /><a href="#" class="btn_file">첨부파일</a><a href="#" class="btn_plus">+</a> (480*360사이즈)</td>
+                        </tr>
+                        <tr>
+                            <td class="title">내용</td>
+                            <td colspan="3"><textarea style="height:300px;"></textarea></td>
+                        </tr>
+                    </table>
+                    <div class="btn_box">
+                        <a href="#">등록</a>
+                        <a href="#">취소</a>
+                    </div>
+                    <!--end btn_box-->
+                </div>
+                <!--end table_write-->
+            </div>
+            <!--end content-->
+        </div>
+        <!--end content_box-->
+    </div>
+    <!--end content_wrap-->
+
+    <div class="footer_wrap">
+        <p>Copyright YellowBoat. All right reserved.</p>
+    </div>
+    <!--end footer_wrap-->
+
+</body>
+
+</html>

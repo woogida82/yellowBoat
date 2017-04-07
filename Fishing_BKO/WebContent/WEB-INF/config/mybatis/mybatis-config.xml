@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- TABLE.COLUMN_ID 를 columnId 로 처리 옵션 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+        <!-- 설정에서 각 mapper 에 설정된 캐시를 전역적으로 사용할지 말지에 대한 여부 -->
+        <setting name="cacheEnabled" value="true"></setting>
+        <!--
+            디폴트 실행자(executor) 설정. SIMPLE 실행자는 특별히 하는 것이 없다. REUSE 실행자는 PreparedStatement 를 재사용한다. BATCH 실행자는 구문을 재사용하고 수정을 배치처리한다.
+            사용가능한 값들 : SIMPLE REUSE BATCH
+        -->
+        <setting name="defaultExecutorType" value="REUSE"></setting>
+    </settings>
+    
+    <typeAliases>
+        <package name="kr.co.fishing.bko.beans"/>
+        <package name="kr.co.fishing.bko.common.beans"/>
+    </typeAliases>
+    
+</configuration>

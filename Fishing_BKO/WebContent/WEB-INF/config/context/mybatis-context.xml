@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+       
+    <context:property-placeholder location="classpath:properties/db.${was.id}.properties" />
+
+    <!-- DB1 설정 Start --> 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName"               value="${jdbc.driver}"/>
+        <property name="url"                           value="${jdbc.url}"/>
+        <property name="username"                      value="${jdbc.username}"/>
+        <property name="password"                      value="${jdbc.password}"/>
+        <property name="maxActive"                     value="50"/>
+        <property name="minIdle"                       value="50"/>
+        <property name="maxWait"                       value="3000"/>
+        <property name="validationQuery"               value="select 1"/>
+        <property name="testWhileIdle"                 value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+        <property name="connectionProperties"          value="useUnicode=true;characterEncoding=UTF-8;" />
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="/WEB-INF/config/mybatis/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:sqlmap/**/*.xml" />
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+    <!-- DB1 설정 End --> 
+    
+    <!-- 
+        REQUIRED : 디폴트속성, 시작된 트랜잭션 있으면 참여, 없으면 생성
+        SUPPORTS : 시작된 트랜잭션 있으면 참여, 
+                   없으면 없이 진행, 경계안에서 Connection이나 하이버네이트 Session 등을 공유
+        MANDATORY : 시작된 트랜잭션 있으면 참여, 없으면 예외 발생 (독립적으로 트랜잭션을 진행하면 안되는 경우 사용)
+        REQUIRES_NEW : 시작된 트랜잭션 있으면 트랜잭션을 잠시 보류하고 새로운 트랜잭션 진행 후,
+                          기존 트랜잭션 진행 (JTA 트랜잭션 매니저를 사용한다면 서버의 트랜잭션 매니저에 트랜잭션 보류가 가능하도록 설정)
+        NEVER : 시작된 트랜잭션 있으면 예외 발생(트랜잭션을 사용하지 않도록 강제)
+        NESTED : 시작된 트랜잭션 있으면 중첩 트랜잭션을 시작(트랜잭션 안에 트랜잭션 생성)
+               부모 트랜잭션의 커밋과 롤백은 자식에게 영향을 주지만, 반대의 경우는 영향 없음
+               중첩 트랜잭션은 JDBC 3.0 스펙의 저장포인트(savepoint)를 지원하는 드라이버와
+               DataSourceTransactionManager를 이용할 경우에 적용 가능.
+               또는 중첩 트랜잭션을 지원하는 일부 WAS의 JTA 트랜잭션 매니저를 이용할 경우 적용 가.능
+            예) 작업 결과 로그를 DB에 남기는 자식 트랜잭션이 실패하더라도, 작업을 롤백할 수는 없다.
+                 반대로, 작업을 실패하면 로그를 DB에 남기면 안된다.
+     -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*"       propagation="REQUIRED" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+    
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceOperation" expression="execution(public * kr.co.fishing..*Service.*(..))" />
+        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
+    </aop:config>
+    
+</beans>

@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+/*login*/
+.bko-login-bodyspace {
+	height: 100%;
+	background-image: url('/images/login/bg.jpg');
+	background-size: 100% 100%;
+}
+
+.bko-login-bodyspace .m0 {
+	width: 100%;
+	height: 150px;
+}
+
+.bko-login-bodyspace .bko-login-box {
+	width: 417px;
+	height: 336px;
+	padding-top: 0px;
+	margin: 0 auto;
+	background-image: url('/images/login/ms_login_form.png');
+	background-size: 100% 100%;
+}
+
+.bko-login-bodyspace .bko-login-box .m1 {
+	width: 100%;
+	height: 98px;
+}
+
+.bko-login-bodyspace .bko-login-box .bko-login-ipt {
+	width: 100%;
+	height: 46px;
+	text-align: center;
+}
+
+.bko-login-bodyspace .bko-login-box .bko-login-ipt .login-input {
+	border: none;
+	height: 100%;
+	width: 254px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #4d4d4d;
+	outline-style: none;
+}
+
+.bko-login-bodyspace .bko-login-box .m2 {
+	width: 100%;
+	height: 15px;
+}
+
+.bko-login-bodyspace .bko-login-box .m3 {
+	width: 100%;
+	height: 18px;
+}
+
+.bko-login-bodyspace .bko-login-box .bko-login-btn {
+	width: 287px;
+	height: 53px;
+	margin: 0 auto;
+}
+
+.bko-login-bodyspace .bko-login-box .bko-login-btn > .loginbtn {
+	outline-style: none;
+}
+
+.bko-login-bodyspace .bko-login-box .m4 {
+	width: 100%;
+	margin-top: 18px;
+}
+
+.bko-login-bodyspace .bko-login-box .bko-login-sav {
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	color: #996699;
+}
+
+#idSave {
+	display: none;
+}
+
+#idSave+label {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+	background-color: #FFFFFF;
+	margin-top:-5px;
+}
+
+#idSave:checked+label:after {
+	position: relative;
+	top: -3px;
+	left: 0px;
+	content: '\2714';
+	font-size: 18px;
+}

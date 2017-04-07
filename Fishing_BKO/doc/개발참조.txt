@@ -1,0 +1,252 @@
+1. 트랜잭션 처리
+      
+   1) update 용
+      Dao에서 updateSqlSession 사용
+      
+      service단에서 메소드 명이 insert, update, delete 로 시작 해야 한다.
+   
+   2) 1)이외의 경우는 readonly임.
+ 
+2. 모든 빈은 CommonBaseBean을 상속 받는다.
+   프레임 워크에서 자동으로 세션 정보를 설정 해 준다.
+   
+3. 스트링 구분 변수에 대해서는 반드시 상수를 만들어서 사용한다.
+   CommonConstant.java 찹조
+   
+4. javascript 작성규칙
+   jsp의 경로와 같은 경로로 자바스크립트를 작성한다.
+   파일명도 jsp와 동일하게 한다.
+   예) /jsp/sample/orderList.jsp
+     /js/sample/orderList.js
+     
+     jsp파일명에서 확장자를 뺀 명칭으로 javascript 변수를 작성하고 (첫문자는 대문자), 
+     init 함수는 반드시 기술한다.
+     예) var OrderList = {
+        init : function () {
+        }
+     }
+   
+5. ajax 처리시 error 옵션은 작성 하지 않는다.
+   error옵션은 common.js에서 공통으로 정의 하고 있음.
+   
+7. editor는 CKEditor을 사용한다.
+   # 주의 : 파일업로드 구현시는 공통으로 처리할수 있도록 한다.
+   
+8. 커스텀 태그 
+
+  1) makeSelectBox
+  
+     TB_COMMON_CODE 마스터에서 코드값과 명칭을 SELECTBOX로 작성 한다.
+
+     사용예 ) <com:makeSelect 
+                boxName="selectbox"         -- 필수   : select박스의 id와 name이 된다. 
+                masterCd=""                 -- 비필수 : COMMON_CODE.MASTER_CD
+                dataList=""                 -- 비필수 : 데이터 리스트 (List<commonCodeBean>)
+                selected=""                 -- 비필수 : selected 속성으로 처리할 코드 값 (multiple인 경우 콤마구분으로 설정)
+                selectDefault=""            -- 비필수 : 디폴트항목의 값
+                selectDefaultName=""        -- 비필수 : 디폴트항목의 명칭
+                include=""                  -- 비필수 : select박스에 추가할 속성을 기술 (예: class='select mw200' onChange='javascript:;')
+                makeDefault=""              -- 비필수 : false 지정시 디폴트 값을 만들지 않는다.
+              />
+
+  2) makeCheck
+  
+     TB_COMMON_CODE 마스터에서 코드값과 명칭을 체크박스로 작성 한다.
+
+     사용예 ) <com:makeCheck
+                boxName=""                  -- 필수   : 체크박스의 id와 name이 된다. 
+                masterCd=""                 -- 비필수 : COMMON_CODE.MASTER_CD
+                dataList=""                 -- 비필수 : 데이터 리스트 (List<commonCodeBean>)
+                selected=""                 -- 비필수 : checked 속성으로 처리할 코드 값 (multiple인 경우 콤마구분으로 설정)
+                include=""                  -- 비필수 : 추가할 속성을 기술 (예: class='checkbox-group')
+                valid=""                    -- 비필수 : validator를 기술
+              />
+
+
+  3) makeRadio
+
+     TB_COMMON_CODE 마스터에서 코드값과 명칭을 라디오버튼으로 작성 한다.
+     
+     사용예 ) <com:makeRadio 
+                boxName="radio"             -- 필수   : 라디오버튼의 id와 name이 된다.   
+                masterCd=""                 -- 비필수 : COMMON_CODE.MASTER_CD
+                dataList=""                 -- 비필수 : 데이터 리스트 (List<commonCodeBean>)
+                selected=""                 -- 비필수 : checked 속성으로 처리할 코드 값
+                include=""                  -- 비필수 : 추가할 속성을 기술 (예: class='radio-group')
+                valid=""                    -- 비필수 : validator를 기술
+              />
+
+9. Custom Function
+
+   1) contains
+     
+     ArrayList<String>에서 해당하는 값이 있는지를 체크 합니다. 
+  
+     사용예 ) ${cf:contains(dataList, 'Y')}
+
+  2) join
+  
+     ArrayList<String>의 문자열을 구분자로 결합 합니다. 
+     
+     ${cf:join(dataList, ',')}
+     
+  3) defaultValue
+  
+     첫번째 인자의 값이 있을경우는 해당 값을 출력 하고,
+     없을경우 두번째 인자의 값을 출력합니다.
+  
+     ${cf:defaultValue(dataList, '2')}
+     
+  4) rate
+  
+     백분율 계산을 한다.
+  
+     ${cf:rate('10','100', 2)}
+
+10. validation
+   1) 타입지정
+      input tag에 문자, 금액, 전화번호 등 타입을 지정할때 사용
+      타입 종류 : numeric (금액), number (숫자), tel (전화번호), eng (영문) , alphanum (영문하고 숫자만)
+      예) valid="{type:'number'}"
+      
+   2) valdation check
+      input tag에 validation check type을 지정
+      method 종류: phonenumber (전화번호체크), required (필수체크), zipcode (우편번호 체크), email(이메일체크), equal (값이 같은지 체크, 비밀번호 확인체크 등)
+      예) valid="{label:'이름', method:'required'}
+      
+      validation check를 하기 위해선 onSubmit 메소드를 사용해야 함
+      
+      예) $form.onSubmit({
+        url            : url,
+        confirmMessage : "삭제하시겠습니까?",   // 서브밋 전 확인 메세지
+        validation     : true,             // validation 체크 유무
+        validmessage   : 'alertAll',       // 하나의 alert에 모든 에러 내용을 표시
+        ajaxSubmit     : true,             // ajax로 통신할 경우
+        success        : function(data){   // ajax인 경우 success callback
+            
+        }
+    });
+
+11. 기본적으로 sample/orderList.jsp 를 복사 해서 화면 개발을 진행한다.
+    1) 검색조건이 있는 경우 아래 태그에서 높이를 지정한다.
+       <div class="tns-searchBox" style="height:90px;">
+    2) 화면 종류에 따라 아래 태그 부분에서 data-content-type을 변경한다.
+       grid1 : 페이징이 있는 리스트, grid2 : 페이징이 없는 리스트, "" : 리스트 화면 외 일반 화면
+       <div class="tns-bodyContent">
+           <div class="tns-bodyContentInnerBox" data-content-type="grid1"></div>
+       </div>
+ 
+12. utils.js
+
+   1) $.popup()
+   
+      $.popup({
+            url    : "/ims/popup",              // URL
+            target : 'newPopup'                 // target명 (지정하지 않을시 디폴트로 'newPopup'이 설정)
+            width  : 1024,                      // 팝업 가로 길이
+            height : 768,                       // 팝업 세로 길이
+            data   : {}                         // 팝업에 넘길 파라메터
+      });
+      
+   2) $.fn.popup()
+      form 태그 내부의 input 항목을 파라메터로 해서 팝업을 표시
+   
+      $("form[name=formname]").popup({
+            url    : "/ims/popup", // URL
+            target : 'newPopup'                 // target명 (지정하지 않을시 디폴트로 'newPopup'이 설정)
+            width  : 1024,                      // 팝업 가로 길이
+            height : 768,                       // 팝업 세로 길이
+            data   : {}                         // 팝업에 넘길 파라메터
+      });
+      
+   3) $.zeroPad(d, digits)
+      digits만큼 0을 채워준다.
+      
+   4) $.escapeTagName(tagNm)
+      jquery용 특수기호를 문자로 인식하도록 변환한다.
+      
+   5) $.setComma(n)
+      숫자에 콤마를 찍어 준다.
+      
+   6) $.removeComma(n)
+      숫자에 콤마를 삭제 준다.
+      
+13. fileUtils.js
+
+   1) $.ajaxFileUpload();
+   
+      AJAX로 비동기 업로드 처리를 할시에 사용한다.
+   
+      $.ajaxFileUpload({
+        fileId : 'uploadFile',   // 파일 업로드 태그의 ID
+        saveId : 'test',         // 저장할 위치의 ID (상세내용은 담당자에게 질문)
+        success : function(data) {
+            if (data.result == 'OK') {
+                var fileName = data.fileName;
+                var filePath = data.filePath;
+                
+            } else {
+            
+            }
+        }
+     });
+    
+    2) $.ajaxFileDownload();
+   
+      AJAX로 비동기 다운로드 처리를 할시에 사용한다.
+      
+      $.ajaxFileDownload({
+        downId  : 'Sample',   // 다운ID
+        data    : {}          // 파라메터
+      });
+    
+14. dateUtils.js
+
+   1) $.format(format, dateStr, weekName)
+      날짜를 지정된 포멧으로 변환해 준다.
+      
+      지정가능 포멧
+        "yyyy": 4자리 연도
+        "yy": 2자리 연도
+        "MM": 월
+        "dd": 일
+        "E": 요일
+        "HH": 시간(24시간기준)
+        "hh": 시간(12시간기준)
+        "mm": 분
+        "ss": 초
+        "a/p": 오전/오후
+                
+   2) $.getWeekday(dateStr)
+      지정한 날짜의 요일을 취득한다.
+   
+   3) $.getToday(format)
+      지정한 포멧형식으로, 오늘 날짜를 취득한다.
+      
+   4) $.dateAdd(dateStr, addDay, format)
+      날짜를 가산한다.
+      
+   5) $.dateDiff(date1Str, date2Str)
+      날짜 차이를 구한다.
+      
+   6) $.strToDate(dateStr)
+      문자열을 날짜형식으로 변환
+      
+   7) $.getAge(dateStr)
+      나이를 취득한다.
+      
+ 15. jqgrid을 이용해서 페이징 처리
+   1) Controller 에서 해당 메소드 명이 Paging로 끝나야 한다.
+   2) 아래 값을 return 한다.
+      // 총 데이터 수
+      resultMap.put("totalCnt", orderListCnt);
+      // 표시할 데이터
+      resultMap.put("rows", orderList);
+   3) sqlmap 에 아래 sql을 include 한다.
+      <include refid="common.paging" />
+      
+16. pdj 파일뷰어
+http://localhost:8080/js/common/pdf/web/viewer.html
+http://localhost:8080/js/common/pdf/web/viewer.html?file=011-0000-1111_AGV_20170404153651231.pdf
+http://localhost:8080/js/common/pdf/web/viewer.html?file=/js/common/pdf/web/011-0000-1111_AGV_20170404153651231.pdf
+      
