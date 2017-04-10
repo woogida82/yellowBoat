@@ -6,70 +6,70 @@ var Main = {
     
     init: function() {
         
-//        Main.popupHtml = $("#popupArea").html();
-//        $("#popupArea").remove();
-//        Main.passHtml = $("#popupArea2").html();
-//        $("#popupArea2").remove();
+        Main.popupHtml = $("#popupArea").html();
+        $("#popupArea").remove();
+        Main.passHtml = $("#popupArea2").html();
+        $("#popupArea2").remove();
         
-//        var oThis = this;
+        var oThis = this;
         /*
          * dropdown : 현재 활성화된 dropdown Menu 확인용
          * divPositionIdx : slide 횟수 확인용
          * LoadContentsList : Load 된 Client Box ID List
          */
-//        this.check = {"dropdown" : "", "divPositionIdx" : 0};
-//        this.LoadContentsList = new Array();
+        this.check = {"dropdown" : "", "divPositionIdx" : 0};
+        this.LoadContentsList = new Array();
         
         // 메뉴 구성
         Menu.makeMenu();
                 
-//        this.setBindClick();
+        this.setBindClick();
         
-//        /*
-//         * 화면 초기화
-//         */     
-//        $("#bko-infoBar").css('width', $(window).width() - 333);
-//        $("#bko-infoDisplay").css('width', $(window).width() - 351);
-//        $('.bko-bodyspace').css('height' , $(window).height() - 34);
-//        $('#bko-CententBox').css('height' , $(window).height() - 34);
-//        $('#bko-CententBox').css('width' , $(window).width());    
-//        $('#bko-leftMenu').slimScroll({
-//            width: '210px',
-//            height: 'auto'
-//        }); // 좌측 메뉴 스크롤 기능 추가   
+        /*
+         * 화면 초기화
+         */     
+        $("#bko-infoBar").css('width', $(window).width() - 333);
+        $("#bko-infoDisplay").css('width', $(window).width() - 351);
+        $('.bko-bodyspace').css('height' , $(window).height() - 34);
+        $('#bko-CententBox').css('height' , $(window).height() - 34);
+        $('#bko-CententBox').css('width' , $(window).width());    
+        $('#bko-leftMenu').slimScroll({
+            width: '210px',
+            height: 'auto'
+        }); // 좌측 메뉴 스크롤 기능 추가   
                 
-//        this.showLeftMenu();
+        this.showLeftMenu();
         
-//        $(window).resize(function() {
-//            
-//            $("#bko-infoBar").css('width',  $(window).width() - 333);
-//            $("#bko-infoDisplay").css('width',  $(window).width() - 351);
-//
-//            $('.bko-bodyspace').css('height' ,  $(window).height() - 34);
-//            $('#bko-CententBox').css('height' ,  $(window).height() - 34);  
-//            if ($('#bko-leftMenu').css("display") == "block") { //좌측 메뉴 활성화 체크
-//                $('#bko-CententBox').css('width' ,  $(window).width() - $('#bko-leftMenu').width());    
-//            } else {
-//                $('#bko-CententBox').css('width' , $(window).width());
-//            }
-//            
-//            //좌측 메뉴 스크롤 size 조절
-//            $('#bko-leftMenu').slimScroll({
-//                width: '210px',
-//                height: 'auto'
-//            });
-//            
-//            if ($(".bko-ClientBox").length > 0) { // 활성화 된 컨텐츠 있는지 확인
-//                $('.bko-ClientBox').css('height' , $('#bko-CententBox').css('height')); 
-//            }
-//            // 상단 버튼 갯수 많을 경우 네비게이션 버튼 활성화  
-//            var minCount = parseInt($("#bko-infoDisplay").width() / 162); 
-//            if (minCount < $(".bko-cCloseBtn").length) {
-//                $(".bko-divNaviBtn").css("display", "block");   
-//            } else {
-//                $(".bko-divNaviBtn").css("display", "none");
-//            }
-//        });
+        $(window).resize(function() {
+            
+            $("#bko-infoBar").css('width',  $(window).width() - 333);
+            $("#bko-infoDisplay").css('width',  $(window).width() - 351);
+
+            $('.bko-bodyspace').css('height' ,  $(window).height() - 34);
+            $('#bko-CententBox').css('height' ,  $(window).height() - 34);  
+            if ($('#bko-leftMenu').css("display") == "block") { //좌측 메뉴 활성화 체크
+                $('#bko-CententBox').css('width' ,  $(window).width() - $('#bko-leftMenu').width());    
+            } else {
+                $('#bko-CententBox').css('width' , $(window).width());
+            }
+            
+            //좌측 메뉴 스크롤 size 조절
+            $('#bko-leftMenu').slimScroll({
+                width: '210px',
+                height: 'auto'
+            });
+            
+            if ($(".bko-ClientBox").length > 0) { // 활성화 된 컨텐츠 있는지 확인
+                $('.bko-ClientBox').css('height' , $('#bko-CententBox').css('height')); 
+            }
+            // 상단 버튼 갯수 많을 경우 네비게이션 버튼 활성화  
+            var minCount = parseInt($("#bko-infoDisplay").width() / 162); 
+            if (minCount < $(".bko-cCloseBtn").length) {
+                $(".bko-divNaviBtn").css("display", "block");   
+            } else {
+                $(".bko-divNaviBtn").css("display", "none");
+            }
+        });
         
         // 뒤로가기 막기
         (function(storedHash){
