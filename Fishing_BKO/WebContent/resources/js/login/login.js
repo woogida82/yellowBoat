@@ -13,15 +13,15 @@ function loginBtnImgChg(click) {
 function login() { 
 	loginBtnImgChg(true);
 
-	var id = $('#adminId').val();
-	var pw = $('#adminPw').val();
+	var id = $('#userId').val();
+	var pw = $('#userPw').val();
 
 	if (!id) {
 		alert('아이디를 입력해주세요.');
-		$('#adminId').focus();
+		$('#userId').focus();
 	} else if (!pw) {
 		alert('비밀번호를 입력해주세요.');
-		$('#adminPw').focus();
+		$('#userPw').focus();
 	} else {
 
 //		if ($('#idSave').is(':checked')) {
@@ -38,8 +38,8 @@ function login() {
 			url : '/bko/doLogin',
 			type : 'POST',
 			data : {
-				adminId : id,
-				adminPw : pw
+			    userId : id,
+			    userPw : pw
 			},
 			dataType : 'json',
 			async : false,

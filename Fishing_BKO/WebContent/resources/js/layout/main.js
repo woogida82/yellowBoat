@@ -6,10 +6,10 @@ var Main = {
     
     init: function() {
         
-        Main.popupHtml = $("#popupArea").html();
-        $("#popupArea").remove();
-        Main.passHtml = $("#popupArea2").html();
-        $("#popupArea2").remove();
+//        Main.popupHtml = $("#popupArea").html();
+//        $("#popupArea").remove();
+//        Main.passHtml = $("#popupArea2").html();
+//        $("#popupArea2").remove();
         
         var oThis = this;
         /*

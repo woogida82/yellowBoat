@@ -134,7 +134,7 @@ public class LoginController {
             boolean isExists = false; 
             
             // 관리자가 존재 하는 경우
-            if (resultBean != null && StringUtils.isNotEmpty(resultBean.getAdminId())) {
+            if (resultBean != null && StringUtils.isNotEmpty(resultBean.getUserId())) {
                 // 세션등록
                 request.getSession().setAttribute(SESSION_KEY.ADMIN, resultBean);
                 isExists = true;

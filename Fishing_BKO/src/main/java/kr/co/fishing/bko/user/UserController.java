@@ -93,7 +93,7 @@ public class UserController {
             if(resultCnt > 0){
                 resultMap.put("result", AJAX_RESULT.DUP); //중복
             } else {
-                bean.setAdminPw(bean.getAdminId()+"1234");
+                bean.setUserPw(bean.getUserId()+"1234");
                 userService.insertUser(bean);
                 resultMap.put("result", AJAX_RESULT.OK);
             }
@@ -129,7 +129,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/updateUserStatus")
     public Map<String,Object> updateUserStatus(HttpServletRequest request, HttpServletResponse response, 
-                                              @RequestParam(value="adminIds[]") String[] adminIds, 
+                                              @RequestParam(value="userIds[]") String[] userIds, 
                                               @RequestParam(value="status") String status) throws Exception {
         Map<String,Object> resultMap = new HashMap<String,Object>();
         
@@ -137,8 +137,8 @@ public class UserController {
             AdminBean adminBean = (AdminBean) request.getSession().getAttribute(SESSION_KEY.ADMIN);
             AdminBean bean = new AdminBean();
             
-            if(adminIds != null && adminIds.length > 0) {
-                bean.setIdxs(adminIds);
+            if(userIds != null && userIds.length > 0) {
+                bean.setIdxs(userIds);
                 bean.setStatus(status);
                 bean.setAdminBean(adminBean);
             }
@@ -163,7 +163,7 @@ public class UserController {
         Map<String,Object> resultMap = new HashMap<String,Object>();
         
         try {
-            bean.setAdminPw(bean.getAdminId()+"1234");
+            bean.setUserPw(bean.getUserId()+"1234");
             userService.updateInitPass(bean);
             resultMap.put("result", AJAX_RESULT.OK);
             

@@ -36,12 +36,8 @@
                              <div class="search_check">
                                 <span>
                                     <select id="searchWordType" name="searchWordType" class='select' onchange="javascript:ContentBody.changeSearchArea($(this));">
-                                            <option value="dept" data-searchType="text">부서</option>
-                                            <option value="team" data-searchType="text">팀</option>
-                                            <option value="adminId" data-searchType="text">아이디</option>
-                                            <option value="adminNm" data-searchType="text">이름</option>
-                                            <option value="createId" data-searchType="text">등록자</option>
-                                            <option value="updateId" data-searchType="text">수정자</option>
+                                            <option value="userId" data-searchType="text">아이디</option>
+                                            <option value="userNm" data-searchType="text">이름</option>
                                     </select>
                                 </span>
                                 <span id="searchArea"><input type="text"  class="text" id="searchWord" name="searchWord" placeholder="검색어 입력" onkeydown="javascript:if (event.keyCode == 13) UserList.search();" maxlength="30" style="width: 200px;"/></span>
@@ -80,39 +76,10 @@
     <form action="" method="post" name="popupForm" id="popupForm">
         <table cellpadding="5" cellspacing="2" border="0">
             <tr>
-                <td class="td1">공장</td>
-                <td class="td2">
-                </td>
-            </tr>
-            <tr>
-                <td class="td1">부서</td>
-                <td class="td2">
-                    <span><input type="text"  class="text" id="dept" name="dept" data-id="dept" maxlength="10"/></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td1">팀</td>
-                <td class="td2">
-                    <span><input type="text"  class="text" id="team" name="team" data-id="team" maxlength="10" valid="{label:'팀'}"/></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td1">직위</td>
-                <td class="td2">
-                    <span><input type="text"  class="text" id="post" name="post" data-id="post" maxlength="10" valid="{label:'직위'}"/></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td1">직책</td>
-                <td class="td2">
-                    <span><input type="text"  class="text" id="duty" name="duty" data-id="duty" maxlength="10" valid="{label:'직책'}"/></span>
-                </td>
-            </tr>
-            <tr>
                 <td class="td1">아이디</td>
                 <td class="td2">
                     <span>
-                        <input type="text" style="float: left;" class="text" id="adminId" name="adminId" data-id='adminId' maxlength="30" valid="{label:'아이디', method:'required'}"/>
+                        <input type="text" style="float: left;" class="text" id="userId" name="userId" data-id='userId' maxlength="30" valid="{label:'아이디', method:'required'}"/>
                         
                         <div id="initPassDiv" style="float: left; margin-left: 2px;">
                             <input type="button" style="padding: 3px 6px 3px 6px;" class="bko-gray bko-middle" value="패스워드 초기화" onclick="javascript:UserList.initPass();" />
@@ -124,7 +91,7 @@
             <tr>
                 <td class="td1">이름</td>
                 <td class="td2">
-                    <span><input type="text"  class="text" id="adminNm" name="adminNm" data-id='adminNm' maxlength="50" valid="{label:'이름', method:'required'}"/></span>
+                    <span><input type="text"  class="text" id="userNm" name="userNm" data-id='userNm' maxlength="50" valid="{label:'이름', method:'required'}"/></span>
                 </td>
             </tr>
             <tr>

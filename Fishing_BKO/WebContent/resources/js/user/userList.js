@@ -11,9 +11,9 @@ var UserList = {
         });
         
         $("#delBtn").click(function(){
-            var adminIds = ContentBody.$grid.jqGrid('getGridParam','selarrrow');
+            var userIds = ContentBody.$grid.jqGrid('getGridParam','selarrrow');
             
-            if(adminIds.length > 0) {
+            if(userIds.length > 0) {
                 
                 if(confirm("삭제 하시겠습니까?")) {
                     $.ajax({
@@ -21,7 +21,7 @@ var UserList = {
                         dataType : "json",
                         url : "/bko/user/updateUserStatus",
                         data :{
-                        	adminIds : adminIds,
+                        	userIds : userIds,
                             status : 'Y'
                         },
                         success : function(data) {
@@ -46,50 +46,6 @@ var UserList = {
                 align : "center",
                 hidden : true,
                 width : 10
-            },
-            {
-                label:"부서",
-                name : "dept",
-                index : "DEPT",
-                align : "center",
-                formatter:function(cellvalue, options, rowObject) {
-                    var html = "<label>" + $.convStr(rowObject.dept) + "</label>";
-                    return html;
-                },
-                width : 100
-            },
-            {
-                label:"팀",
-                name : "team",
-                index : "TEAM",
-                align : "center",
-                formatter:function(cellvalue, options, rowObject) {
-                    var html = "<label>" + $.convStr(rowObject.team) + "</label>";
-                    return html;
-                },
-                width : 100
-            },
-            {
-                label:"직위",
-                name : "post",
-                index : "POST",
-                align : "center",
-                formatter:function(cellvalue, options, rowObject) {
-                    var html = "<label>" + $.convStr(rowObject.post) + "</label>";
-                    return html;
-                },
-                width : 100
-            },
-            {
-                label:"직책",
-                name : "duty",
-                index : "DUTY",
-                align : "center",
-                formatter:function(cellvalue, options, rowObject) {
-                    var html = "<label>" + $.convStr(rowObject.duty) + "</label>";
-                    return html;
-                },
-                width : 100
             },
             {
                 label:"아이디",

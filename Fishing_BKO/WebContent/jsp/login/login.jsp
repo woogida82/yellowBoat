@@ -38,13 +38,13 @@ $LAB
 	);
 	
 	$(function(){
-        $('#adminId').keypress(function(e){
+        $('#userId').keypress(function(e){
             if(e.which == 13){
                 login();
             }
         });
         
-        $('#adminPw').keypress(function(e){
+        $('#userPw').keypress(function(e){
             if(e.which == 13){
                  login();
             }
@@ -52,7 +52,7 @@ $LAB
         
         var loginId = $.cookie('ims_loginId');
         if(loginId){
-            $("#adminId").val(loginId);
+            $("#userId").val(loginId);
             $('#idSave').attr("checked", true);
         }
         
@@ -72,8 +72,8 @@ $LAB
         <div class="login_form">
             <div class="title_bar">LOGIN</div>
                 <div class="form_left">
-                    <span class="title">아이디</span><input type="text" name="adminId" id="adminId" tabindex="1" maxlength="70" style="width:115px;"/>
-                    <span class="title">비밀번호</span><input type="password" name="adminPw" id="adminPw" tabindex="2" maxlength="20" style="width:115px;"/>
+                    <span class="title">아이디</span><input type="text" name="userId" id="userId" tabindex="1" maxlength="70" style="width:115px;"/>
+                    <span class="title">비밀번호</span><input type="password" name="userPw" id="userPw" tabindex="2" maxlength="20" style="width:115px;"/>
                     <a href="#" id="loginBtn" class="login_bt">로그인</a>
                 </div>
             <div class="form_right">

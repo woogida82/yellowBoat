@@ -4,11 +4,27 @@
 <mapper namespace="admin">
     
     <select id="selectAdminInfo" resultType="AdminBean">
-        SELECT ADMIN_ID, AES128_DECRYPT(ADMIN_PW) ADMIN_PW, ADMIN_NM, MENU_AUTH, DEPT, TEAM, POST, DUTY, ADMIN_NM, DEL_YN
-          FROM T_ADMIN
+        SELECT 
+        	USER_ID, 
+            AES128_DECRYPT(USER_PW) AS USER_PW,
+        	USER_NM, 
+            USER_CD,
+            MENU_AUTH,
+        	USER_NM, 
+            ZIP_CD,
+            ADDR,
+            ADDR_DETAIL,
+            SANGHO_NM,
+            TEL_NO,
+            HP_NO,
+            BANK_CD,
+            ACNT_NO,
+            ACNT_NM,
+        	DEL_YN
+          FROM T_USER
          WHERE
-           ADMIN_ID = #{adminId}
-           AND ADMIN_PW = AES128_ENCRYPT(#{adminPw})
+           USER_ID = #{userId}
+           AND USER_PW = AES128_ENCRYPT(#{userPw})
     </select>
     
 </mapper>

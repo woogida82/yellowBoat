@@ -27,6 +27,21 @@ public class AdminBean extends CommonBaseBean {
     private String[] idxs; //멀티 IDX
     private String status; //상태
     
+    /** 추가 */
+    private String userId; //유저id
+    private String userPw; //유저패스워드
+    private String userCd; //유저구분
+    private String userNm; //유저이름
+    private String zipCd; //우편번호
+    private String addr; //주소
+    private String addrDetail; //상세주소
+    private String sanghoNm; //상호명
+    private String telNo; //전화번호
+    private String hpNo; //휴대폰번호
+    private String bankCd; //은행명    
+    private String acntNo; //계좌명
+    private String acntNm; //예금주
+    
 	public String getAdminId() {
 		return adminId;
 	}
@@ -135,6 +150,84 @@ public class AdminBean extends CommonBaseBean {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getUserId() {
+        return userId;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    public String getUserPw() {
+        return userPw;
+    }
+    public void setUserPw(String userPw) {
+        this.userPw = userPw;
+    }
+    public String getUserCd() {
+        return userCd;
+    }
+    public void setUserCd(String userCd) {
+        this.userCd = userCd;
+    }
+    public String getUserNm() {
+        return userNm;
+    }
+    public void setUserNm(String userNm) {
+        this.userNm = userNm;
+    }
+    public String getZipCd() {
+        return zipCd;
+    }
+    public void setZipCd(String zipCd) {
+        this.zipCd = zipCd;
+    }
+    public String getAddr() {
+        return addr;
+    }
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+    public String getAddrDetail() {
+        return addrDetail;
+    }
+    public void setAddrDetail(String addrDetail) {
+        this.addrDetail = addrDetail;
+    }
+    public String getSanghoNm() {
+        return sanghoNm;
+    }
+    public void setSanghoNm(String sanghoNm) {
+        this.sanghoNm = sanghoNm;
+    }
+    public String getTelNo() {
+        return telNo;
+    }
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
+    }
+    public String getHpNo() {
+        return hpNo;
+    }
+    public void setHpNo(String hpNo) {
+        this.hpNo = hpNo;
+    }
+    public String getBankCd() {
+        return bankCd;
+    }
+    public void setBankCd(String bankCd) {
+        this.bankCd = bankCd;
+    }
+    public String getAcntNo() {
+        return acntNo;
+    }
+    public void setAcntNo(String acntNo) {
+        this.acntNo = acntNo;
+    }
+    public String getAcntNm() {
+        return acntNm;
+    }
+    public void setAcntNm(String acntNm) {
+        this.acntNm = acntNm;
     }
     
 }
