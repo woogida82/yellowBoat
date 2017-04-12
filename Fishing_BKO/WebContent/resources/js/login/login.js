@@ -63,5 +63,5 @@ function login() {
 
 //회원가입 페이지 이동
 function signUp(){
-    location.href = "/bko/user/singUpView";
+    location.href = "/bko/user/singUp";
 }

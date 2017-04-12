@@ -34,7 +34,7 @@ $LAB
 .script("/js/common/dateUtils.js?20160610")
 .script(function() {
     return [
-        "/js/common/contentBody.js?20160610",
+        "/js/common/contentBody.js?20170411",
         "${jsName}?20160805"
     ];
 }).wait(function(){

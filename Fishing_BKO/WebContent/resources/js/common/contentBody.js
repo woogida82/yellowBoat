@@ -8,7 +8,6 @@
 
     /*초기 로딩시 실행*/
     init: function() {
-        
         if ($(".bko-bodyContentInnerBox").data("content-type")) {
             this.contentType = $(".bko-bodyContentInnerBox").data("content-type");
         }

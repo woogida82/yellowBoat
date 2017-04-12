@@ -42,6 +42,7 @@
             <mvc:mapping path="/bko/**" />
             <mvc:exclude-mapping path="/bko/login"/>
             <mvc:exclude-mapping path="/bko/doLogin"/>
+            <mvc:exclude-mapping path="/bko/user/singUp"/>
             <mvc:exclude-mapping path="/bko/user/singUpView"/>
             
             <bean class="kr.co.fishing.bko.common.aop.LoginCheckInterceptor" />

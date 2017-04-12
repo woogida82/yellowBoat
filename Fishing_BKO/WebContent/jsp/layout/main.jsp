@@ -6,6 +6,7 @@
 <%@ include file="/jsp/common/meta.jsp" %>
 <%@ include file="/jsp/common/taglibs.jsp" %>
 <%@ include file="/jsp/common/style.jsp" %>
+<%@ include file="/jsp/common/javascript.jsp" %>
 
 <title>옐로우 보트</title>
 </head>
@@ -13,7 +14,7 @@
 <body>
     <div class="header_wrap">
         <h1>
-            <a href="/"><img src="/images/common/logo.png" alt="대원낚시" /></a>
+            <a href="#" onclick="Main.returnHome();"><img src="/images/common/logo.png" alt="대원낚시" /></a>
         </h1>
     </div>
     <div class="content_wrap">
@@ -37,9 +38,8 @@
         </div>
         <!--end sidebar-->
         
-        <div class="content_box">
-        </div>
-        <!--end content_box-->
+        <div id="bko-CententBox"></div>
+        
     </div>
     <!--end content_wrap-->
     
@@ -47,7 +47,8 @@
         <p>Copyright YellowBoat. All right reserved.</p>
     </div>
     <!--end footer_wrap-->    
-    <input type="hidden" id="signUpYn" value="${signUpYn}">
+    <input type="hidden" id="signUpYn" value="${signUpYn}"/>
+    <input type="hidden" id="userCd" value="${SESSION_KEY_ADMIN.userCd}"/>
 <script type="text/javascript" src="/js/jquery/LAB.min.js"></script>
 <script type="text/javascript">
     $LAB.script(function() {

@@ -34,10 +34,18 @@ public class UserController {
         return "user/userList";
     }
     
-    @RequestMapping("/singUpView")
-    public String singUpView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+    @RequestMapping("/singUp")
+    public String singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
         model.addAttribute("signUpYn", "Y");
         return "layout/main";
+    }    
+    
+    @RequestMapping("/singUpView")
+    public String singUpView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+        
+        
+        
+        return "user/signUp";
     }
     
     

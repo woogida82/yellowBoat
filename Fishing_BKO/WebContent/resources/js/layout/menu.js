@@ -44,18 +44,18 @@ var Menu = {
                             if (menu.subId == 0) {
                                 if(menu.lastYn == 'Y'){
                                     if(menu.directYn == 'Y'){
-                                        str += "<li class='has-sub'><a href='#' title='"+ menu.menuNm +"'><span class='list3' onClick=Main.openClientDirect('"+menu.uri+"');><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
+                                        str += "<li class='has-sub'><a href='#'><span class='list3' onClick=\"Main.openClientDirect('"+menu.uri+"');\"><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
                                     }else{
-                                        str += "<li class='has-sub'><a href='#'><span class='list3'><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
+                                        str += "<li class='has-sub'><a href='#'><span class='list3' onClick=\"Main.openClient('"+menu.uri+"');\"><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
                                     }
                                 }else{
                                     str += "<li class='has-sub'><a href='#'><span class='list3'><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a><ul>"
                                 }
                             }else{
                                 if(menu.lastYn == 'Y'){
-                                    str += "<li><a href='#'><span>"+ menu.menuNm +"</span></a></li></ul></li>";
+                                    str += "<li><a href='#'><span onClick=\"Main.openClient('"+menu.uri+"');\">"+ menu.menuNm +"</span></a></li></ul></li>";
                                 }else{
-                                    str += "<li><a href='#'><span>"+ menu.menuNm +"</span></a></li>";
+                                    str += "<li><a href='#'><span onClick=\"Main.openClient('"+menu.uri+"');\">"+ menu.menuNm +"</span></a></li>";
                                 }
                             }
                         }
