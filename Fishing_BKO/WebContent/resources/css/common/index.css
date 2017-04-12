@@ -17,6 +17,8 @@ body {background:#f1f3fa;}
 .login_box .login_form .form_right {position:absolute; top:50px; right:30px; padding-right:20px; padding-top:10px; height:78px; padding-left:45px; border-left:1px solid #75828e; }
 .login_box .login_form a.login_bt {display:inline-block; width:73px; text-align:center; padding:9px 0; vertical-align:top; font-weight:500; color:#000; background:#f9be4c; margin-left:5px;}
 .login_box .login_form a.login_bt2 {display:inline-block; width:130px; text-align:center; padding:5px 0; color:#000; background:#f9be4c; margin-left:10px;}
+.login_box .login_form a.title {color:#fff; display:inline-block; margin-top:10px; margin-right:10px; margin-left:10px; line-height:1.5;}
+/* .login_box .login_form input[type="checkbox"]{position: relative;top: -3px;left: 0px;content: '\2714';font-size: 18px;} */
 
 /*헤더*/
 .header_wrap { position:fixed; z-index:9999; width:100%; background:#fff; box-shadow:2px 2px 6px #d1d4da;}

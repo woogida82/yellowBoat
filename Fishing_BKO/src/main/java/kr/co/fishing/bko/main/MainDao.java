@@ -31,16 +31,4 @@ public class MainDao {
     public AdminBean selectInfo(AdminBean bean) throws Exception{
         return sqlSession.selectOne("main.selectInfo", bean);
     }
-    
-    public int updateInfo(AdminBean bean) throws Exception{
-        return sqlSession.update("main.updateInfo", bean);
-    }
-    
-    public int matchPass(AdminBean bean) throws Exception{
-        return sqlSession.selectOne("main.matchPass", bean);
-    }
-    
-    public int updatePass(AdminBean bean) throws Exception{
-        return sqlSession.update("main.updatePass", bean);
-    }
 }

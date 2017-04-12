@@ -10,6 +10,9 @@ public class MenuBean extends CommonBaseBean {
     private String menuNm;
     private String uri;
     private String useYn;
+    private String material;
+    private String lastYn;
+    private String directYn;
     
 	public String getMenuIdx() {
 		return menuIdx;
@@ -47,5 +50,23 @@ public class MenuBean extends CommonBaseBean {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
+    public String getMaterial() {
+        return material;
+    }
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+    public String getLastYn() {
+        return lastYn;
+    }
+    public void setLastYn(String lastYn) {
+        this.lastYn = lastYn;
+    }
+    public String getDirectYn() {
+        return directYn;
+    }
+    public void setDirectYn(String directYn) {
+        this.directYn = directYn;
+    }
     
 }

@@ -36,22 +36,4 @@ public class MainServiceImpl implements MainService {
     public AdminBean selectInfo(AdminBean bean) throws Exception{
         return mainDao.selectInfo(bean);
     }
-    
-    public int updateInfo(AdminBean bean) throws Exception{
-        return mainDao.updateInfo(bean);
-    }
-    
-    public void updatePass(AdminBean bean) throws Exception{
-        List<String> errList = new ArrayList<String>();
-        
-        if(mainDao.matchPass(bean) == 0) {
-            // 에러처리
-            errList.add(contextUtil.getMessage(ERROR_CODE.MSG_0002E));
-            throw new BizException(errList);
-        } else {
-            mainDao.updatePass(bean);
-        }
-        
-        
-    }
 }

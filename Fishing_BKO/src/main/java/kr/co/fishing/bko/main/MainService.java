@@ -19,8 +19,4 @@ public interface MainService {
     List<MenuBean> selectMenuList(MenuBean bean) throws Exception;
     
     AdminBean selectInfo(AdminBean bean) throws Exception;
-    
-    int updateInfo(AdminBean bean) throws Exception;
-    
-    void updatePass(AdminBean bean) throws Exception;
 }

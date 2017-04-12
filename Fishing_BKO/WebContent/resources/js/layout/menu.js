@@ -33,9 +33,7 @@ var Menu = {
                 if (data.result == "OK") {
                     
                     if (data.menuList) {
-                        
                         oThis.menusList = data.menuList;
-                        
                         var str = '';
                         var setClass = '';
                         var captionName = '';
@@ -43,28 +41,25 @@ var Menu = {
                         for (var i = 0; i < data.menuList.length; i++) {
                             
                             var menu = data.menuList[i];
-                            
-                            setClass = ' class=';
-                            captionName = '';
-                            
                             if (menu.subId == 0) {
-                                setClass += '"bko-leftMenuTitle" ';
-                                captionName = menu.menuNm;
-                                
-                            } else {
-                                setClass += '"bko-leftMenuContext" id="m' + menu.menuIdx+'" ';
-                                setClass += 'onClick="Main.openClient(\'w' + menu.menuIdx + '\' ,\'' + menu.uri + '\' ,\'' + menu.menuNm + '\');" ';
-                                setClass += '"alt="' + menu.menuNm + '" title="' + menu.menuNm + '" ';
-                                captionName += menu.menuNm;
-                                
+                                if(menu.lastYn == 'Y'){
+                                    if(menu.directYn == 'Y'){
+                                        str += "<li class='has-sub'><a href='#' title='"+ menu.menuNm +"'><span class='list3' onClick=Main.openClientDirect('"+menu.uri+"');><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
+                                    }else{
+                                        str += "<li class='has-sub'><a href='#'><span class='list3'><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a></li>"
+                                    }
+                                }else{
+                                    str += "<li class='has-sub'><a href='#'><span class='list3'><i class='material-icons'>"+menu.material+"</i>"+ menu.menuNm +"</span></a><ul>"
+                                }
+                            }else{
+                                if(menu.lastYn == 'Y'){
+                                    str += "<li><a href='#'><span>"+ menu.menuNm +"</span></a></li></ul></li>";
+                                }else{
+                                    str += "<li><a href='#'><span>"+ menu.menuNm +"</span></a></li>";
+                                }
                             }
-                            str += "<div "+setClass+">"+captionName+"</div> ";
-                            if (oThis.debug) {  console.log("setClass ===> "+setClass);};
-                            if (oThis.debug) {  console.log("captionName ===> "+captionName);};
                         }
-
                         oThis.$leftMenuList.html(str);
-                            
                     }
                     else {
                         oThis.$leftMenuList.html("<div class=\"bko-leftMenuTitle\">메뉴정보없음:000</div>");

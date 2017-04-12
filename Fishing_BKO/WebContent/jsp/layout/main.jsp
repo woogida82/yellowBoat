@@ -7,61 +7,47 @@
 <%@ include file="/jsp/common/taglibs.jsp" %>
 <%@ include file="/jsp/common/style.jsp" %>
 
-<title>FISHING</title>
-<!-- 필수 //-->
-<link rel="stylesheet" type="text/css" href="/css/layout/main.css" />
-<link rel="stylesheet" type="text/css" href="/css/layout/dropdown.css" />
-
-<style type="text/css">
-
-.bko-topspace .bko-topBar {
-    background-color : lightskyblue;
-}
-
-</style>
+<title>옐로우 보트</title>
 </head>
 
 <body>
-
-<div id="bko-workspace">
-    <div class="bko-topspace">
-        <div class="bko-blackGround" id="background1"></div>
-        <div class="bko-topBar">
-            <div id="bko-top-Side-Btn">
-                <div class="bko-leftMenuLink" ><input type="image" src="/images/layout/btn_sidebar.png" id="bko-sidbarbtn" alt="메뉴"  title="메뉴"/></div>
-                <div id="bko-topCI">
-                    <div id="bko-topCIimg">
-                        <img src="/images/layout/logo_new_S.png" style="width:100%;margin-left: 10px;" />
-                    </div>
-                </div>
-                <div id="bko-divline"></div>
-            </div>
-            <div id="bko-infoBar">
-                <div id="bko-leftNaviBtn"><input type="image" src="/images/layout/divNavi-left.png" class="bko-divNaviBtn" id="bko-slide-pevious" alt="앞으로" title="앞으로이동" /></div>
-                <div id="bko-infoDisplay"><div id="bko-btnList" draggable="true" ondragstart="return dragStart(event)" ondragend="return dragEnd(event)"></div></div>
-                <div id="bko-rightNaviBtn"><input type="image" src="/images/layout/divNavi-right.png" class="bko-divNaviBtn" id="bko-slide-next"  alt="뒤로" title="뒤로이동" /></div>
-            </div>
-            <div class="bko-Userinfo">
-                <div class="bko-LoginUser">
-                    <div class="bko-LoginUser" id="bko-LoginName"><b id="UserName">${SESSION_KEY_ADMIN.adminNm}</b></div>
-                    <div class="bko-LoginUser" id="bko-LoginManu"><input type="image" src="/images/layout/down.png" alt="사용자정보관리" title="사용자정보관리" /></div>
-                </div>
-            </div>
-        </div>
-        <div class="bko-blackGround" id="background2"></div>
+    <div class="header_wrap">
+        <h1>
+            <a href="/"><img src="/images/common/logo.png" alt="대원낚시" /></a>
+        </h1>
     </div>
-    <div class="bko-bodyspace">
-        <div id="bko-leftMenu">
-            <div class="bko-leftMenuItem" id="bko-leftMenuList">
-            </div><!-- bko-leftMenuItem -->     
-        </div> <!-- bko-leftMenu -->
+    <div class="content_wrap">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="/images/common/photo.png" />
+                
+                <p class="title">${SESSION_KEY_ADMIN.userNm} 님</p>
+                
+                <p>좋은 하루 되세요!</p>
+                <p class="date"></p>
+            </div>
+            <!--end profile-->
+            <div class="gnb_box">
+                <div id='cssmenu'>
+                    <ul id='bko-leftMenuList'>
+                    </ul>
+                </div>
+            </div>
+            <!--end gnb_box-->
+        </div>
+        <!--end sidebar-->
         
-        <div id="bko-CententBox"></div>
-
-    </div><!-- class=bko-bodyspace -->
-
-</div>
-
+        <div class="content_box">
+        </div>
+        <!--end content_box-->
+    </div>
+    <!--end content_wrap-->
+    
+    <div class="footer_wrap">
+        <p>Copyright YellowBoat. All right reserved.</p>
+    </div>
+    <!--end footer_wrap-->    
+    <input type="hidden" id="signUpYn" value="${signUpYn}">
 <script type="text/javascript" src="/js/jquery/LAB.min.js"></script>
 <script type="text/javascript">
     $LAB.script(function() {
@@ -87,7 +73,7 @@
         ];
     }).wait()
     .script("/js/layout/menu.js")
-    .script("/js/layout/main.js?20160609")
+    .script("/js/layout/main.js?20170412")
     .wait(function(){
         $(function () {
             Main.init();

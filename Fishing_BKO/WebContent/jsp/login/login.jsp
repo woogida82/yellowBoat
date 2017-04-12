@@ -6,9 +6,6 @@
 
 <title>옐로우 보트</title>
 
-<!-- <link rel="stylesheet" type="text/css" href="/css/common/common.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="/css/common/base.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="/css/login/login.css?ver=201503252158" /> -->
 <link rel="stylesheet" type="text/css" href="/css/common/index.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/common/reset.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/common/styles.css">
@@ -21,22 +18,6 @@ $LAB
 .script("/js/jquery/jquery-migrate-1.2.1.min.js").wait()
 .script("/js/jquery/jquery.cookie.js").wait()
 .script("/js/login/login.js?ver=201503261151").wait(function(){
-
-	//로그인화면 베이스 div의 height를 해당 창의 높이값으로 변경.
-	function bgResize() {
-		$(".bko-login-bodyspace").css("height",window.innerHeight);
-	}
-
-	//jQuery document.onload
-	$(function(){
-		bgResize();
-	});
-
-	//jQuery window.resize
-	$(window).resize(
-		bgResize
-	);
-	
 	$(function(){
         $('#userId').keypress(function(e){
             if(e.which == 13){
@@ -59,6 +40,11 @@ $LAB
         $("#loginBtn").click(function(){
             login();
         });
+        
+        $("#signUp").click(function(){
+            signUp();
+        });
+        
     });
 })
 
@@ -79,6 +65,8 @@ $LAB
             <div class="form_right">
                 <img src="/images/common/login_logo.png" alt="logo" />
             </div>
+            <a href="#" id="signUp" class="title" >회원가입</a>
+<!--             <input type="checkbox" id="idSave" /> -->
         </div>
     </div>    
 </body>

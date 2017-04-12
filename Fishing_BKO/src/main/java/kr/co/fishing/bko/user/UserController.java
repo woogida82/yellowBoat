@@ -34,6 +34,13 @@ public class UserController {
         return "user/userList";
     }
     
+    @RequestMapping("/singUpView")
+    public String singUpView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+        model.addAttribute("signUpYn", "Y");
+        return "layout/main";
+    }
+    
+    
     @ResponseBody
     @RequestMapping("/userList")
     public Map<String,Object> userListPaging(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) throws Exception {

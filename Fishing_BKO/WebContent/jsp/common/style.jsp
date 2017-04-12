@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" type="text/css" href="/css/common/base.css" />
-<link rel="stylesheet" type="text/css" href="/css/common/common.css?20151202" />
-<link rel="stylesheet" type="text/css" href="/css/common/content.css" />
-<link rel="stylesheet" type="text/css" href="/css/common/button.css" />
+<!-- 충돌로 주석처리 -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/common/base.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/common/common.css?20151202" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/common/content.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/common/button.css" /> -->
 
 <link rel="stylesheet" type="text/css" href="/css/jquery/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="/css/jquery/jquery.jqplot.css" />

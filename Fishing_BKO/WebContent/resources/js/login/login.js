@@ -11,7 +11,7 @@ function loginBtnImgChg(click) {
 }
 
 function login() { 
-	loginBtnImgChg(true);
+//	loginBtnImgChg(true);
 
 	var id = $('#userId').val();
 	var pw = $('#userPw').val();
@@ -58,5 +58,10 @@ function login() {
 		});
 	}
 
-	loginBtnImgChg(false);
+//	loginBtnImgChg(false);
+}
+
+//회원가입 페이지 이동
+function signUp(){
+    location.href = "/bko/user/singUpView";
 }

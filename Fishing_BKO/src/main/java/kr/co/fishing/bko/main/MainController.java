@@ -3,6 +3,7 @@ package kr.co.fishing.bko.main;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+//import java.util.
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,10 @@ public class MainController {
      */
     @RequestMapping("/main")
     public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+        model.addAttribute("signUpYn", "N");
+        
+        
+        
         return "layout/main";
     }
     
@@ -58,49 +63,6 @@ public class MainController {
             
         return resultMap;
     }
-    
-    @ResponseBody
-    @RequestMapping("/updateInfo")
-    public Map<String,Object> updateInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) {
-        
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        
-        try {
-            
-            mainService.updateInfo(bean);
-            
-            resultMap.put("result", AJAX_RESULT.OK);
-        } catch(Exception e) {
-            resultMap.put("result", AJAX_RESULT.NG);
-            e.printStackTrace();
-        }
-        
-        return resultMap;
-    }
-    
-    @ResponseBody
-    @RequestMapping("/updatePass")
-    public Map<String,Object> updatePass(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) {
-        
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        
-        try {
-            
-            try {
-                mainService.updatePass(bean);
-            } catch (BizException e) {
-                resultMap.put("errList", e.getErrList());
-            }
-            
-            resultMap.put("result", AJAX_RESULT.OK);
-        } catch(Exception e) {
-            resultMap.put("result", AJAX_RESULT.NG);
-            e.printStackTrace();
-        }
-        
-        return resultMap;
-    }
-            
             
     /**
      * 메뉴리스트 취득
