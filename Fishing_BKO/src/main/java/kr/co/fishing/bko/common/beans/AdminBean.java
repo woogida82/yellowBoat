@@ -30,6 +30,7 @@ public class AdminBean extends CommonBaseBean {
     /** 추가 */
     private String userId; //유저id
     private String userPw; //유저패스워드
+    private String userPw2; //유저패스워드
     private String userCd; //유저구분
     private String userNm; //유저이름
     private String zipCd; //우편번호
@@ -39,10 +40,16 @@ public class AdminBean extends CommonBaseBean {
     private String telNo; //전화번호
     private String hpNo; //휴대폰번호
     private String bankCd; //은행명    
-    private String acntNo; //계좌명
+    private String acntNo; //계좌번호
     private String acntNm; //예금주
     
-	public String getAdminId() {
+	public String getUserPw2() {
+        return userPw2;
+    }
+    public void setUserPw2(String userPw2) {
+        this.userPw2 = userPw2;
+    }
+    public String getAdminId() {
 		return adminId;
 	}
 	public void setAdminId(String adminId) {

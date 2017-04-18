@@ -13,9 +13,9 @@ $(function(){
 //        
 //    });
     
-    $(".checkbox-group[data-role!=none], .radio-group[data-role!=none]").buttonset();
-    $("select.select[data-role!=none]").select2({minimumResultsForSearch: -1});
-    $("select.select-search[data-role!=none]").select2();
+//    $(".checkbox-group[data-role!=none], .radio-group[data-role!=none]").buttonset();
+//    $("select.select[data-role!=none]").select2({minimumResultsForSearch: -1});
+//    $("select.select-search[data-role!=none]").select2();
     
     $("body").initvalidation();
     

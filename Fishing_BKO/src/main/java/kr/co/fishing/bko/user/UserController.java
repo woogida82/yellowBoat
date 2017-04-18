@@ -37,17 +37,9 @@ public class UserController {
     @RequestMapping("/singUp")
     public String singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
         model.addAttribute("signUpYn", "Y");
-        return "layout/main";
-    }    
-    
-    @RequestMapping("/singUpView")
-    public String singUpView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
-        
-        
-        
+//        return "layout/main";
         return "user/signUp";
-    }
-    
+    }    
     
     @ResponseBody
     @RequestMapping("/userList")
@@ -108,7 +100,7 @@ public class UserController {
             if(resultCnt > 0){
                 resultMap.put("result", AJAX_RESULT.DUP); //중복
             } else {
-                bean.setUserPw(bean.getUserId()+"1234");
+//                bean.setUserPw(bean.getUserId()+"1234");
                 userService.insertUser(bean);
                 resultMap.put("result", AJAX_RESULT.OK);
             }

@@ -87,22 +87,11 @@
     <insert id="insertUser" parameterType="AdminBean">
         INSERT INTO T_USER (
         	DEL_YN
-        	<if test='userId != null and userId != ""'>
             ,USER_ID
-            </if>
-            <if test='userPw != null and userPw != ""'>
             ,USER_PW
-            </if>
-            <if test='userCd != null and userCd != ""'>
             ,USER_CD
-            </if>            
-            <if test='menuAuth != null and menuAuth != ""'>
             ,MENU_AUTH
-            </if>
-            <if test='userNm != null and userNm != ""'>
             ,USER_NM
-            </if>
-            
             <if test='zipCd != null and zipCd != ""'>
             ,ZIP_CD
             </if>            
@@ -137,22 +126,11 @@
             ,CREATE_TIME
         ) VALUES (
             'N'
-            <if test='userId != null and userId != ""'>
             ,#{userId}
-            </if>
-            <if test='userPw != null and userPw != ""'>
             ,AES128_ENCRYPT(#{userPw})
-            </if>
-            <if test='userCd != null and userCd != ""'>
-            ,#{userCd}
-            </if>             
-            <if test='menuAuth != null and menuAuth != ""'>
-            ,#{menuAuth}
-            </if>
-            <if test='userNm != null and userNm != ""'>
+            ,'CUST'
+            ,'CU'
             ,#{userNm}
-            </if>
-            
             <if test='zipCd != null and zipCd != ""'>
             ,#{zipCd}
             </if>            
@@ -180,10 +158,9 @@
             <if test='acntNm != null and acntNm != ""'>            
             ,#{acntNm}            
             </if>          
-            
-            ,#{adminBean.userId}
+            ,#{userId}
             ,NOW()
-            ,#{adminBean.userId}
+            ,#{userId}
             ,NOW()
         )
     </insert>

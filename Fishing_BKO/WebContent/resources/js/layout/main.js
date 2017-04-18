@@ -11,36 +11,20 @@ var Main = {
     init: function() {
         var toDay = "Today "+$.getToday('yyyy.MM.dd');
         var pDate = $("p.date");
-//        var pUserNm = $("p.title");
         var sidebar =$("div.sidebar");
-        
-        //슬라이드바 숨김
-        sidebar.hide();
         
         if(signUpYn != "Y"){
             // 메뉴 구성
             Menu.makeMenu();  
-            
             pDate.empty();
             pDate.text(toDay);
-            
-            sidebar.show();
-            if(userCd == "ADMN"){
-//                url = URL.ADMN;
-            }else if(userCd == "CUST"){
-//                url = URL.CUST;
-            }else if(userCd == "USER"){
-//                url = URL.USER;
-            }
-            url = URL.SIGNUP;
         }else{
-//            pUserNm.empty();
-//            pUserNm.text("고객 님");
-            url = URL.SIGNUP;
+            //슬라이드바 숨김
+            sidebar.hide();
+//            url = URL.SIGNUP;
+            //컨텐츠 open
+//            this.openClient(url);
         }
-        
-        //컨텐츠 open
-        this.openClient(url);
     },
     //페이지 직접이동
     openClientDirect: function(CURL) {
