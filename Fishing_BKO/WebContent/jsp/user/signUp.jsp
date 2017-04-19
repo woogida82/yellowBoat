@@ -6,7 +6,6 @@
 <%@ include file="/jsp/common/meta.jsp" %>
 <%@ include file="/jsp/common/taglibs.jsp" %>
 <%@ include file="/jsp/common/style.jsp" %>
-<%@ include file="/jsp/common/javascript.jsp" %>
 
 <title>회원 가입</title>
 </head>
@@ -129,6 +128,7 @@
     <div class="footer_wrap">
         <p>Copyright YellowBoat. All right reserved.</p>
     </div>
-    <!--end footer_wrap-->    
+    <!--end footer_wrap-->  
+    <%@ include file="/jsp/common/javascript.jsp" %>  
 </body>
 </html>

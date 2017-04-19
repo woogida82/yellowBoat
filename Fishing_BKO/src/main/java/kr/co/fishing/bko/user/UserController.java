@@ -35,46 +35,11 @@ public class UserController {
     @Autowired
     private ShipInfoService shipInfoService;    
     
-    @RequestMapping("/user")
-    public String user(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+    @RequestMapping("")
+    public String user(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
         return "user/userList";
     }
-    
-    /**
-     * 회원가입화면
-     * 
-     * @param request
-     * @param response
-     * @param model
-     * @return
-     * @throws Exception
-     */    
-    @RequestMapping("/singUp")
-//    public String singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
-//        model.addAttribute("signUpYn", "Y");
-//        return "user/signUp";
-//    } 
-    public ModelAndView singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        
-        AdminBean adminBean = (AdminBean) request.getSession().getAttribute(SESSION_KEY.ADMIN);
-        
-        if (adminBean != null) {
-            
-            RedirectView redirectView = new RedirectView();
-            redirectView.setUrl("/bko/main");
-            redirectView.setExposeModelAttributes(false);
-
-            mav.setView(redirectView);
-        } else {
-            mav.addObject("jsName", "/js/user/signUp.js");
-            mav.addObject("jsObjName", "SignUp");
-            mav.setViewName("user/signUp");
-        }
-        return mav;
-    } 
-    
     
     @ResponseBody
     @RequestMapping("/userList")
@@ -101,7 +66,37 @@ public class UserController {
         }
         
         return resultMap;
-    }
+    }    
+    
+    /**
+     * 회원가입화면
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */    
+    @RequestMapping("/singUp")
+    public ModelAndView singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        
+        AdminBean adminBean = (AdminBean) request.getSession().getAttribute(SESSION_KEY.ADMIN);
+        
+        if (adminBean != null) {
+            
+            RedirectView redirectView = new RedirectView();
+            redirectView.setUrl("/bko/main");
+            redirectView.setExposeModelAttributes(false);
+
+            mav.setView(redirectView);
+        } else {
+            mav.addObject("jsName", "/js/user/signUp.js");
+            mav.addObject("jsObjName", "SignUp");
+            mav.setViewName("user/signUp");
+        }
+        return mav;
+    } 
     
     @ResponseBody
     @RequestMapping("/selectUser")

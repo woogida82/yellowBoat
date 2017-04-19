@@ -14,47 +14,6 @@
         
         /* 타입선택에 따라 로직 변경 */
         this.choiceContentType();
-
-        /*content에 스크롤 여부에 따라 grid width, height resize bind 설정*/
-        $(window).bind('resize', function() {
-            ContentBody.reSize();
-        });
-        
-        // 검색패널
-        if ($(".bko-searchPanel").length > 0) {
-            $(".bko-searchPanel").click(function(){
-                ContentBody.searchBoxView();
-            });
-        }
-        
-        // 새로고침
-        if ($(".bko-refresh").length > 0) {
-            $(".bko-refresh").click(function(){
-                $(this).attr("disabled", true);
-                ContentBody.reload();
-            });
-        }
-        
-        // 새창열기
-        if ($(".bko-newWindow").length > 0) {
-            $(".bko-newWindow").click(function(){
-                ContentBody.winOpen();
-            });
-        }
-        
-        // 검색영역 초기화
-        if ($("#reset").length > 0) {
-            $("#reset").click(function(){
-                // textbox 초기화
-                $(".bko-searchBox input[type=text]").val('');
-                
-                // selectbox 초기화
-                $(".bko-searchBox select").each(function(){
-                    $(this).find(">option:eq(0)").attr('selected', true).trigger('change');
-                });
-            });
-        }
-        
     },
     
     /*content영역에 나오는 타입 선택*/
