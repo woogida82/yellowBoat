@@ -47,6 +47,6 @@ var Main = {
     },
     /* 홈으로 */
     returnHome(){
-        window.location.href = "/";
+        window.location.href = "/bko/main";
     }
 };

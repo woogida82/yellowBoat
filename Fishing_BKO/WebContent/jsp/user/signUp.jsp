@@ -129,39 +129,6 @@
     <div class="footer_wrap">
         <p>Copyright YellowBoat. All right reserved.</p>
     </div>
-    <!--end footer_wrap-->        
-<script type="text/javascript">
-    $LAB.script(function() {
-        return [
-                "/js/jquery/jquery-1.11.2.min.js",
-                "/js/jquery/jquery-migrate-1.2.1.min.js",
-                "/js/jquery/jquery-ui.min.js",
-            ];
-    }).wait()
-    .script("/js/jquery/html5shiv.min.js")
-    .script("/js/jquery/jquery.form.min.js")
-    .script("/js/jquery/jquery.slimscroll.min.js").wait()
-    .script("/js/jquery/jquery.select2.min.js").wait()
-    .script("/js/jquery/jquery-impromptu.min.js").wait()
-    .script(function() {
-        return [
-            "/js/common/control.js",
-            "/js/common/validator.js",
-            "/js/common/utils.js",
-            "/js/common/fileUtils.js",
-            "/js/common/dateUtils.js",
-            "/js/common/common.js?20151224"
-        ];
-    }).wait()
-    .script("/js/layout/menu.js")
-    .script("/js/user/signUp.js?20170412")
-    .wait(function(){
-        $(function () {
-			SignUp.init();
-        });
-    })
-    .script("/js/common/script.js")
-    ;
-</script>           
+    <!--end footer_wrap-->    
 </body>
 </html>

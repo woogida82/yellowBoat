@@ -68,9 +68,10 @@ public class UserController {
 
             mav.setView(redirectView);
         } else {
+            mav.addObject("jsName", "/js/user/signUp.js");
+            mav.addObject("jsObjName", "SignUp");
             mav.setViewName("user/signUp");
         }
-        
         return mav;
     } 
     
