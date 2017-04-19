@@ -47,8 +47,6 @@
         <p>Copyright YellowBoat. All right reserved.</p>
     </div>
     <!--end footer_wrap-->    
-    <input type="hidden" id="signUpYn" value="${signUpYn}"/>
-    <input type="hidden" id="userCd" value="${SESSION_KEY_ADMIN.userCd}"/>
 <script type="text/javascript" src="/js/jquery/LAB.min.js"></script>
 <script type="text/javascript">
     $LAB.script(function() {

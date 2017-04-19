@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import kr.co.fishing.bko.beans.ShipInfoBean;
 import kr.co.fishing.bko.common.beans.AdminBean;
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
+import kr.co.fishing.bko.common.shipInfo.ShipInfoService;
 import kr.co.fishing.bko.common.utils.CommonConstant.AJAX_RESULT;
 import kr.co.fishing.bko.common.utils.CommonConstant.SESSION_KEY;
 
@@ -28,18 +32,48 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ShipInfoService shipInfoService;    
+    
     @RequestMapping("/user")
     public String user(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
 
         return "user/userList";
     }
     
+    /**
+     * 회원가입화면
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */    
     @RequestMapping("/singUp")
-    public String singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
-        model.addAttribute("signUpYn", "Y");
-//        return "layout/main";
-        return "user/signUp";
-    }    
+//    public String singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+//        model.addAttribute("signUpYn", "Y");
+//        return "user/signUp";
+//    } 
+    public ModelAndView singUp(HttpServletRequest request, HttpServletResponse response, @ModelAttribute CommonBaseBean bean, ModelMap model) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        
+        AdminBean adminBean = (AdminBean) request.getSession().getAttribute(SESSION_KEY.ADMIN);
+        
+        if (adminBean != null) {
+            
+            RedirectView redirectView = new RedirectView();
+            redirectView.setUrl("/bko/main");
+            redirectView.setExposeModelAttributes(false);
+
+            mav.setView(redirectView);
+        } else {
+            mav.setViewName("user/signUp");
+        }
+        
+        return mav;
+    } 
+    
     
     @ResponseBody
     @RequestMapping("/userList")
@@ -102,6 +136,13 @@ public class UserController {
             } else {
 //                bean.setUserPw(bean.getUserId()+"1234");
                 userService.insertUser(bean);
+                ShipInfoBean shipInfoBean = new ShipInfoBean();
+                shipInfoBean = bean.getShipInfoBean();
+                shipInfoBean.setUserId(bean.getUserId());
+                shipInfoBean.setShipCd("00");
+                shipInfoBean.setStatusCd("00");
+                shipInfoService.insertShipInfo(shipInfoBean);
+                
                 resultMap.put("result", AJAX_RESULT.OK);
             }
 //            

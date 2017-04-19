@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shipInfo">
+    
+    <select id="selectShipInfo" resultType="kr.co.fishing.bko.beans.ShipInfoBean">
+        SELECT 
+            SHIP_ID,
+            USER_ID,
+            SHIP_CD,
+            SHIP_NM,
+            SHIP_WEIGHT,
+            BOARDING_QUOTA,
+            MAIN_FISHING_POINT,
+            OUTPORT,
+            SERVICE_CD,
+            STATUS_CD,
+            ORG_MAIN_IMG_PATH,
+            ORG_MAIN_IMG_NM,
+            THUM_MAIN_IMG_PATH,
+            THUM_MAIN_IMG_SIZE_CD,
+            ORG_01_IMG_PATH,
+            ORG_01_IMG_NM,
+            THUM_01_IMG_PATH,
+            THUM_01_IMG_SIZE_CD,
+            ORG_02_IMG_PATH,
+            ORG_02_IMG_NM,
+            THUM_02_IMG_PATH,
+            THUM_02_IMG_SIZE_CD,
+            ORG_03_IMG_PATH,
+            ORG_03_IMG_NM,
+            THUM_03_IMG_PATH,
+            THUM_03_IMG_SIZE_CD,
+            ORG_04_IMG_PATH,
+            ORG_04_IMG_NM,
+            THUM_04_IMG_PATH,
+            THUM_04_IMG_SIZE_CD,
+            ORG_05_IMG_PATH,
+            ORG_05_IMG_NM,
+            THUM_05_IMG_PATH,
+            THUM_05_IMG_SIZE_CD,
+            ORG_06_IMG_PATH,
+            ORG_06_IMG_NM,
+            THUM_06_IMG_PATH,
+            THUM_06_IMG_SIZE_CD,
+            ORG_07_IMG_PATH,
+            ORG_07_IMG_NM,
+            THUM_07_IMG_PATH,
+            THUM_07_IMG_SIZE_CD,
+            ORG_08_IMG_PATH,
+            ORG_08_IMG_NM,
+            THUM_08_IMG_PATH,
+            THUM_08_IMG_SIZE_CD,
+            ORG_09_IMG_PATH,
+            ORG_09_IMG_NM,
+            THUM_09_IMG_PATH,
+            THUM_09_IMG_SIZE_CD,
+            ORG_10_IMG_PATH,
+            ORG_10_IMG_NM,
+            THUM_10_IMG_PATH,
+            THUM_10_IMG_SIZE_CD,
+        	DEL_YN
+            ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.UPDATE_ID) UPDATE_ID
+            ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+            ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.CREATE_ID) CREATE_ID
+            ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+          FROM T_SHIP_INFO
+         WHERE SHIP_ID = #{shipId}
+    </select>
+    
+    <insert id="insertShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
+        INSERT INTO T_SHIP_INFO (
+            DEL_YN
+            ,USER_ID
+            ,SHIP_CD
+            ,SHIP_NM
+            ,STATUS_CD 
+            <if test='shipWeight != null and shipWeight != ""'>   
+            ,SHIP_WEIGHT
+            </if>            
+            <if test='boardingQuota != null and boardingQuota != ""'>             
+            ,BOARDING_QUOTA
+            </if>            
+            <if test='mainFishingPoint != null and mainFishingPoint != ""'>              
+            ,MAIN_FISHING_POINT
+            </if>            
+            <if test='outport != null and outport != ""'>              
+            ,OUTPORT
+            </if>            
+            <if test='serviceCd != null and serviceCd != ""'>              
+            ,SERVICE_CD
+            </if>            
+            <if test='orgMainImgPath != null and orgMainImgPath != ""'>  
+            ,ORG_MAIN_IMG_PATH
+            </if>            
+            <if test='orgMainImgNm != null and orgMainImgNm != ""'>              
+            ,ORG_MAIN_IMG_NM
+            </if>            
+            <if test='thumMainImgPath != null and thumMainImgPath != ""'>             
+            ,THUM_MAIN_IMG_PATH
+            </if>            
+            <if test='thumMainImgSizeCd != null and thumMainImgSizeCd != ""'>              
+            ,THUM_MAIN_IMG_SIZE_CD
+            </if>            
+            <if test='org01ImgPath != null and org01ImgPath != ""'>              
+            ,ORG_01_IMG_PATH
+            </if>            
+            <if test='org01ImgNm != null and org01ImgNm != ""'>              
+            ,ORG_01_IMG_NM
+            </if>            
+            <if test='thum01ImgPath != null and thum01ImgPath != ""'>              
+            ,THUM_01_IMG_PATH
+            </if>            
+            <if test='thum01ImgSizeCd != null and thum01ImgSizeCd != ""'>              
+            ,THUM_01_IMG_SIZE_CD
+            </if>            
+            <if test='org02ImgPath != null and org02ImgPath != ""'>              
+            ,ORG_02_IMG_PATH
+            </if>            
+            <if test='org02ImgNm != null and org02ImgNm != ""'>              
+            ,ORG_02_IMG_NM
+            </if>            
+            <if test='thum02ImgPath != null and thum02ImgPath != ""'>              
+            ,THUM_02_IMG_PATH
+            </if>            
+            <if test='thum02ImgSizeCd != null and thum02ImgSizeCd != ""'>              
+            ,THUM_02_IMG_SIZE_CD
+            </if>            
+            <if test='org03ImgPath != null and org03ImgPath != ""'>              
+            ,ORG_03_IMG_PATH
+            </if>            
+            <if test='org03ImgNm != null and org03ImgNm != ""'>              
+            ,ORG_03_IMG_NM
+            </if>            
+            <if test='thum03ImgPath != null and thum03ImgPath != ""'>              
+            ,THUM_03_IMG_PATH
+            </if>            
+            <if test='thum03ImgSizeCd != null and thum03ImgSizeCd != ""'>              
+            ,THUM_03_IMG_SIZE_CD
+            </if>            
+            <if test='org04ImgPath != null and org04ImgPath != ""'>              
+            ,ORG_04_IMG_PATH
+             </if>            
+            <if test='org04ImgNm != null and org04ImgNm != ""'>             
+            ,ORG_04_IMG_NM
+            </if>            
+            <if test='thum04ImgPath != null and thum04ImgPath != ""'>              
+            ,THUM_04_IMG_PATH
+            </if>            
+            <if test='thum04ImgSizeCd != null and thum04ImgSizeCd != ""'>              
+            ,THUM_04_IMG_SIZE_CD
+            </if>            
+            <if test='org05ImgPath != null and org05ImgPath != ""'>              
+            ,ORG_05_IMG_PATH
+            </if>            
+            <if test='org05ImgNm != null and org05ImgNm != ""'>              
+            ,ORG_05_IMG_NM
+            </if>            
+            <if test='thum05ImgPath != null and thum05ImgPath != ""'>              
+            ,THUM_05_IMG_PATH
+            </if>            
+            <if test='thum05ImgSizeCd != null and thum05ImgSizeCd != ""'>              
+            ,THUM_05_IMG_SIZE_CD
+            </if>            
+            <if test='org06ImgPath != null and org06ImgPath != ""'>              
+            ,ORG_06_IMG_PATH
+            </if>            
+            <if test='org06ImgNm != null and org06ImgNm != ""'>              
+            ,ORG_06_IMG_NM
+            </if>            
+            <if test='thum06ImgPath != null and thum06ImgPath != ""'>              
+            ,THUM_06_IMG_PATH
+            </if>            
+            <if test='thum06ImgSizeCd != null and thum06ImgSizeCd != ""'>              
+            ,THUM_06_IMG_SIZE_CD
+            </if>            
+            <if test='org07ImgPath != null and org07ImgPath != ""'>              
+            ,ORG_07_IMG_PATH
+            </if>            
+            <if test='org07ImgNm != null and org07ImgNm != ""'>              
+            ,ORG_07_IMG_NM
+            </if>            
+            <if test='thum07ImgPath != null and thum07ImgPath != ""'>              
+            ,THUM_07_IMG_PATH
+            </if>            
+            <if test='thum07ImgSizeCd != null and thum07ImgSizeCd != ""'>              
+            ,THUM_07_IMG_SIZE_CD
+            </if>            
+            <if test='org08ImgPath != null and org08ImgPath != ""'>                
+            ,ORG_08_IMG_PATH
+            </if>            
+            <if test='org08ImgNm != null and org08ImgNm != ""'>  
+            ,ORG_08_IMG_NM
+            </if>            
+            <if test='thum08ImgPath != null and thum08ImgPath != ""'> 
+            ,THUM_08_IMG_PATH
+            </if>            
+            <if test='thum08ImgSizeCd != null and thum08ImgSizeCd != ""'> 
+            ,THUM_08_IMG_SIZE_CD
+            </if>            
+            <if test='org09ImgPath != null and org09ImgPath != ""'> 
+            ,ORG_09_IMG_PATH
+            </if>            
+            <if test='org09ImgNm != null and org09ImgNm != ""'> 
+            ,ORG_09_IMG_NM
+            </if>            
+            <if test='thum09ImgPath != null and thum09ImgPath != ""'> 
+            ,THUM_09_IMG_PATH
+            </if>            
+            <if test='thum09ImgSizeCd != null and thum09ImgSizeCd != ""'> 
+            ,THUM_09_IMG_SIZE_CD
+            </if>            
+            <if test='org10ImgPath != null and org10ImgPath != ""'> 
+            ,ORG_10_IMG_PATH
+            </if>            
+            <if test='org10ImgNm != null and org10ImgNm != ""'> 
+            ,ORG_10_IMG_NM
+            </if>            
+            <if test='thum10ImgPath != null and thum10ImgPath != ""'> 
+            ,THUM_10_IMG_PATH
+            </if>            
+            <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
+            ,THUM_10_IMG_SIZE_CD
+            </if>            
+            ,UPDATE_ID
+            ,UPDATE_TIME
+            ,CREATE_ID
+            ,CREATE_TIME
+        ) VALUES (
+            'N'
+            ,#{userId}
+            ,#{shipCd}
+            ,#{shipNm}
+            ,#{statusCd}            
+            <if test='shipWeight != null and shipWeight != ""'>   
+            ,#{shipWeight}
+            </if>            
+            <if test='boardingQuota != null and boardingQuota != ""'>             
+            ,#{boardingQuota}
+            </if>            
+            <if test='mainFishingPoint != null and mainFishingPoint != ""'>              
+            ,#{mainFishingPoint}
+            </if>            
+            <if test='outport != null and outport != ""'>              
+            ,#{outport}
+            </if>            
+            <if test='serviceCd != null and serviceCd != ""'>              
+            ,#{serviceCd}
+            </if>            
+            <if test='orgMainImgPath != null and orgMainImgPath != ""'>  
+            ,#{orgMainImgPath}
+            </if>            
+            <if test='orgMainImgNm != null and orgMainImgNm != ""'>              
+            ,#{orgMainImgNm}
+            </if>            
+            <if test='thumMainImgPath != null and thumMainImgPath != ""'>             
+            ,#{thumMainImgPath}
+            </if>            
+            <if test='thumMainImgSizeCd != null and thumMainImgSizeCd != ""'>              
+            ,#{thumMainImgSizeCd}
+            </if>            
+            <if test='org01ImgPath != null and org01ImgPath != ""'>              
+            ,#{org01ImgPath}
+            </if>            
+            <if test='org01ImgNm != null and org01ImgNm != ""'>              
+            ,#{org01ImgNm}
+            </if>            
+            <if test='thum01ImgPath != null and thum01ImgPath != ""'>              
+            ,#{thum01ImgPath}
+            </if>            
+            <if test='thum01ImgSizeCd != null and thum01ImgSizeCd != ""'>              
+            ,#{thum01ImgSizeCd}
+            </if>            
+            <if test='org02ImgPath != null and org02ImgPath != ""'>              
+            ,#{org02ImgPath}
+            </if>            
+            <if test='org02ImgNm != null and org02ImgNm != ""'>              
+            ,#{org02ImgNm}
+            </if>            
+            <if test='thum02ImgPath != null and thum02ImgPath != ""'>              
+            ,#{thum02ImgPath}
+            </if>            
+            <if test='thum02ImgSizeCd != null and thum02ImgSizeCd != ""'>              
+            ,#{thum02ImgSizeCd}
+            </if>            
+            <if test='org03ImgPath != null and org03ImgPath != ""'>              
+            ,#{org03ImgPath}
+            </if>            
+            <if test='org03ImgNm != null and org03ImgNm != ""'>              
+            ,#{org03ImgNm}
+            </if>            
+            <if test='thum03ImgPath != null and thum03ImgPath != ""'>              
+            ,#{thum03ImgPath}
+            </if>            
+            <if test='thum03ImgSizeCd != null and thum03ImgSizeCd != ""'>              
+            ,#{thum03ImgSizeCd}
+            </if>            
+            <if test='org04ImgPath != null and org04ImgPath != ""'>              
+            ,#{org04ImgPath}
+             </if>            
+            <if test='org04ImgNm != null and org04ImgNm != ""'>             
+            ,#{org04ImgNm}
+            </if>            
+            <if test='thum04ImgPath != null and thum04ImgPath != ""'>              
+            ,#{thum04ImgPath}
+            </if>            
+            <if test='thum04ImgSizeCd != null and thum04ImgSizeCd != ""'>              
+            ,#{thum04ImgSizeCd}
+            </if>            
+            <if test='org05ImgPath != null and org05ImgPath != ""'>              
+            ,#{org05ImgPath}
+            </if>            
+            <if test='org05ImgNm != null and org05ImgNm != ""'>              
+            ,#{org05ImgNm}
+            </if>            
+            <if test='thum05ImgPath != null and thum05ImgPath != ""'>              
+            ,#{thum05ImgPath}
+            </if>            
+            <if test='thum05ImgSizeCd != null and thum05ImgSizeCd != ""'>              
+            ,#{thum05ImgSizeCd}
+            </if>            
+            <if test='org06ImgPath != null and org06ImgPath != ""'>              
+            ,#{org06ImgPath}
+            </if>            
+            <if test='org06ImgNm != null and org06ImgNm != ""'>              
+            ,#{org06ImgNm}
+            </if>            
+            <if test='thum06ImgPath != null and thum06ImgPath != ""'>              
+            ,#{thum06ImgPath}
+            </if>            
+            <if test='thum06ImgSizeCd != null and thum06ImgSizeCd != ""'>              
+            ,#{thum06ImgSizeCd}
+            </if>            
+            <if test='org07ImgPath != null and org07ImgPath != ""'>              
+            ,#{org07ImgPath}
+            </if>            
+            <if test='org07ImgNm != null and org07ImgNm != ""'>              
+            ,#{org07ImgNm}
+            </if>            
+            <if test='thum07ImgPath != null and thum07ImgPath != ""'>              
+            ,#{thum07ImgPath}
+            </if>            
+            <if test='thum07ImgSizeCd != null and thum07ImgSizeCd != ""'>              
+            ,#{thum07ImgSizeCd}
+            </if>            
+            <if test='org08ImgPath != null and org08ImgPath != ""'>                
+            ,#{org08ImgPath}
+            </if>            
+            <if test='org08ImgNm != null and org08ImgNm != ""'>  
+            ,#{org08ImgNm}
+            </if>            
+            <if test='thum08ImgPath != null and thum08ImgPath != ""'> 
+            ,#{thum08ImgPath}
+            </if>            
+            <if test='thum08ImgSizeCd != null and thum08ImgSizeCd != ""'> 
+            ,#{thum08ImgSizeCd}
+            </if>            
+            <if test='org09ImgPath != null and org09ImgPath != ""'> 
+            ,#{org09ImgPath}
+            </if>            
+            <if test='org09ImgNm != null and org09ImgNm != ""'> 
+            ,#{org09ImgNm}
+            </if>            
+            <if test='thum09ImgPath != null and thum09ImgPath != ""'> 
+            ,#{thum09ImgPath}
+            </if>            
+            <if test='thum09ImgSizeCd != null and thum09ImgSizeCd != ""'> 
+            ,#{thum09ImgSizeCd}
+            </if>            
+            <if test='org10ImgPath != null and org10ImgPath != ""'> 
+            ,#{org10ImgPath}
+            </if>            
+            <if test='org10ImgNm != null and org10ImgNm != ""'> 
+            ,#{org10ImgNm}
+            </if>            
+            <if test='thum10ImgPath != null and thum10ImgPath != ""'> 
+            ,#{thum10ImgPath}
+            </if>            
+            <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
+            ,#{thum10ImgSizeCd}
+            </if>            
+            ,#{userId}
+            ,NOW()
+            ,#{userId}
+            ,NOW()
+        )
+    </insert>
+    
+    <update id="updateShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
+        UPDATE T_SHIP_INFO SET
+            UPDATE_ID = #{userId}
+            ,UPDATE_TIME = NOW()
+            ,SHIP_CD = #{shipCd}
+            ,SHIP_NM = #{shipNm}
+            ,STATUS_CD = #{statusCd}
+            <if test='shipWeight != null and shipWeight != ""'>   
+            ,SHIP_WEIGHT = #{shipWeight}
+            </if>            
+            <if test='boardingQuota != null and boardingQuota != ""'>             
+            ,BOARDING_QUOTA = #{boardingQuota}
+            </if>            
+            <if test='mainFishingPoint != null and mainFishingPoint != ""'>              
+            ,MAIN_FISHING_POINT = #{mainFishingPoint}
+            </if>            
+            <if test='outport != null and outport != ""'>              
+            ,OUTPORT = #{outport}
+            </if>            
+            <if test='serviceCd != null and serviceCd != ""'>              
+            ,SERVICE_CD = #{serviceCd}
+            </if>            
+            <if test='orgMainImgPath != null and orgMainImgPath != ""'>  
+            ,ORG_MAIN_IMG_PATH = #{orgMainImgPath}
+            </if>            
+            <if test='orgMainImgNm != null and orgMainImgNm != ""'>              
+            ,ORG_MAIN_IMG_NM = #{orgMainImgNm}
+            </if>            
+            <if test='thumMainImgPath != null and thumMainImgPath != ""'>             
+            ,THUM_MAIN_IMG_PATH = #{thumMainImgPath}
+            </if>            
+            <if test='thumMainImgSizeCd != null and thumMainImgSizeCd != ""'>              
+            ,THUM_MAIN_IMG_SIZE_CD = #{thumMainImgSizeCd}
+            </if>            
+            <if test='org01ImgPath != null and org01ImgPath != ""'>              
+            ,ORG_01_IMG_PATH = #{org01ImgPath}
+            </if>            
+            <if test='org01ImgNm != null and org01ImgNm != ""'>              
+            ,ORG_01_IMG_NM = #{org01ImgNm}
+            </if>            
+            <if test='thum01ImgPath != null and thum01ImgPath != ""'>              
+            ,THUM_01_IMG_PATH = #{thum01ImgPath}
+            </if>            
+            <if test='thum01ImgSizeCd != null and thum01ImgSizeCd != ""'>              
+            ,THUM_01_IMG_SIZE_CD = #{thum01ImgSizeCd}
+            </if>            
+            <if test='org02ImgPath != null and org02ImgPath != ""'>              
+            ,ORG_02_IMG_PATH = #{org02ImgPath}
+            </if>            
+            <if test='org02ImgNm != null and org02ImgNm != ""'>              
+            ,ORG_02_IMG_NM = #{org02ImgNm}
+            </if>            
+            <if test='thum02ImgPath != null and thum02ImgPath != ""'>              
+            ,THUM_02_IMG_PATH = #{thum02ImgPath}
+            </if>            
+            <if test='thum02ImgSizeCd != null and thum02ImgSizeCd != ""'>              
+            ,THUM_02_IMG_SIZE_CD = #{thum02ImgSizeCd}
+            </if>            
+            <if test='org03ImgPath != null and org03ImgPath != ""'>              
+            ,ORG_03_IMG_PATH = #{org03ImgPath}
+            </if>            
+            <if test='org03ImgNm != null and org03ImgNm != ""'>              
+            ,ORG_03_IMG_NM = #{org03ImgNm}
+            </if>            
+            <if test='thum03ImgPath != null and thum03ImgPath != ""'>              
+            ,THUM_03_IMG_PATH = #{thum03ImgPath}
+            </if>            
+            <if test='thum03ImgSizeCd != null and thum03ImgSizeCd != ""'>              
+            ,THUM_03_IMG_SIZE_CD = #{thum03ImgSizeCd}
+            </if>            
+            <if test='org04ImgPath != null and org04ImgPath != ""'>              
+            ,ORG_04_IMG_PATH = #{org04ImgPath}
+             </if>            
+            <if test='org04ImgNm != null and org04ImgNm != ""'>             
+            ,ORG_04_IMG_NM = #{org04ImgNm}
+            </if>            
+            <if test='thum04ImgPath != null and thum04ImgPath != ""'>              
+            ,THUM_04_IMG_PATH = #{thum04ImgPath}
+            </if>            
+            <if test='thum04ImgSizeCd != null and thum04ImgSizeCd != ""'>              
+            ,THUM_04_IMG_SIZE_CD = #{thum04ImgSizeCd}
+            </if>            
+            <if test='org05ImgPath != null and org05ImgPath != ""'>              
+            ,ORG_05_IMG_PATH = #{org05ImgPath}
+            </if>            
+            <if test='org05ImgNm != null and org05ImgNm != ""'>              
+            ,ORG_05_IMG_NM = #{org05ImgNm}
+            </if>            
+            <if test='thum05ImgPath != null and thum05ImgPath != ""'>              
+            ,THUM_05_IMG_PATH = #{thum05ImgPath}
+            </if>            
+            <if test='thum05ImgSizeCd != null and thum05ImgSizeCd != ""'>              
+            ,THUM_05_IMG_SIZE_CD = #{thum05ImgSizeCd}
+            </if>            
+            <if test='org06ImgPath != null and org06ImgPath != ""'>              
+            ,ORG_06_IMG_PATH = #{org06ImgPath}
+            </if>            
+            <if test='org06ImgNm != null and org06ImgNm != ""'>              
+            ,ORG_06_IMG_NM = #{org06ImgNm}
+            </if>            
+            <if test='thum06ImgPath != null and thum06ImgPath != ""'>              
+            ,THUM_06_IMG_PATH = #{thum06ImgPath}
+            </if>            
+            <if test='thum06ImgSizeCd != null and thum06ImgSizeCd != ""'>              
+            ,THUM_06_IMG_SIZE_CD = #{thum06ImgSizeCd}
+            </if>            
+            <if test='org07ImgPath != null and org07ImgPath != ""'>              
+            ,ORG_07_IMG_PATH = #{org07ImgPath}
+            </if>            
+            <if test='org07ImgNm != null and org07ImgNm != ""'>              
+            ,ORG_07_IMG_NM = #{org07ImgNm}
+            </if>            
+            <if test='thum07ImgPath != null and thum07ImgPath != ""'>              
+            ,THUM_07_IMG_PATH = #{thum07ImgPath}
+            </if>            
+            <if test='thum07ImgSizeCd != null and thum07ImgSizeCd != ""'>              
+            ,THUM_07_IMG_SIZE_CD = #{thum07ImgSizeCd}
+            </if>            
+            <if test='org08ImgPath != null and org08ImgPath != ""'>                
+            ,ORG_08_IMG_PATH = #{org08ImgPath}
+            </if>            
+            <if test='org08ImgNm != null and org08ImgNm != ""'>  
+            ,ORG_08_IMG_NM = #{org08ImgNm}
+            </if>            
+            <if test='thum08ImgPath != null and thum08ImgPath != ""'> 
+            ,THUM_08_IMG_PATH = #{thum08ImgPath}
+            </if>            
+            <if test='thum08ImgSizeCd != null and thum08ImgSizeCd != ""'> 
+            ,THUM_08_IMG_SIZE_CD = #{thum08ImgSizeCd}
+            </if>            
+            <if test='org09ImgPath != null and org09ImgPath != ""'> 
+            ,ORG_09_IMG_PATH = #{org09ImgPath}
+            </if>            
+            <if test='org09ImgNm != null and org09ImgNm != ""'> 
+            ,ORG_09_IMG_NM = #{org09ImgNm}
+            </if>            
+            <if test='thum09ImgPath != null and thum09ImgPath != ""'> 
+            ,THUM_09_IMG_PATH = #{thum09ImgPath}
+            </if>            
+            <if test='thum09ImgSizeCd != null and thum09ImgSizeCd != ""'> 
+            ,THUM_09_IMG_SIZE_CD = #{thum09ImgSizeCd}
+            </if>            
+            <if test='org10ImgPath != null and org10ImgPath != ""'> 
+            ,ORG_10_IMG_PATH = #{org10ImgPath}
+            </if>            
+            <if test='org10ImgNm != null and org10ImgNm != ""'> 
+            ,ORG_10_IMG_NM = #{org10ImgNm}
+            </if>            
+            <if test='thum10ImgPath != null and thum10ImgPath != ""'> 
+            ,THUM_10_IMG_PATH = #{thum10ImgPath}
+            </if>            
+            <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
+            ,THUM_10_IMG_SIZE_CD = #{thum10ImgSizeCd}
+            </if>   
+        WHERE SHIP_ID = #{shipId}
+    </update>
+    
+</mapper>

@@ -3,6 +3,8 @@ package kr.co.fishing.bko.common.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.fishing.bko.beans.ShipInfoBean;
+
 public class AdminBean extends CommonBaseBean {
     
     private String adminId;
@@ -42,6 +44,8 @@ public class AdminBean extends CommonBaseBean {
     private String bankCd; //은행명    
     private String acntNo; //계좌번호
     private String acntNm; //예금주
+    
+    private ShipInfoBean shipInfoBean;
     
 	public String getUserPw2() {
         return userPw2;
@@ -236,5 +240,10 @@ public class AdminBean extends CommonBaseBean {
     public void setAcntNm(String acntNm) {
         this.acntNm = acntNm;
     }
-    
+    public ShipInfoBean getShipInfoBean() {
+        return shipInfoBean;
+    }
+    public void setShipInfoBean(ShipInfoBean shipInfoBean) {
+        this.shipInfoBean = shipInfoBean;
+    }
 }

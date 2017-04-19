@@ -12,19 +12,15 @@ var Main = {
         var toDay = "Today "+$.getToday('yyyy.MM.dd');
         var pDate = $("p.date");
         var sidebar =$("div.sidebar");
-        
-        if(signUpYn != "Y"){
-            // 메뉴 구성
-            Menu.makeMenu();  
-            pDate.empty();
-            pDate.text(toDay);
-        }else{
-            //슬라이드바 숨김
-            sidebar.hide();
-//            url = URL.SIGNUP;
-            //컨텐츠 open
-//            this.openClient(url);
-        }
+//        if(signUpYn != "Y"){
+        // 메뉴 구성
+        Menu.makeMenu();  
+        pDate.empty();
+        pDate.text(toDay);
+//        }else{
+//            //슬라이드바 숨김
+//            sidebar.empty();
+//        }
     },
     //페이지 직접이동
     openClientDirect: function(CURL) {
