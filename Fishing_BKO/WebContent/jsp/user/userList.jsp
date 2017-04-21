@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="/jsp/common/meta.jsp" %>
 <%@ include file="/jsp/common/taglibs.jsp" %>
 <%@ include file="/jsp/common/style.jsp" %>
@@ -34,9 +35,59 @@
                 </ul>
             </div>   
             <div class="table_box">     
-                <div class="bko-bodyContent">
-                    <div class="bko-bodyContentInnerBox" data-content-type="grid1"></div>
-                </div>
+                <table class="t_body">
+                    <colgroup>
+                        <col width="50px;"/>
+                        <col width="250px;" />
+                        <col width="250px" />
+                        <col width="100px;" />
+                        <col width="170px;" />
+                        <col width="100px;" />
+                        <col width="170px;" />
+                        <col width="100px;" />
+                    </colgroup>
+                    <tr>
+                        <th>번호</th>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>권한</th>
+                        <th>수정일시</th>
+                        <th>수정자</th>
+                        <th>등록일시</th>
+                        <th>등록자</th>
+                    </tr>
+                    <c:choose>
+                        <c:when test="${!empty rows}">
+                            <c:forEach items="${rows}" var="list" varStatus="status">
+                                <tr>
+                                    <td>${status.index +1}</td>
+                                    <td>
+                                        <a onclick="javascript:UserList.detailView('${list.userId }');">
+                                            ${list.userId }
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a onclick="javascript:UserList.detailView('${list.userId }');">
+                                            ${list.userNm }
+                                        </a>
+                                    </td>
+                                    <td>${list.menuAuth }</td>
+                                    <td>${list.updateTime }</td>
+                                    <td>${list.updateId }</td>
+                                    <td>${list.createTime }</td>
+                                    <td>${list.createId }</td>
+                                </tr>                                
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td rowspan="8">
+                                    조회된 결과가 없습니다.
+                                </td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                </table> 
             </div>
         </form>
     </div>

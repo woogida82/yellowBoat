@@ -36,8 +36,15 @@ public class UserController {
     private ShipInfoService shipInfoService;    
     
     @RequestMapping("")
-    public String user(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-
+    public String user(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
+        try {
+            int resultCnt = userService.selectUserListCnt(bean);
+            List<AdminBean> resultList = userService.selectUserList(bean);
+            model.addAttribute("rows", resultList);
+            model.addAttribute("records", resultCnt);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }        
         return "user/userList";
     }
     

@@ -78,32 +78,32 @@ var colModel = [
 var UserList = {
     /* 초기 로딩시 실행 */
     init : function() {
-        ContentBody.$grid.jqGrid($.extend(true, {}, $jqgridOpt, {
-            colModel : colModel,
-            url : "/bko/user/userList",
-            pager: "#"+ContentBody.gridPagerID,
-            multiselect: true
-        }));
+//        ContentBody.$grid.jqGrid($.extend(true, {}, $jqgridOpt, {
+//            colModel : colModel,
+//            url : "/bko/user/userList",
+//            pager: "#"+ContentBody.gridPagerID,
+//            multiselect: true
+//        }));
     },
     /* 검색 */
     search : function() {
-        if($("#searchWord").val() != "" && $("#searchWordType>option:selected").val() == ""){
-            alert("검색구분을 선택해주세요.");
-        }else {
-            ContentBody.$grid.setGridParam({postData : UserList.makeParam(), page: 1}).trigger('reloadGrid');
-        }
+//        if($("#searchWord").val() != "" && $("#searchWordType>option:selected").val() == ""){
+//            alert("검색구분을 선택해주세요.");
+//        }else {
+//            ContentBody.$grid.setGridParam({postData : UserList.makeParam(), page: 1}).trigger('reloadGrid');
+//        }
     },
     
     makeParam: function() {
-        var searchWord = '';
-        if ($("#searchWord")) {
-            searchWord = $("#searchWord").val();
-        }
-        
-        return {
-            searchWordType : $("#searchWordType>option:selected").val(),
-            searchWord : searchWord
-        };
+//        var searchWord = '';
+//        if ($("#searchWord")) {
+//            searchWord = $("#searchWord").val();
+//        }
+//        
+//        return {
+//            searchWordType : $("#searchWordType>option:selected").val(),
+//            searchWord : searchWord
+//        };
     },
     detailView : function(userId){
         var formUserList = $("#userListForm");

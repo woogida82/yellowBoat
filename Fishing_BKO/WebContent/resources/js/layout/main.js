@@ -1,5 +1,4 @@
-var URL = {SIGNUP:"/bko/user/singUpView", ADMN:"/bko/user/user",CUST:"/bko/user/user",USER:"/bko/user/user"};
-var signUpYn = $("#signUpYn").val();
+var URL = {SIGNUP:"/bko/user/singUpView", ADMN:"/bko/user",CUST:"/bko/user",USER:"/bko/user"};
 var userCd = $("#userCd").val();
 var url;
 
@@ -16,6 +15,7 @@ var Main = {
         Menu.makeMenu();  
         pDate.empty();
         pDate.text(toDay);
+        Main.openClient(URL.ADMN);
     },
     //페이지 직접이동
     openClientDirect: function(CURL) {
@@ -26,8 +26,7 @@ var Main = {
      * winID : Contents Box ID, CURL : Contents URL, MenuName: 메뉴명
      */
     openClient: function(CURL) {
-        if(signUpYn != "Y")$.checkSession();// 세션체크
-        
+        $.checkSession();// 세션체크
         var objName = "";
         var btnName = "";
         var AppendHtml = "";    

@@ -38,10 +38,6 @@ public class MainController {
      */
     @RequestMapping("/main")
     public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-        model.addAttribute("signUpYn", "N");
-        
-        
-        
         return "layout/main";
     }
     
