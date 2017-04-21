@@ -389,9 +389,9 @@
             <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
             ,#{thum10ImgSizeCd}
             </if>            
-            ,#{userId}
+            ,NVL(#{adminBean.userId}, #{userId})
             ,NOW()
-            ,#{userId}
+            ,NVL(#{adminBean.userId}, #{userId})
             ,NOW()
         )
     </insert>

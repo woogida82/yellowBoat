@@ -4,23 +4,8 @@ var Menu = {
     debug: false,
     
     makeMenu: function() {
-        
         var oThis = this;
-        
-//        var appendHtml = "";
-        
-//        appendHtml += "<div id='dropdown-1' class='dropdown'>";
-//        appendHtml += "<ul class='dropdown-menu'>";
-//        appendHtml += "        <li><a href='javascript://' onClick='Main.changeInfo();'title='정보수정'>정보수정</a></li>";
-//        appendHtml += "        <li><a href='javascript://' onClick='Main.changePW();'title='비밀번호변경'>비밀번호변경</a></li>";
-//        appendHtml += "        <li><a href='/bko/logout' title='로그아웃'>로그아웃</a></li>";
-//        appendHtml += "</ul>";
-//        appendHtml += "</div>"; 
-//        
-//        $(".bko-bodyspace").append(appendHtml);
-        
         oThis.$leftMenuList = $("#bko-leftMenuList");
-        
         $.ajax({
             type : "POST",
             dataType : "json",

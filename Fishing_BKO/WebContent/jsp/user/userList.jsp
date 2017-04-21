@@ -20,7 +20,7 @@
     <!--end top_img-->
     <div class="content">
         <h3>회원목록</h3>
-        <form action="/bko/user/userDetailView" id="userListForm" name="userListForm">
+        <form action="" id="userListForm" name="userListForm">
             <input type="hidden" id="userId" name="userId"/>
             <div class="search_area">
                 <ul>
@@ -81,7 +81,7 @@
                         </c:when>
                         <c:otherwise>
                             <tr>
-                                <td rowspan="8">
+                                <td colspan="8">
                                     조회된 결과가 없습니다.
                                 </td>
                             </tr>
