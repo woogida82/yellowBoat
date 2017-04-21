@@ -55,8 +55,8 @@
                             <tr>
                                 <td class="title">우편번호</td>
                                 <td colspan="3">
-                                    <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' valid="{label:'우편번호', method:'required'}"/>
-                                    <a href="#" class="btn_postPop" onclick="javascript:SignUp.getPostNo();">우편 번호</a></td>
+                                    <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' valid="{label:'우편번호', method:'required'}" readonly="readonly"/>
+                                    <a href="#" class="btn_postPop" onclick="javascript:SignUp.getPostNo();">우편 번호</a>
                                 </td>
                             </tr>
                             <tr>

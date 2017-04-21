@@ -40,15 +40,22 @@
                     <tr>
                         <td class="title">우편번호</td>
                         <td colspan="3">
-                            <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' value="${userBean.zipCd}"/>
+                            <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' value="${userBean.zipCd}" valid="{label:'우편번호', method:'required'}" readonly="readonly"/>
+                            <a href="#" class="btn_postPop" onclick="javascript:UserDetailView.getPostNo();">우편 번호</a>
                         </td>
                     </tr>
                     <tr>
                         <td class="title">주소</td>
                         <td colspan="3">
-                            <input type="text" style="width:100%;" id="addr" name="addr" data-id='addr' value="${userBean.addr}"/>
+                            <input type="text" style="width:100%;" id="addr" name="addr" data-id='addr' value="${userBean.addr}" valid="{label:'주소', method:'required'}"/>
                         </td>
                     </tr> 
+                    <tr>
+                        <td class="title">상세 주소</td>
+                        <td colspan="3">
+                            <input type="text" style="width:340px;" id="addrDetail" name="addrDetail" data-id='addrDetail' value="${userBean.addrDetail}" valid="{label:'상세주소', method:'required'}"/>
+                        </td>
+                    </tr>                     
                     <tr>
                         <td class="title">휴대폰번호</td>
                         <td colspan="3">
