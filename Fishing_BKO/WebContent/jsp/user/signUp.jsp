@@ -12,14 +12,14 @@
 <body>
     <div class="header_wrap">
         <h1>
-            <a href="#" onclick="Main.returnHome();"><img src="/images/common/logo.png" alt="대원낚시" /></a>
+            <a href="#" onclick="SignUp.returnHome();"><img src="/images/common/logo.png" alt="대원낚시" /></a>
         </h1>
     </div>
     <div class="content_wrap">
         <div class="content_box">
             <div class="util">
                 <ul>
-                    <li class="list1">Home</li>
+                    <li class="list1"><a href="#"  onclick="SignUp.returnHome();">Home</a></li>
                     <li><a href="#"  onclick="ContentBody.reload();">회원 가입</a></li>
                 </ul>
             </div>
@@ -55,15 +55,22 @@
                             <tr>
                                 <td class="title">우편번호</td>
                                 <td colspan="3">
-                                    <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd'/>
+                                    <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' valid="{label:'우편번호', method:'required'}"/>
+                                    <a href="#" class="btn_postPop" onclick="javascript:SignUp.getPostNo();">우편 번호</a></td>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="title">주소</td>
                                 <td colspan="3">
-                                    <input type="text" style="width:100%;" id="addr" name="addr" data-id='addr'/>
+                                    <input type="text" style="width:340px;" id="addr" name="addr" data-id='addr' valid="{label:'주소', method:'required'}"/>
                                 </td>
                             </tr> 
+                            <tr>
+                                <td class="title">상세 주소</td>
+                                <td colspan="3">
+                                    <input type="text" style="width:340px;" id="addrDetail" name="addrDetail" data-id='addrDetail' valid="{label:'상세주소', method:'required'}"/>
+                                </td>
+                            </tr>                             
                             <tr>
                                 <td class="title">휴대폰번호</td>
                                 <td colspan="3">
@@ -91,6 +98,12 @@
                         </table>
                         
                         <table width="100%">
+                            <tr>
+                                <td class="title">선박 등록 번호</td>
+                                <td colspan="3">
+                                    <input type="text" style="width:150px;" id="shipRegNo" name="shipInfoBean.shipRegNo" data-id='shipRegNo' valid="{label:'선박 등록 번호', method:'required'}"/>
+                                </td>
+                            </tr>                        
                             <tr>
                                 <td class="title">선박 이름</td>
                                 <td colspan="3">

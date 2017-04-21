@@ -25,6 +25,7 @@
          WHERE
            USER_ID = #{userId}
            AND USER_PW = AES128_ENCRYPT(#{userPw})
+           AND DEL_YN = 'N'
     </select>
     
 </mapper>

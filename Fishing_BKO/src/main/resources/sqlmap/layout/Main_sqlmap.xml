@@ -38,5 +38,6 @@
           FROM T_USER
          WHERE
            USER_ID = = #{adminBean.userId}
+           AND DEL_YN = 'N'
     </select>
 </mapper>

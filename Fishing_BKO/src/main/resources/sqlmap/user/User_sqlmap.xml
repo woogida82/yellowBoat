@@ -5,6 +5,7 @@
 
 	<sql id = 'userWhere'>
         AND DEL_YN = 'N'
+        AND USER_CD != 'ADMN'
         <if test='searchWordType != null and searchWordType != "" and ((searchWord != null and searchWord != "") or (searchWordS != null and searchWordS != "" and searchWordE != null and searchWordE != ""))'>
             <!-- 아이디 -->
             <if test='searchWordType == "userId"'>
@@ -75,13 +76,13 @@
         	DEL_YN
         FROM T_USER
         WHERE USER_ID = #{userId}
+          AND DEL_YN = 'N'
     </select>
     
     <select id="selectUserAdminId" resultType="int">
         SELECT COUNT(1) 
         FROM T_USER
         WHERE USER_ID = #{userId}
-<!--          AND DEL_YN = 'N' -->
     </select>
     
     <insert id="insertUser" parameterType="AdminBean">
@@ -225,4 +226,13 @@
             ,USER_PW = AES128_ENCRYPT(#{userPw})
         WHERE USER_ID = #{userId}
     </update>
+    
+    <update id="deleteUser" parameterType="AdminBean">
+        UPDATE T_USER SET
+            UPDATE_ID = #{adminBean.userId}
+            ,UPDATE_TIME = NOW()
+            ,DEL_YN = 'Y'
+        WHERE USER_ID = #{userId}
+    </update>    
+    
 </mapper>

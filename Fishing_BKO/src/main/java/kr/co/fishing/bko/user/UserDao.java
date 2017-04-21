@@ -45,4 +45,8 @@ public class UserDao {
     public int updateInitPass(AdminBean bean) throws Exception{
         return sqlSession.update("user.updateInitPass", bean);
     }
+
+    public int deleteUser(AdminBean bean) {
+        return sqlSession.update("user.deleteUser", bean);
+    }
 }

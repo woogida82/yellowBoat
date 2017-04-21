@@ -4,6 +4,7 @@ import kr.co.fishing.bko.common.beans.CommonBaseBean;
 
 public class ShipInfoBean extends CommonBaseBean {
     private String shipId;
+    private String shipRegNo;
     private String userId;
     private String shipCd;
     private String shipNm;
@@ -62,6 +63,12 @@ public class ShipInfoBean extends CommonBaseBean {
     private String updateTime;
     private String createId;
     private String createTime;
+    public String getShipRegNo() {
+        return shipRegNo;
+    }
+    public void setShipRegNo(String shipRegNo) {
+        this.shipRegNo = shipRegNo;
+    }
     public String getShipId() {
         return shipId;
     }

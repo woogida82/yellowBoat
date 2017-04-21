@@ -32,5 +32,27 @@ public class ShipInfoDao {
      */    
     public int insertShipInfo(ShipInfoBean bean) throws Exception{
         return sqlSession.insert("shipInfo.insertShipInfo", bean);
+    }
+    
+    /**
+     * 보트 등록
+     * 
+     * @param bean
+     * @return 관리자정보
+     * @throws Exception
+     */  
+    public int updateShipInfo(ShipInfoBean bean) throws Exception{
+        return sqlSession.insert("shipInfo.updateShipInfo", bean);
+    }
+    
+    /**
+     * 보트 등록
+     * 
+     * @param bean
+     * @return 관리자정보
+     * @throws Exception
+     */  
+    public int deleteShipInfo(ShipInfoBean bean) throws Exception{
+        return sqlSession.insert("shipInfo.deleteShipInfo", bean);
     }    
 }

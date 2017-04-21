@@ -44,4 +44,8 @@ public class UserServiceImpl implements UserService {
     public int updateInitPass(AdminBean bean) throws Exception{
         return adminDao.updateInitPass(bean);
     }
+    
+    public int deleteUser(AdminBean bean) throws Exception{
+        return adminDao.deleteUser(bean);
+    }    
 }

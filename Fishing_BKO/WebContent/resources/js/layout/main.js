@@ -12,15 +12,10 @@ var Main = {
         var toDay = "Today "+$.getToday('yyyy.MM.dd');
         var pDate = $("p.date");
         var sidebar =$("div.sidebar");
-//        if(signUpYn != "Y"){
         // 메뉴 구성
         Menu.makeMenu();  
         pDate.empty();
         pDate.text(toDay);
-//        }else{
-//            //슬라이드바 숨김
-//            sidebar.empty();
-//        }
     },
     //페이지 직접이동
     openClientDirect: function(CURL) {
@@ -46,7 +41,7 @@ var Main = {
         document.getElementById("objContent").data = CURL;
     },
     /* 홈으로 */
-    returnHome(){
+    returnHome: function(){
         window.location.href = "/bko/main";
     }
 };

@@ -22,9 +22,9 @@
         
         //content에 해당 타입 그리기
         if (this.contentType=="grid1" || this.contentType=="grid3") {
-            html = "<table id='"+this.gridID+"'></table><div id='"+this.gridPagerID+"'></div>";
+            html = "<table id='"+this.gridID+"' class='t_body' ></table><div id='"+this.gridPagerID+"'></div>";
         } else if(this.contentType=="grid2") {  
-            html = "<table id='"+this.gridID+"'></table>";
+            html = "<table id='"+this.gridID+"' class='t_body' ></table>";
         } else {
             html = "";
         }
@@ -203,5 +203,8 @@
             });
             
         }
+    },
+    returnHome: function(){
+        window.parent.Main.returnHome();        
     }
 };

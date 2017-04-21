@@ -2,6 +2,7 @@
 
 <spring:eval expression="@config['cdn.domain.name']" var="cdnDomainName" />
 <script type="text/javascript" src="/js/jquery/LAB.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 var cdnDomainName = '${cdnDomainName}';
 
@@ -43,7 +44,7 @@ $LAB
         
     	${jsObjName}.init();
     	
-        ContentBody.searchBoxResize();
+//         ContentBody.searchBoxResize();
     });
 });
 </script>

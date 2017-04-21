@@ -6,6 +6,7 @@
     <select id="selectShipInfo" resultType="kr.co.fishing.bko.beans.ShipInfoBean">
         SELECT 
             SHIP_ID,
+            SHIP_REG_NO,
             USER_ID,
             SHIP_CD,
             SHIP_NM,
@@ -65,12 +66,20 @@
             ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.CREATE_ID) CREATE_ID
             ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
           FROM T_SHIP_INFO
-         WHERE SHIP_ID = #{shipId}
+         WHERE 1 = 1
+           <if test='userId != null and userId != ""'>
+           AND USER_ID = #{userId}
+           </if> 
+           <if test='shipId != null and shipId != ""'>
+           AND SHIP_ID = #{shipId}
+           </if> 
+           AND DEL_YN = 'N'
     </select>
     
     <insert id="insertShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
         INSERT INTO T_SHIP_INFO (
             DEL_YN
+            ,SHIP_REG_NO
             ,USER_ID
             ,SHIP_CD
             ,SHIP_NM
@@ -228,6 +237,7 @@
             ,CREATE_TIME
         ) VALUES (
             'N'
+            ,#{shipRegNo}
             ,#{userId}
             ,#{shipCd}
             ,#{shipNm}
@@ -388,7 +398,7 @@
     
     <update id="updateShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
         UPDATE T_SHIP_INFO SET
-            UPDATE_ID = #{userId}
+            UPDATE_ID = #{adminBean.userId}
             ,UPDATE_TIME = NOW()
             ,SHIP_CD = #{shipCd}
             ,SHIP_NM = #{shipNm}
@@ -540,6 +550,14 @@
             <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
             ,THUM_10_IMG_SIZE_CD = #{thum10ImgSizeCd}
             </if>   
+        WHERE SHIP_ID = #{shipId}
+    </update>
+
+    <update id="deleteShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
+        UPDATE T_SHIP_INFO SET
+            UPDATE_ID = #{adminBean.userId}
+            ,UPDATE_TIME = NOW()
+            ,DEL_YN = 'Y'            
         WHERE SHIP_ID = #{shipId}
     </update>
     

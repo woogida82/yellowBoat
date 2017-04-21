@@ -14,7 +14,7 @@
 <body>
     <div class="header_wrap">
         <h1>
-            <a href="#" onclick="Main.returnHome();"><img src="/images/common/logo.png" alt="대원낚시" /></a>
+            <a href="#" onclick="ContentBody.returnHome();"><img src="/images/common/logo.png" alt="대원낚시" /></a>
         </h1>
     </div>
     <div class="content_wrap">

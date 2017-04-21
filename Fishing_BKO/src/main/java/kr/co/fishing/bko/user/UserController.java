@@ -66,6 +66,30 @@ public class UserController {
         }
         
         return resultMap;
+    } 
+    
+    /**
+     * 회원상세화면
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */     
+    @RequestMapping("/userDetailView")
+    public String userDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
+        AdminBean resultUserBean = new AdminBean();
+        ShipInfoBean resultShipBean = new ShipInfoBean();
+        resultUserBean = userService.selectUser(bean);
+        ShipInfoBean paramBean = new ShipInfoBean();
+        paramBean.setUserId(bean.getUserId());
+        resultShipBean = shipInfoService.selectShipInfo(paramBean);
+        
+//        model.addAttribute("userId", bean.getUserId());
+        model.addAttribute("userBean", resultUserBean);
+        model.addAttribute("shipBean", resultShipBean);
+        return "user/userDetailView";
     }    
     
     /**
@@ -130,13 +154,13 @@ public class UserController {
             if(resultCnt > 0){
                 resultMap.put("result", AJAX_RESULT.DUP); //중복
             } else {
-//                bean.setUserPw(bean.getUserId()+"1234");
                 userService.insertUser(bean);
                 ShipInfoBean shipInfoBean = new ShipInfoBean();
                 shipInfoBean = bean.getShipInfoBean();
                 shipInfoBean.setUserId(bean.getUserId());
                 shipInfoBean.setShipCd("00");
                 shipInfoBean.setStatusCd("00");
+                shipInfoBean.setAdminBean(bean.getAdminBean());
                 shipInfoService.insertShipInfo(shipInfoBean);
                 
                 resultMap.put("result", AJAX_RESULT.OK);
@@ -156,9 +180,15 @@ public class UserController {
         Map<String,Object> resultMap = new HashMap<String,Object>();
         
         try {
-
-            
         	userService.updateUser(bean);
+            ShipInfoBean paramBean = new ShipInfoBean();
+            paramBean = bean.getShipInfoBean();        	
+        	if(!paramBean.getShipId().isEmpty()){
+            	paramBean.setShipCd("00");
+            	paramBean.setStatusCd("00");        	
+            	paramBean.setAdminBean(bean.getAdminBean());
+            	shipInfoService.updateShipInfo(paramBean);
+        	}
             resultMap.put("result", AJAX_RESULT.OK);
             
         } catch(Exception e) {
@@ -219,5 +249,28 @@ public class UserController {
         
         return resultMap;
     }
-
+    
+    @ResponseBody
+    @RequestMapping("/deleteUser")
+    public Map<String,Object> deleteUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) throws Exception {
+        Map<String,Object> resultMap = new HashMap<String,Object>();
+        
+        try {
+            userService.deleteUser(bean);
+            
+            ShipInfoBean paramBean = new ShipInfoBean();
+            paramBean = bean.getShipInfoBean();
+            if(!paramBean.getShipId().isEmpty()){
+                paramBean.setAdminBean(bean.getAdminBean());
+                shipInfoService.deleteShipInfo(paramBean);   
+            }
+            resultMap.put("result", AJAX_RESULT.OK);
+        } catch(Exception e) {
+            
+            resultMap.put("result", AJAX_RESULT.NG);
+            e.printStackTrace();
+        }
+        
+        return resultMap;
+    }    
 }
