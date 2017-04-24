@@ -22,6 +22,7 @@
         <h3>회원목록</h3>
         <form action="" id="userListForm" name="userListForm">
             <input type="hidden" id="userId" name="userId"/>
+            <input type="hidden" id="page" name="page"  value="${bean.page}"/>
             <div class="search_area">
                 <ul>
                     <li>
@@ -30,8 +31,8 @@
                             <option value="userNm" data-searchType="text">이름</option>
                         </select>
                     </li>
-                    <li><input type="text" style="width:150px;" id= "searchWord" name="searchWord" onkeydown="javascript:if (event.keyCode == 13) UserList.search();"/></li>
-                    <li><a href="#" onclick="UserList.search();">검색</a></li>
+                    <li><input type="text" style="width:150px;" id= "searchWord" name="searchWord" onkeydown="javascript:if (event.keyCode == 13) UserList.search('1');"/></li>
+                    <li><a href="#" onclick="UserList.search('1');">검색</a></li>
                 </ul>
             </div>   
             <div class="table_box">     
@@ -88,6 +89,9 @@
                         </c:otherwise>
                     </c:choose>
                 </table> 
+                <div class="pagination">
+                    <cpg:paginator maxLinks="10" currPage="${bean.page}" totalPages="${bean.totalPages}" uri="UserList"/>
+                </div>                
             </div>
         </form>
     </div>

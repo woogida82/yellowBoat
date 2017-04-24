@@ -95,41 +95,41 @@ public class CommonAspect {
      * @return
      * @throws Throwable
      */
-    @SuppressWarnings("unchecked")
-    @Around("execution(public java.util.Map<String,Object> kr.co.fishing.bko..*Controller.*Paging(..))")
-    public Object paginAround(ProceedingJoinPoint pjp) throws Throwable {
-        
-        CommonBaseBean commonBean = null;
-        Map<String,Object> resultMap = null;
-        
-        for (Object obj : pjp.getArgs()){ 
-            if (obj instanceof CommonBaseBean) {
-                commonBean = (CommonBaseBean) obj;
-            } 
-        }
-                
-        int rowCnt = 0;
-        if (commonBean != null) {
-            rowCnt = commonBean.getRows();
-            commonBean.setStartRow((rowCnt * commonBean.getPage()) - rowCnt);
-            commonBean.setEndRow(rowCnt);
-        }
-        
-        resultMap = (Map<String,Object>) pjp.proceed();
-        
-        if (commonBean != null) {
-            int totalCnt = 0;
-            
-            if (resultMap.get("records") != null) {
-                totalCnt = (int) resultMap.get("records");
-            }
-            
-            int total = (int) Math.ceil((double) totalCnt / rowCnt);
-            
-            resultMap.put("page", commonBean.getPage());
-            resultMap.put("total", total);
-        }
-        
-        return resultMap;
-    }
+//    @SuppressWarnings("unchecked")
+//    @Around("execution(public java.util.Map<String,Object> kr.co.fishing.bko..*Controller.*Paging(..))")
+//    public Object paginAround(ProceedingJoinPoint pjp) throws Throwable {
+//        
+//        CommonBaseBean commonBean = null;
+//        Map<String,Object> resultMap = null;
+//        
+//        for (Object obj : pjp.getArgs()){ 
+//            if (obj instanceof CommonBaseBean) {
+//                commonBean = (CommonBaseBean) obj;
+//            } 
+//        }
+//                
+//        int rowCnt = 0;
+//        if (commonBean != null) {
+//            rowCnt = commonBean.getRows();
+//            commonBean.setStartRow((rowCnt * commonBean.getPage()) - rowCnt);
+//            commonBean.setEndRow(rowCnt);
+//        }
+//        
+//        resultMap = (Map<String,Object>) pjp.proceed();
+//        
+//        if (commonBean != null) {
+//            int totalCnt = 0;
+//            
+//            if (resultMap.get("records") != null) {
+//                totalCnt = (int) resultMap.get("records");
+//            }
+//            
+//            int total = (int) Math.ceil((double) totalCnt / rowCnt);
+//            
+//            resultMap.put("page", commonBean.getPage());
+//            resultMap.put("total", total);
+//        }
+//        
+//        return resultMap;
+//    }
 }

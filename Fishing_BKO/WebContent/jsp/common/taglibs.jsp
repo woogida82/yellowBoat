@@ -6,6 +6,7 @@
 <%-- CUSTOM TAG --%>
 <%@ taglib uri="/taglib/function"  prefix="cf"%>
 <%@ taglib uri="/taglib/component" prefix="com"%>
+<%@ taglib uri="/taglib/paginator" prefix="cpg"%>
 
 <%-- 공백제거--%>
 <%@ page trimDirectiveWhitespaces="true" %>

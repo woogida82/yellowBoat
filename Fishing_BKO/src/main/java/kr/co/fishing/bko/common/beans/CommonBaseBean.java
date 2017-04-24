@@ -5,15 +5,6 @@ public class CommonBaseBean {
     
     private AdminBean adminBean;
     
-    private int page = 1;
-    
-    /**
-     * PAGING처리
-     */
-    private int startRow = 0;
-    private int endRow = 0;
-    private int rows = 0;
-    
     /**
      * SORT처리
      */
@@ -28,35 +19,22 @@ public class CommonBaseBean {
     private String searchWordS;
     private String searchWordE;
     
+    /**
+     * Paging
+     * */
+    private int totalCount;
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount = 10;
+    private int start;
+    private int end;
+    private int totalPages;    
+    
     public AdminBean getAdminBean() {
         return adminBean;
     }
     public void setAdminBean(AdminBean adminBean) {
         this.adminBean = adminBean;
-    }
-    public int getPage() {
-        return page;
-    }
-    public void setPage(int page) {
-        this.page = page;
-    }
-    public int getStartRow() {
-        return startRow;
-    }
-    public void setStartRow(int startRow) {
-        this.startRow = startRow;
-    }
-    public int getEndRow() {
-        return endRow;
-    }
-    public void setEndRow(int endRow) {
-        this.endRow = endRow;
-    }
-    public int getRows() {
-        return rows;
-    }
-    public void setRows(int rows) {
-        this.rows = rows;
     }
     public String getSortColumn() {
         return sortColumn;
@@ -94,5 +72,68 @@ public class CommonBaseBean {
     public void setSearchWordE(String searchWordE) {
         this.searchWordE = searchWordE;
     }
-	    
+    
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+        totalPages = totalCount / pageSize;
+        if (totalCount % pageSize > 0) totalPages++;
+        end = page * pageSize >= totalCount ? totalCount : page * pageSize;
+        start = (page - 1) * pageSize + 1;
+        if (start > end) {
+            start = 0;
+            end = 0;
+        }
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }    
 }

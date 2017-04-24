@@ -3,11 +3,11 @@ var UserList = {
     init : function() {
     },
     /* 검색 */
-    search : function() {
+    search : function(page) {
         var formUserList = $("#userListForm");
         var url = "/bko/user";
         formUserList.prop("action", url);
-        $("#userId").val(userId);
+        $("#page").val(page);
         formUserList.submit();
     },
     /* 회원상세 화면으로 이동 */

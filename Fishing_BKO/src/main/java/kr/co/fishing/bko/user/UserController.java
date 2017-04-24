@@ -39,7 +39,11 @@ public class UserController {
     public String user(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
         try {
             int resultCnt = userService.selectUserListCnt(bean);
+            bean.setTotalCount(resultCnt);            
+            
             List<AdminBean> resultList = userService.selectUserList(bean);
+            
+            model.addAttribute("bean", bean);
             model.addAttribute("rows", resultList);
             model.addAttribute("records", resultCnt);
         } catch(Exception e) {
@@ -47,34 +51,7 @@ public class UserController {
         }        
         return "user/userList";
     }
-    
-    @ResponseBody
-    @RequestMapping("/userList")
-    public Map<String,Object> userListPaging(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) throws Exception {
         
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        
-        try {
-            
-            int resultCnt = userService.selectUserListCnt(bean);
-            
-            if(resultCnt > 0){
-                List<AdminBean> resultList = userService.selectUserList(bean);
-                resultMap.put("rows", resultList);
-                resultMap.put("records", resultCnt);
-            }
-            
-            resultMap.put("result", AJAX_RESULT.OK);
-            
-        } catch(Exception e) {
-            
-            resultMap.put("result", AJAX_RESULT.NG);
-            e.printStackTrace();
-        }
-        
-        return resultMap;
-    } 
-    
     /**
      * 회원상세화면
      * 

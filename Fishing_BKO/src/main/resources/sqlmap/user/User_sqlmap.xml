@@ -27,34 +27,42 @@
     
     
     <select id="selectUserList" resultType="AdminBean">
-        SELECT 
-        	USER_ID, 
-        	USER_NM, 
-            USER_CD,
-            MENU_AUTH,
-        	USER_NM, 
-            ZIP_CD,
-            ADDR,
-            ADDR_DETAIL,
-            SANGHO_NM,
-            TEL_NO,
-            HP_NO,
-            BANK_CD,
-            ACNT_NO,
-            ACNT_NM,
-        	DEL_YN
-            ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.UPDATE_ID) UPDATE_ID
-            ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
-            ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.CREATE_ID) CREATE_ID
-            ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
-          FROM T_USER
-         WHERE
-           1=1
-        <include refid="userWhere"/>
-        <if test='sortColumn == null or sortColumn == ""'>
-            ORDER BY CREATE_TIME DESC
-        </if>
-        <include refid="common.paging" />
+       SELECT *
+            FROM (
+                SELECT ROWNUM AS RNUM, Z.*
+                    FROM (                 
+                        SELECT @RNUM := @RNUM + 1 AS ROWNUM, A.*
+                            FROM (     
+                                SELECT 
+                                	USER_ID, 
+                                	USER_NM, 
+                                    USER_CD,
+                                    MENU_AUTH,
+                                    ZIP_CD,
+                                    ADDR,
+                                    ADDR_DETAIL,
+                                    SANGHO_NM,
+                                    TEL_NO,
+                                    HP_NO,
+                                    BANK_CD,
+                                    ACNT_NO,
+                                    ACNT_NM,
+                                	DEL_YN
+                                    ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.UPDATE_ID) UPDATE_ID
+                                    ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+                                    ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.CREATE_ID) CREATE_ID
+                                    ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+                                  FROM T_USER
+                                 WHERE
+                                   1=1
+                                <include refid="userWhere"/>
+                                    ORDER BY CREATE_TIME DESC
+                                ) A
+                                , (SELECT @RNUM := 0) B
+                        ) Z
+                    WHERE ROWNUM <![CDATA[ <= ${end} ]]>
+                ) MainSQL
+            WHERE RNUM <![CDATA[ >= ${start} ]]>            
     </select>
     
     <select id="selectUser" resultType="AdminBean">
@@ -63,7 +71,6 @@
         	USER_NM, 
             USER_CD,
             MENU_AUTH,
-        	USER_NM, 
             ZIP_CD,
             ADDR,
             ADDR_DETAIL,

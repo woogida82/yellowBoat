@@ -79,5 +79,9 @@
       <taglib-uri>/taglib/component</taglib-uri>
       <taglib-location>/WEB-INF/config/tlds/component.tld</taglib-location>
     </taglib>
+    <taglib>
+      <taglib-uri>/taglib/paginator</taglib-uri>
+      <taglib-location>/WEB-INF/config/tlds/paginator.tld</taglib-location>
+    </taglib>    
   </jsp-config>
 </web-app>
