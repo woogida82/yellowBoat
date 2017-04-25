@@ -32,6 +32,24 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="title">기존 비밀번호</td>
+                        <td colspan="3">
+                            <input type="password" style="width:150px;" id="userPw" name="userPw" data-id='userPw' valid="{label:'비밀번호', method:'required', type:'alphanum'}"/>
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td class="title">새 비밀번호</td>
+                        <td colspan="3">
+                            <input type="password" style="width:150px;" id="newUserPw1" name="newUserPw1" data-id='newUserPw1' valid="{label:'비밀번호', type:'alphanum'}"/>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="title">새 비밀번호 확인</td>
+                        <td colspan="3">
+                            <input type="password" style="width:150px;" id="newUserPw2" name="newUserPw2" data-id='newUserPw2' valid="{label:'비밀번호', type:'alphanum'}"/>
+                        </td>
+                    </tr>                                         
+                    <tr>
                         <td class="title">이름</td>
                         <td colspan="3">
                             <input type="text" style="width:150px;" id="userNm" name="userNm" data-id='userNm' value="${userBean.userNm}" valid="{label:'이름', method:'required'}"/>

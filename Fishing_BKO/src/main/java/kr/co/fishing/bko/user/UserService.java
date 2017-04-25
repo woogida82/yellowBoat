@@ -23,4 +23,6 @@ public interface UserService {
     int updateInitPass(AdminBean bean) throws Exception;
 
     int deleteUser(AdminBean bean) throws Exception;
+
+    int checkPassWord(AdminBean bean) throws Exception;
 }

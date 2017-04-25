@@ -92,6 +92,15 @@
         WHERE USER_ID = #{userId}
     </select>
     
+    <select id="checkPassWord" resultType="int">
+	   SELECT COUNT(1) 
+         FROM T_USER
+        WHERE USER_ID = #{userId}
+          AND USER_PW = AES128_ENCRYPT(#{userPw})
+          AND DEL_YN = 'N'
+          AND USER_CD IN ('CUST', 'USER')
+    </select>    
+    
     <insert id="insertUser" parameterType="AdminBean">
         INSERT INTO T_USER (
         	DEL_YN

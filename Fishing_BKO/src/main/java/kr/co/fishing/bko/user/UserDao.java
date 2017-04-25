@@ -49,4 +49,8 @@ public class UserDao {
     public int deleteUser(AdminBean bean) {
         return sqlSession.update("user.deleteUser", bean);
     }
+
+    public int checkPassWord(AdminBean bean) {
+        return sqlSession.selectOne("user.checkPassWord", bean);
+    }
 }

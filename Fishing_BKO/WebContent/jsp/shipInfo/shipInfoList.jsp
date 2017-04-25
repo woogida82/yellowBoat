@@ -22,12 +22,15 @@
         <h3>선박 목록</h3>
         <form action="" id="shipInfoListForm" name="shipInfoListForm">
             <input type="hidden" id="userId" name="userId" />
+            <input type="hidden" id="shipId" name="shipId" />
             <input type="hidden" id="page" name="page"  value="${bean.page}"/>
             <div class="search_area">
                 <ul>
                     <li>
                         <select style="width:120px;" id="searchWordType" name="searchWordType">
-                            <option value="userId" data-searchType="text">아이디</option>
+                            <c:if test="${bean.adminBean.userCd eq 'ADMN' }">
+                                <option value="userId" data-searchType="text">아이디</option>
+                            </c:if>
                             <option value="shipNm" data-searchType="text">선박명</option>
                         </select>
                     </li>
@@ -71,7 +74,16 @@
                                     </td>
                                     <td>${list.shipWeight } ton</td>
                                     <td>${list.boardingQuota } 명</td>
-                                    <td>${list.userNm }</td>
+                                    <td>
+                                        <c:if test="${bean.adminBean.userCd eq 'CUST' }">
+                                            ${list.userNm }
+                                        </c:if>
+                                        <c:if test="${bean.adminBean.userCd eq 'ADMN' }">
+                                            <a onclick="javascript:ShipInfoList.userInfoView('${list.userId }');">
+                                                ${list.userNm }
+                                            </a>
+                                        </c:if>
+                                    </td>
                                     <td>${list.updateTime }</td>
                                     <td>${list.updateId }</td>
                                     <td>${list.createTime }</td>
@@ -90,7 +102,15 @@
                 </table> 
                 <div class="pagination">
                     <cpg:paginator maxLinks="10" currPage="${bean.page}" totalPages="${bean.totalPages}" uri="ShipInfoList"/>
-                </div>                
+                </div> 
+                <!--end pagination-->  
+                             
+                <div class="btn_box">
+                    <c:if test="${bean.adminBean.userCd eq 'CUST' }">
+                        <a href="#" id="regShipInfoButton">등록</a>
+                    </c:if>
+                </div>
+                <!--end btn_box-->                
             </div>
         </form>
     </div>

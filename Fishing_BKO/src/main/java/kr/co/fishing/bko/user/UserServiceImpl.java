@@ -47,5 +47,10 @@ public class UserServiceImpl implements UserService {
     
     public int deleteUser(AdminBean bean) throws Exception{
         return adminDao.deleteUser(bean);
+    }
+
+    @Override
+    public int checkPassWord(AdminBean bean) throws Exception {
+        return adminDao.checkPassWord(bean);
     }    
 }

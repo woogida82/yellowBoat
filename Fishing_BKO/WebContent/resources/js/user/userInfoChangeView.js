@@ -5,6 +5,18 @@ var UserInfoChangeView = {
         $("#cancelButton").bind("click", function() { UserInfoChangeView.cancel(); });
     },
     updateUserInfo:function(){
+        var newUserPw1 = $("#newUserPw1").val();
+        var newUserPw2 = $("#newUserPw2").val();
+        
+        
+        if((newUserPw1 == newUserPw2)||(newUserPw1 == "" && newUserPw2 == "")){
+            UserInfoChangeView.doUpdateUserInfo();
+        }else{
+            alert("새 비밀번호가 일치 하지 않습니다.");
+            return false;            
+        }
+    },
+    doUpdateUserInfo:function(){
         $("#userDetailForm").onSubmit({
             url            : "/bko/user/updateUser",
             confirmMessage : "개인 정보를 수정하시겠습니까?",
@@ -28,14 +40,19 @@ var UserInfoChangeView = {
                         alert("수정되었습니다.");
                         UserInfoChangeView.cancel();
                     }
-                }else {
+                }else if (data.result == 'PW') {
+                    alert("기존 비밀번호를 확인하시기 바랍니다.");
+                }else if (data.result == 'NPW') {
+                    alert("새 비밀번호를 확인하시기 바랍니다.");
+                }else{
                     alert("실패하였습니다.");
                     UserInfoChangeView.cancel();
                 }
             }
-        });          
+        });         
     },
     deleteUser : function(){
+        
         $("#userDetailForm").onSubmit({
             url            : "/bko/user/deleteUser",
             confirmMessage : "탈퇴 하시겠습니까?",
@@ -59,12 +76,15 @@ var UserInfoChangeView = {
                         alert("탈퇴 되었습니다.");
                         UserInfoChangeView.logOut();
                     }
-                }else {
+                }else if (data.result == 'PW') {
+                    alert("기존 비밀번호를 확인하시기 바랍니다.");
+//                    UserInfoChangeView.cancel();
+                }else{
                     alert("실패하였습니다.");
-                    UserInfoChangeView.cancel();
+                    UserInfoChangeView.cancel();                    
                 }
             }
-        });          
+        }); 
     },
     cancel : function(){
 //        window.location.href = "/bko/user";

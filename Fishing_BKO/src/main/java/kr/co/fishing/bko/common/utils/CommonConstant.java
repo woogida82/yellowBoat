@@ -64,6 +64,12 @@ public class CommonConstant {
         
         /** 중복 */
         public final String DUP = "DUP";
+        
+        /** 패스워드 확인(기존) */
+        public final String PW = "PW"; 
+        
+        /** 패스워드 확인(신규) */
+        public final String NPW = "NPW";         
     }
     
     /** 파일구분 */

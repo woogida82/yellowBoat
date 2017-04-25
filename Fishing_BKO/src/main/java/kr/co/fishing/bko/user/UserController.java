@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import kr.co.fishing.bko.beans.ShipInfoBean;
+import com.mysql.jdbc.StringUtils;
+
 import kr.co.fishing.bko.common.beans.AdminBean;
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
 import kr.co.fishing.bko.common.utils.CommonConstant.AJAX_RESULT;
@@ -59,10 +60,10 @@ public class UserController {
      */     
     @RequestMapping("/userDetailView")
     public String userDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
-        AdminBean resultUserBean = new AdminBean();
-        resultUserBean = userService.selectUser(bean);
+        AdminBean userBean = new AdminBean();
+        userBean = userService.selectUser(bean);
         
-        model.addAttribute("userBean", resultUserBean);
+        model.addAttribute("userBean", userBean);
         return "user/userDetailView";
     }   
     
@@ -77,12 +78,12 @@ public class UserController {
      */     
     @RequestMapping("/userInfoChangeView")
     public String userInfoChangeView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
-        AdminBean resultUserBean = new AdminBean();
+        AdminBean userBean = new AdminBean();
         
         bean.setUserId(bean.getAdminBean().getUserId());
-        resultUserBean = userService.selectUser(bean);
+        userBean = userService.selectUser(bean);
         
-        model.addAttribute("userBean", resultUserBean);
+        model.addAttribute("userBean", userBean);
         return "user/userInfoChangeView";
     }     
     
@@ -146,22 +147,12 @@ public class UserController {
 
             //아이디 중복 체크
             int resultCnt = userService.selectUserAdminId(bean);
-//            
             if(resultCnt > 0){
                 resultMap.put("result", AJAX_RESULT.DUP); //중복
             } else {
                 userService.insertUser(bean);
-//                ShipInfoBean shipInfoBean = new ShipInfoBean();
-//                shipInfoBean = bean.getShipInfoBean();
-//                shipInfoBean.setUserId(bean.getUserId());
-//                shipInfoBean.setShipCd("00");
-//                shipInfoBean.setStatusCd("00");
-//                shipInfoBean.setAdminBean(bean.getAdminBean());
-//                shipInfoService.insertShipInfo(shipInfoBean);
-                
                 resultMap.put("result", AJAX_RESULT.OK);
             }
-//            
         } catch(Exception e) {
             
             resultMap.put("result", AJAX_RESULT.NG);
@@ -174,25 +165,43 @@ public class UserController {
     @RequestMapping("/updateUser")
     public Map<String,Object> updateUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean) throws Exception {
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        
         try {
-        	userService.updateUser(bean);
-//            ShipInfoBean paramBean = new ShipInfoBean();
-//            paramBean = bean.getShipInfoBean();        	
-//        	if(!paramBean.getShipId().isEmpty()){
-//            	paramBean.setShipCd("00");
-//            	paramBean.setStatusCd("00");        	
-//            	paramBean.setAdminBean(bean.getAdminBean());
-//            	shipInfoService.updateShipInfo(paramBean);
-//        	}
-            resultMap.put("result", AJAX_RESULT.OK);
-            
+            if(("CUST").equals(bean.getAdminBean().getUserCd())){
+                int chkPw = userService.checkPassWord(bean);
+                if(chkPw > 0){
+                    String newUserPw1 = null;
+                    String newUserPw2 = null;
+                    newUserPw1 = bean.getNewUserPw1();
+                    newUserPw2 = bean.getNewUserPw2();
+                    if(!StringUtils.isNullOrEmpty(newUserPw1)&&!StringUtils.isNullOrEmpty(newUserPw2)){
+                        if((newUserPw1).equals(newUserPw2)){
+                            userService.updateUser(bean);
+                            AdminBean paramBean = new AdminBean();
+                            paramBean.setUserId(bean.getUserId());
+                            paramBean.setUserPw(newUserPw1);
+                            paramBean.setAdminBean((AdminBean) request.getSession().getAttribute(SESSION_KEY.ADMIN));
+                            userService.updateInitPass(paramBean);
+                            resultMap.put("result", AJAX_RESULT.OK);                            
+                        }else{
+                            resultMap.put("result", AJAX_RESULT.NPW); //새 비밀번호 오류 
+                        }
+                    }else if(StringUtils.isNullOrEmpty(newUserPw1)&&StringUtils.isNullOrEmpty(newUserPw2)){
+                        userService.updateUser(bean);
+                        resultMap.put("result", AJAX_RESULT.OK);                             
+                    }else{
+                        resultMap.put("result", AJAX_RESULT.NPW); //새 비밀번호 오류                         
+                    }
+                }else{
+                    resultMap.put("result", AJAX_RESULT.PW); //기본 비밀번호 오류                    
+                }
+            }else{
+                userService.updateUser(bean);
+                resultMap.put("result", AJAX_RESULT.OK);            
+            }            
         } catch(Exception e) {
-            
             resultMap.put("result", AJAX_RESULT.NG);
             e.printStackTrace();
         }
-        
         return resultMap;
     }
     
@@ -233,12 +242,9 @@ public class UserController {
         Map<String,Object> resultMap = new HashMap<String,Object>();
         
         try {
-            bean.setUserPw(bean.getUserId()+"1234");
             userService.updateInitPass(bean);
             resultMap.put("result", AJAX_RESULT.OK);
-            
         } catch(Exception e) {
-            
             resultMap.put("result", AJAX_RESULT.NG);
             e.printStackTrace();
         }
@@ -252,15 +258,19 @@ public class UserController {
         Map<String,Object> resultMap = new HashMap<String,Object>();
         
         try {
-            userService.deleteUser(bean);
             
-            ShipInfoBean paramBean = new ShipInfoBean();
-//            paramBean = bean.getShipInfoBean();
-//            if(!paramBean.getShipId().isEmpty()){
-//                paramBean.setAdminBean(bean.getAdminBean());
-//                shipInfoService.deleteShipInfo(paramBean);   
-//            }
-            resultMap.put("result", AJAX_RESULT.OK);
+            if(("CUST").equals(bean.getAdminBean().getUserCd())){
+                int chkPw = userService.checkPassWord(bean);
+                if(chkPw > 0){
+                    userService.deleteUser(bean);
+                    resultMap.put("result", AJAX_RESULT.OK);                        
+                }else{
+                    resultMap.put("result", AJAX_RESULT.PW); //기존 비밀번호 오류                    
+                }
+            }else{
+                userService.deleteUser(bean);
+                resultMap.put("result", AJAX_RESULT.OK);                
+            }
         } catch(Exception e) {
             
             resultMap.put("result", AJAX_RESULT.NG);

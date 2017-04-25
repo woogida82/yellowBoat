@@ -177,24 +177,16 @@
             THUM_10_IMG_PATH,
             THUM_10_IMG_SIZE_CD,
         	DEL_YN
+            ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.USER_ID) USER_NM
             ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.UPDATE_ID) UPDATE_ID
             ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
             ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_SHIP_INFO.CREATE_ID) CREATE_ID
             ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
           FROM T_SHIP_INFO
          WHERE 1 = 1
-           <if test='userId != null and userId != ""'>
-           AND USER_ID = #{userId}
-           </if> 
-           <if test='shipId != null and shipId != ""'>
            AND SHIP_ID = #{shipId}
-           </if> 
            AND DEL_YN = 'N'
     </select>
-    
-    
-    
-    
     
     <insert id="insertShipInfo" parameterType="kr.co.fishing.bko.beans.ShipInfoBean">
         INSERT INTO T_SHIP_INFO (
@@ -509,9 +501,9 @@
             <if test='thum10ImgSizeCd != null and thum10ImgSizeCd != ""'> 
             ,#{thum10ImgSizeCd}
             </if>            
-            ,NVL(#{adminBean.userId}, #{userId})
+            ,IFNULL(#{adminBean.userId}, #{userId})
             ,NOW()
-            ,NVL(#{adminBean.userId}, #{userId})
+            ,IFNULL(#{adminBean.userId}, #{userId})
             ,NOW()
         )
     </insert>

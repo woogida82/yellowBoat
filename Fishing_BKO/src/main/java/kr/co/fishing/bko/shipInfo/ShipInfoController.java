@@ -43,18 +43,37 @@ public class ShipInfoController {
         
         return "shipInfo/shipInfoList";
     }
+    
+    @RequestMapping("shipInfoDetailView")
+    public String shipInfoDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
+        try {
+            ShipInfoBean shipBean = new ShipInfoBean();
+            shipBean = shipInfoService.selectShipInfo(bean);
+            model.addAttribute("shipBean", shipBean);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }        
+        return "shipInfo/shipInfoDetailView";
+    }   
+    
+    @RequestMapping("regShipInfoView")
+    public String regShipInfoView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
         
+        model.addAttribute("userId", bean.getUserId());
+        return "shipInfo/regShipInfoView";
+    }      
     
     @ResponseBody
     @RequestMapping("/insertShipInfo")
     public Map<String,Object> insertPlanDrug(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean) throws Exception {
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        
         try {
-                bean.setShipCd("00");
-                bean.setStatusCd("00");
-                shipInfoService.insertShipInfo(bean);
-                resultMap.put("result", AJAX_RESULT.OK);
+            //고객회원
+            if(("CUST").equals(bean.getAdminBean().getUserCd())) bean.setUserId(bean.getAdminBean().getUserId());
+            bean.setShipCd("00");
+            bean.setStatusCd("00");
+            shipInfoService.insertShipInfo(bean);
+            resultMap.put("result", AJAX_RESULT.OK);
         } catch(Exception e) {
             
             resultMap.put("result", AJAX_RESULT.NG);
@@ -67,19 +86,17 @@ public class ShipInfoController {
     @RequestMapping("/updateShipInfo")
     public Map<String,Object> updateShipInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean) throws Exception {
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        
         try {
-    	    bean.setShipCd("00");
-    	    bean.setStatusCd("00");        	
-        	shipInfoService.updateShipInfo(bean);
+            //고객회원
+            if(("CUST").equals(bean.getAdminBean().getUserCd())) bean.setUserId(bean.getAdminBean().getUserId());
+            bean.setShipCd("00");
+            bean.setStatusCd("00");        	
+            shipInfoService.updateShipInfo(bean);
             resultMap.put("result", AJAX_RESULT.OK);
-            
         } catch(Exception e) {
-            
             resultMap.put("result", AJAX_RESULT.NG);
             e.printStackTrace();
         }
-        
         return resultMap;
     }
     

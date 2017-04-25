@@ -45,6 +45,9 @@ public class AdminBean extends CommonBaseBean {
     private String acntNo; //계좌번호
     private String acntNm; //예금주
     
+    private String newUserPw1;
+    private String newUserPw2;
+    
     private ShipInfoBean shipInfoBean;
     
 	public String getUserPw2() {
@@ -245,5 +248,17 @@ public class AdminBean extends CommonBaseBean {
     }
     public void setShipInfoBean(ShipInfoBean shipInfoBean) {
         this.shipInfoBean = shipInfoBean;
+    }
+    public String getNewUserPw1() {
+        return newUserPw1;
+    }
+    public void setNewUserPw1(String newUserPw1) {
+        this.newUserPw1 = newUserPw1;
+    }
+    public String getNewUserPw2() {
+        return newUserPw2;
+    }
+    public void setNewUserPw2(String newUserPw2) {
+        this.newUserPw2 = newUserPw2;
     }
 }

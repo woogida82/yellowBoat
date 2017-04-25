@@ -37,15 +37,21 @@
                             <tr>
                                 <td class="title">아이디</td>
                                 <td colspan="3">
-                                    <input type="text" style="width:150px;" id="userId" name="userId" data-id='userId' valid="{label:'아이디', method:'required'}"/>
+                                    <input type="text" style="width:150px;" id="userId" name="userId" data-id='userId' valid="{label:'아이디', method:'required', type:'alphanum'}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="title">비밀번호</td>
                                 <td colspan="3">
-                                    <input type="password" style="width:150px;" id="userPw" name="userPw" data-id='userPw' valid="{label:'비밀번호', method:'required'}"/>
+                                    <input type="password" style="width:150px;" id="userPw" name="userPw" data-id='userPw' valid="{label:'비밀번호', method:'required', type:'alphanum'}"/>
         	                   </td>
                             </tr> 
+                            <tr>
+                                <td class="title">비밀번호 확인</td>
+                                <td colspan="3">
+                                    <input type="password" style="width:150px;" id="userPw2" name="userPw2" data-id='userPw2' valid="{label:'비밀번호 확인', method:'required', type:'alphanum'}"/>
+                               </td>
+                            </tr>                             
                             <tr>
                                 <td class="title">이름</td>
                                 <td colspan="3">
