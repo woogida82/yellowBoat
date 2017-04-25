@@ -25,26 +25,23 @@ $LAB
 .script("/js/jquery/jquery-impromptu.min.js").wait()
 .script("/js/jquery/jquery-ui-timepicker-addon.min.js").wait()
 .script("/js/jquery/jquery-ui-timepicker-ko.js")
-.script("/js/jquery/jquery-ui-datepicker-ko.js?20170421")
+.script("/js/jquery/jquery-ui-datepicker-ko.js?20170425")
 .script("/js/jquery/jquery.slimscroll.min.js")
-.script("/js/common/control.js?20170421").wait()
-.script("/js/common/validator.js?20170421").wait()
-.script("/js/common/common.js?20170421").wait()
-.script("/js/common/utils.js?20170421")
-.script("/js/common/fileUtils.js?20170421")
-.script("/js/common/dateUtils.js?20170421")
+.script("/js/common/control.js?20170425").wait()
+.script("/js/common/validator.js?20170425").wait()
+.script("/js/common/common.js?20170425").wait()
+.script("/js/common/utils.js?20170425")
+.script("/js/common/fileUtils.js?20170425")
+.script("/js/common/dateUtils.js?20170425")
 .script(function() {
     return [
-        "/js/common/contentBody.js?20170421",
-        "${jsName}?20170421"
+        "/js/common/contentBody.js?20170425",
+        "${jsName}?20170425"
     ];
 }).wait(function(){
     $(function(){
         ContentBody.init();
-        
     	${jsObjName}.init();
-    	
-//         ContentBody.searchBoxResize();
     });
 });
 </script>

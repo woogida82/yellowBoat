@@ -7,18 +7,18 @@
     <div class="util">
         <ul>
             <li class="list1"><a href="#"  onclick="ContentBody.returnHome();">Home</a></li>
-            <li>회원관리</li>
-            <li><a href="#"  onclick="ContentBody.reload();">회원 정보</a></li>
+            <li>회원/선박관리</li>
+            <li><a href="#"  onclick="ContentBody.reload();">개인정보 수정</a></li>
         </ul>
     </div>
     <!--end util-->
     <div class="top_img">
-        <h2>회원 정보</h2>
+        <h2>개인정보 수정</h2>
         <img src="/images/common/top_img1.png" />
     </div>
     <!--end top_img-->
     <div class="content">
-        <h3>회원 정보</h3>
+        <h3>개인 정보</h3>
         <div class="table_write">
             <form action="" method="post" name="userDetailForm" id="userDetailForm">
                 <input type="hidden" id="userId" name="userId" value="${userBean.userId}"/>
@@ -41,7 +41,7 @@
                         <td class="title">우편번호</td>
                         <td colspan="3">
                             <input type="text" style="width:80px;" id="zipCd" name="zipCd" data-id='zipCd' value="${userBean.zipCd}" valid="{label:'우편번호', method:'required'}" readonly="readonly"/>
-                            <a href="#" class="btn_postPop" onclick="javascript:UserDetailView.getPostNo();">우편 번호</a>
+                            <a href="#" class="btn_postPop" onclick="javascript:UserInfoChangeView.getPostNo();">우편 번호</a>
                         </td>
                     </tr>
                     <tr>
@@ -81,36 +81,9 @@
                         </td>
                     </tr> 
                 </table>
-                
-<!--                 <table width="100%"> -->
-<!--                     <tr> -->
-<!--                         <td class="title">선박 등록 번호</td> -->
-<!--                         <td colspan="3"> -->
-<%--                             ${shipBean.shipRegNo} --%>
-<!--                         </td> -->
-<!--                     </tr>                 -->
-<!--                     <tr> -->
-<!--                         <td class="title">선박 이름</td> -->
-<!--                         <td colspan="3"> -->
-<%--                             <input type="text" style="width:150px;" id="shipNm" name="shipInfoBean.shipNm" data-id='shipNm' value="${shipBean.shipNm}"/> --%>
-<!--                         </td> -->
-<!--                     </tr> -->
-<!--                     <tr> -->
-<!--                         <td class="title">선박 무게</td> -->
-<!--                         <td colspan="3"> -->
-<%--                             <input type="text" style="width:150px;" id="shipWeight" name="shipInfoBean.shipWeight" data-id='shipWeight' value="${shipBean.shipWeight}" valid="{label:'선박 무게', type:'number'}"/> --%>
-<!--                         </td> -->
-<!--                     </tr>  -->
-<!--                     <tr> -->
-<!--                         <td class="title">탑승정원</td> -->
-<!--                         <td colspan="3"> -->
-<%--                             <input type="text" style="width:150px;" id="boardingQuota" name="shipInfoBean.boardingQuota" data-id='boardingQuota' value="${shipBean.boardingQuota}" valid="{label:'탑승정원', type:'number'}"/> --%>
-<!--                         </td> -->
-<!--                     </tr> -->
-<!--                 </table>                         -->
                 <div class="btn_box">
                     <a href="#" id="updateInfoButton">수정</a>
-                    <a href="#" id="deleteUserButton">삭제</a>
+                    <a href="#" id="deleteUserButton">탈퇴</a>
                     <a href="#" id="cancelButton">취소</a>
                 </div>
                 <!--end btn_box-->

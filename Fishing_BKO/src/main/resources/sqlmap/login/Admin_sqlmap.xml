@@ -26,6 +26,7 @@
            USER_ID = #{userId}
            AND USER_PW = AES128_ENCRYPT(#{userPw})
            AND DEL_YN = 'N'
+           AND USER_CD IN ('ADMN', 'CUST')
     </select>
     
 </mapper>

@@ -1,4 +1,4 @@
-var URL = {SIGNUP:"/bko/user/singUpView", ADMN:"/bko/user",CUST:"/bko/user",USER:"/bko/user"};
+var URL = {ADMN:"/bko/user",CUST:"/bko/shipInfo"};
 var userCd = $("#userCd").val();
 var url;
 
@@ -10,12 +10,20 @@ var Main = {
     init: function() {
         var toDay = "Today "+$.getToday('yyyy.MM.dd');
         var pDate = $("p.date");
-        var sidebar =$("div.sidebar");
+        var sidebar = $("div.sidebar");
+        var userCd = $("#hiddenUserCd").val();
+        var url = "";
         // 메뉴 구성
         Menu.makeMenu();  
         pDate.empty();
         pDate.text(toDay);
-        Main.openClient(URL.ADMN);
+        if(userCd == "ADMN"){
+            url = URL.ADMN;
+        }else{
+            url = URL.CUST;
+        }
+        
+        Main.openClient(url);
     },
     //페이지 직접이동
     openClientDirect: function(CURL) {
@@ -42,5 +50,9 @@ var Main = {
     /* 홈으로 */
     returnHome: function(){
         window.location.href = "/bko/main";
+    },
+    /* log out */
+    logOut : function(){
+        window.location.href = "/bko/logout";
     }
 };

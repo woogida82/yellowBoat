@@ -20,7 +20,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import kr.co.fishing.bko.beans.ShipInfoBean;
 import kr.co.fishing.bko.common.beans.AdminBean;
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
-import kr.co.fishing.bko.common.shipInfo.ShipInfoService;
 import kr.co.fishing.bko.common.utils.CommonConstant.AJAX_RESULT;
 import kr.co.fishing.bko.common.utils.CommonConstant.SESSION_KEY;
 
@@ -31,9 +30,6 @@ public class UserController {
     
     @Autowired
     private UserService userService;
-    
-    @Autowired
-    private ShipInfoService shipInfoService;    
     
     @RequestMapping("")
     public String user(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
@@ -64,17 +60,33 @@ public class UserController {
     @RequestMapping("/userDetailView")
     public String userDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
         AdminBean resultUserBean = new AdminBean();
-        ShipInfoBean resultShipBean = new ShipInfoBean();
         resultUserBean = userService.selectUser(bean);
-        ShipInfoBean paramBean = new ShipInfoBean();
-        paramBean.setUserId(bean.getUserId());
-        resultShipBean = shipInfoService.selectShipInfo(paramBean);
         
-//        model.addAttribute("userId", bean.getUserId());
         model.addAttribute("userBean", resultUserBean);
-        model.addAttribute("shipBean", resultShipBean);
         return "user/userDetailView";
-    }    
+    }   
+    
+    /**
+     * 회원상세화면
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */     
+    @RequestMapping("/userInfoChangeView")
+    public String userInfoChangeView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute AdminBean bean, ModelMap model) throws Exception {
+        AdminBean resultUserBean = new AdminBean();
+        
+        bean.setUserId(bean.getAdminBean().getUserId());
+        resultUserBean = userService.selectUser(bean);
+        
+        model.addAttribute("userBean", resultUserBean);
+        return "user/userInfoChangeView";
+    }     
+    
+    
     
     /**
      * 회원가입화면
@@ -139,13 +151,13 @@ public class UserController {
                 resultMap.put("result", AJAX_RESULT.DUP); //중복
             } else {
                 userService.insertUser(bean);
-                ShipInfoBean shipInfoBean = new ShipInfoBean();
-                shipInfoBean = bean.getShipInfoBean();
-                shipInfoBean.setUserId(bean.getUserId());
-                shipInfoBean.setShipCd("00");
-                shipInfoBean.setStatusCd("00");
-                shipInfoBean.setAdminBean(bean.getAdminBean());
-                shipInfoService.insertShipInfo(shipInfoBean);
+//                ShipInfoBean shipInfoBean = new ShipInfoBean();
+//                shipInfoBean = bean.getShipInfoBean();
+//                shipInfoBean.setUserId(bean.getUserId());
+//                shipInfoBean.setShipCd("00");
+//                shipInfoBean.setStatusCd("00");
+//                shipInfoBean.setAdminBean(bean.getAdminBean());
+//                shipInfoService.insertShipInfo(shipInfoBean);
                 
                 resultMap.put("result", AJAX_RESULT.OK);
             }
@@ -165,14 +177,14 @@ public class UserController {
         
         try {
         	userService.updateUser(bean);
-            ShipInfoBean paramBean = new ShipInfoBean();
-            paramBean = bean.getShipInfoBean();        	
-        	if(!paramBean.getShipId().isEmpty()){
-            	paramBean.setShipCd("00");
-            	paramBean.setStatusCd("00");        	
-            	paramBean.setAdminBean(bean.getAdminBean());
-            	shipInfoService.updateShipInfo(paramBean);
-        	}
+//            ShipInfoBean paramBean = new ShipInfoBean();
+//            paramBean = bean.getShipInfoBean();        	
+//        	if(!paramBean.getShipId().isEmpty()){
+//            	paramBean.setShipCd("00");
+//            	paramBean.setStatusCd("00");        	
+//            	paramBean.setAdminBean(bean.getAdminBean());
+//            	shipInfoService.updateShipInfo(paramBean);
+//        	}
             resultMap.put("result", AJAX_RESULT.OK);
             
         } catch(Exception e) {
@@ -243,11 +255,11 @@ public class UserController {
             userService.deleteUser(bean);
             
             ShipInfoBean paramBean = new ShipInfoBean();
-            paramBean = bean.getShipInfoBean();
-            if(!paramBean.getShipId().isEmpty()){
-                paramBean.setAdminBean(bean.getAdminBean());
-                shipInfoService.deleteShipInfo(paramBean);   
-            }
+//            paramBean = bean.getShipInfoBean();
+//            if(!paramBean.getShipId().isEmpty()){
+//                paramBean.setAdminBean(bean.getAdminBean());
+//                shipInfoService.deleteShipInfo(paramBean);   
+//            }
             resultMap.put("result", AJAX_RESULT.OK);
         } catch(Exception e) {
             

@@ -97,32 +97,32 @@
                             </tr> 
                         </table>
                         
-                        <table width="100%">
-                            <tr>
-                                <td class="title">선박 등록 번호</td>
-                                <td colspan="3">
-                                    <input type="text" style="width:150px;" id="shipRegNo" name="shipInfoBean.shipRegNo" data-id='shipRegNo' valid="{label:'선박 등록 번호', method:'required'}"/>
-                                </td>
-                            </tr>                        
-                            <tr>
-                                <td class="title">선박 이름</td>
-                                <td colspan="3">
-                                    <input type="text" style="width:150px;" id="shipNm" name="shipInfoBean.shipNm" data-id='shipNm' valid="{label:'선박 이름', method:'required'}"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="title">선박 무게</td>
-                                <td colspan="3">
-                                    <input type="text" style="width:150px;" id="shipWeight" name="shipInfoBean.shipWeight" data-id='shipWeight' valid="{label:'선박 무게', type:'number'}"/>
-                                </td>
-                            </tr> 
-                            <tr>
-                                <td class="title">탑승정원</td>
-                                <td colspan="3">
-                                    <input type="text" style="width:150px;" id="boardingQuota" name="shipInfoBean.boardingQuota" data-id='boardingQuota' valid="{label:'탑승정원', type:'number'}"/>
-                                </td>
-                            </tr>
-                        </table>                        
+<!--                         <table width="100%"> -->
+<!--                             <tr> -->
+<!--                                 <td class="title">선박 등록 번호</td> -->
+<!--                                 <td colspan="3"> -->
+<!--                                     <input type="text" style="width:150px;" id="shipRegNo" name="shipInfoBean.shipRegNo" data-id='shipRegNo' valid="{label:'선박 등록 번호', method:'required'}"/> -->
+<!--                                 </td> -->
+<!--                             </tr>                         -->
+<!--                             <tr> -->
+<!--                                 <td class="title">선박 이름</td> -->
+<!--                                 <td colspan="3"> -->
+<!--                                     <input type="text" style="width:150px;" id="shipNm" name="shipInfoBean.shipNm" data-id='shipNm' valid="{label:'선박 이름', method:'required'}"/> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                                 <td class="title">선박 무게</td> -->
+<!--                                 <td colspan="3"> -->
+<!--                                     <input type="text" style="width:150px;" id="shipWeight" name="shipInfoBean.shipWeight" data-id='shipWeight' valid="{label:'선박 무게', type:'number'}"/> -->
+<!--                                 </td> -->
+<!--                             </tr>  -->
+<!--                             <tr> -->
+<!--                                 <td class="title">탑승정원</td> -->
+<!--                                 <td colspan="3"> -->
+<!--                                     <input type="text" style="width:150px;" id="boardingQuota" name="shipInfoBean.boardingQuota" data-id='boardingQuota' valid="{label:'탑승정원', type:'number'}"/> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+<!--                         </table>                         -->
                         <div class="btn_box">
                             <a href="#" id="signUpButton">등록</a>
                             <a href="#" id="cancelButton">취소</a>

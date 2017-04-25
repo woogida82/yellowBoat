@@ -63,6 +63,10 @@ public class ShipInfoBean extends CommonBaseBean {
     private String updateTime;
     private String createId;
     private String createTime;
+    
+    /* 추가 */
+    private String userNm;
+    
     public String getShipRegNo() {
         return shipRegNo;
     }
@@ -422,5 +426,11 @@ public class ShipInfoBean extends CommonBaseBean {
     }
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+    public String getUserNm() {
+        return userNm;
+    }
+    public void setUserNm(String userNm) {
+        this.userNm = userNm;
     }
 }

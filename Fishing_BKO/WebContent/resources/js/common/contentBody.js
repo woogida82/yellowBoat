@@ -206,5 +206,8 @@
     },
     returnHome: function(){
         window.parent.Main.returnHome();        
+    },
+    logOut: function(){
+        window.parent.Main.logOut();        
     }
 };

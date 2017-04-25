@@ -47,6 +47,7 @@
         <p>Copyright YellowBoat. All right reserved.</p>
     </div>
     <!--end footer_wrap-->    
+    <input type="hidden" id="hiddenUserCd" name="hiddenUserCd" value="${SESSION_KEY_ADMIN.userCd}" />
 <script type="text/javascript" src="/js/jquery/LAB.min.js"></script>
 <script type="text/javascript">
     $LAB.script(function() {
@@ -68,11 +69,11 @@
             "/js/common/utils.js",
             "/js/common/fileUtils.js",
             "/js/common/dateUtils.js",
-            "/js/common/common.js?20151224"
+            "/js/common/common.js?20170425"
         ];
     }).wait()
     .script("/js/layout/menu.js")
-    .script("/js/layout/main.js?20170412")
+    .script("/js/layout/main.js?20170425")
     .wait(function(){
         $(function () {
             Main.init();

@@ -1,24 +1,13 @@
-var UserDetailView = {
+var UserInfoChangeView = {
     init : function(){
-        $("#updateInfoButton").bind("click", function() { UserDetailView.updateUserInfo(); });
-        $("#deleteUserButton").bind("click", function() { UserDetailView.deleteUser(); });
-        $("#cancelButton").bind("click", function() { UserDetailView.cancel(); });
+        $("#updateInfoButton").bind("click", function() { UserInfoChangeView.updateUserInfo(); });
+        $("#deleteUserButton").bind("click", function() { UserInfoChangeView.deleteUser(); });
+        $("#cancelButton").bind("click", function() { UserInfoChangeView.cancel(); });
     },
     updateUserInfo:function(){
-//        var shipId = $("#shipId");
-//        var shipNm = $("#shipNm");
-//        
-//        if(shipId.val() != ""){
-//            if(shipNm.val() == ""){
-//                alert("선박 이름을 기입해 주시기 바랍니다. ");
-//                shipNm.focus();
-//                return false;
-//            }
-//        }
-        
         $("#userDetailForm").onSubmit({
             url            : "/bko/user/updateUser",
-            confirmMessage : "수정하시겠습니까?",
+            confirmMessage : "개인 정보를 수정하시겠습니까?",
             validation     : true,             // validation 체크 유무
             validmessage   : 'alertAll',       // 하나의 alert에 모든 에러 내용을 표시
             ajaxSubmit     : true,             // ajax로 통신할 경우
@@ -37,11 +26,11 @@ var UserDetailView = {
                         alert(errMsg);
                     } else {
                         alert("수정되었습니다.");
-                        UserDetailView.cancel();
+                        UserInfoChangeView.cancel();
                     }
                 }else {
                     alert("실패하였습니다.");
-                    UserDetailView.cancel();
+                    UserInfoChangeView.cancel();
                 }
             }
         });          
@@ -49,7 +38,7 @@ var UserDetailView = {
     deleteUser : function(){
         $("#userDetailForm").onSubmit({
             url            : "/bko/user/deleteUser",
-            confirmMessage : "삭제하시겠습니까?",
+            confirmMessage : "탈퇴 하시겠습니까?",
             validation     : true,             // validation 체크 유무
             validmessage   : 'alertAll',       // 하나의 alert에 모든 에러 내용을 표시
             ajaxSubmit     : true,             // ajax로 통신할 경우
@@ -67,18 +56,22 @@ var UserDetailView = {
                         }
                         alert(errMsg);
                     } else {
-                        alert("삭제되었습니다.");
-                        UserDetailView.cancel();
+                        alert("탈퇴 되었습니다.");
+                        UserInfoChangeView.logOut();
                     }
                 }else {
                     alert("실패하였습니다.");
-                    UserDetailView.cancel();
+                    UserInfoChangeView.cancel();
                 }
             }
         });          
     },
     cancel : function(){
-        window.location.href = "/bko/user";
+//        window.location.href = "/bko/user";
+        ContentBody.returnHome();
+    },
+    logOut : function(){
+        ContentBody.logOut();
     },
     getPostNo: function() {
         new daum.Postcode({
