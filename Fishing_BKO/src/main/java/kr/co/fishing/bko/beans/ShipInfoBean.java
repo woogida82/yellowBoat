@@ -1,5 +1,7 @@
 package kr.co.fishing.bko.beans;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
@@ -81,6 +83,8 @@ public class ShipInfoBean extends CommonBaseBean {
     private MultipartFile uploadFile08;     
     private MultipartFile uploadFile09;
     private MultipartFile uploadFile10;    
+    
+    private List<ReservationBean> reservationBeans;
     
     public String getShipRegNo() {
         return shipRegNo;
@@ -513,5 +517,11 @@ public class ShipInfoBean extends CommonBaseBean {
     }
     public void setUploadFile10(MultipartFile uploadFile10) {
         this.uploadFile10 = uploadFile10;
+    }
+    public List<ReservationBean> getReservationBeans() {
+        return reservationBeans;
+    }
+    public void setReservationBeans(List<ReservationBean> reservationBeans) {
+        this.reservationBeans = reservationBeans;
     }
 }
