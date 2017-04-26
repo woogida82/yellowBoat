@@ -2,6 +2,7 @@ var RegShipInfoView = {
     init : function(){
         $("#regShipInfoButton").bind("click", function() { RegShipInfoView.regShipInfo(); });
         $("#cancelButton").bind("click", function() { RegShipInfoView.cancel(); });
+        $(".file_photo>img").hide();
     },
     /* 선박등록 */
     regShipInfo:function(){
@@ -36,6 +37,43 @@ var RegShipInfoView = {
     /* cancel */
     cancel : function(){
         window.location.href = "/bko/shipInfo";
+    },
+    
+    fileChoice : function(name1, name2, name3) {
+        var filePath = $("#"+name1).val();
+        var ext = filePath.split('.').pop().toLowerCase();
+        var file = null;
+        var img = null;
+        var holder = $("#"+name3); 
+//      holder = document.getElementById(name3);               
+        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+            $("#"+name1).val("");
+            $("#"+name2).val("");
+            holder.hide();
+            return false;
+        }
+        
+        if (filePath) {
+            var orgFileNm = filePath.replace(/^.*[\\\/]/, '');
+            $("#"+name2).val(orgFileNm);
+        }
+        file = $("#"+name1)[0].files[0];
+//        var reader = new FileReader();
+//        reader.onload = function (event) {  
+////            img = new Image();
+////            img.src = event.target.result; 
+////            holder.innerHTML = '';
+////            holder.appendChild(img);  
+////            $('#image_preview img').prop('src', event.target.result);
+//            //  document.getElementById('holderMain').innerHTML = '';
+//            //  document.getElementById('holderMain').appendChild(img); 
+//        };
+//        reader.readAsDataURL(file);  
+        blobURL = window.URL.createObjectURL(file);
+        holder.prop('src', blobURL);
+        holder.show();
     }    
 }
 
+ 

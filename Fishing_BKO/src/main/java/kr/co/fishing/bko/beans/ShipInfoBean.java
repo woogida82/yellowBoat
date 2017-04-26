@@ -1,5 +1,7 @@
 package kr.co.fishing.bko.beans;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
 
 public class ShipInfoBean extends CommonBaseBean {
@@ -66,6 +68,19 @@ public class ShipInfoBean extends CommonBaseBean {
     
     /* 추가 */
     private String userNm;
+    
+    /* file */
+    private MultipartFile uploadFileMain;
+    private MultipartFile uploadFile01;
+    private MultipartFile uploadFile02;
+    private MultipartFile uploadFile03;
+    private MultipartFile uploadFile04;   
+    private MultipartFile uploadFile05;
+    private MultipartFile uploadFile06;
+    private MultipartFile uploadFile07;
+    private MultipartFile uploadFile08;     
+    private MultipartFile uploadFile09;
+    private MultipartFile uploadFile10;    
     
     public String getShipRegNo() {
         return shipRegNo;
@@ -432,5 +447,71 @@ public class ShipInfoBean extends CommonBaseBean {
     }
     public void setUserNm(String userNm) {
         this.userNm = userNm;
+    }
+    public MultipartFile getUploadFileMain() {
+        return uploadFileMain;
+    }
+    public void setUploadFileMain(MultipartFile uploadFileMain) {
+        this.uploadFileMain = uploadFileMain;
+    }
+    public MultipartFile getUploadFile01() {
+        return uploadFile01;
+    }
+    public void setUploadFile01(MultipartFile uploadFile01) {
+        this.uploadFile01 = uploadFile01;
+    }
+    public MultipartFile getUploadFile02() {
+        return uploadFile02;
+    }
+    public void setUploadFile02(MultipartFile uploadFile02) {
+        this.uploadFile02 = uploadFile02;
+    }
+    public MultipartFile getUploadFile03() {
+        return uploadFile03;
+    }
+    public void setUploadFile03(MultipartFile uploadFile03) {
+        this.uploadFile03 = uploadFile03;
+    }
+    public MultipartFile getUploadFile04() {
+        return uploadFile04;
+    }
+    public void setUploadFile04(MultipartFile uploadFile04) {
+        this.uploadFile04 = uploadFile04;
+    }
+    public MultipartFile getUploadFile05() {
+        return uploadFile05;
+    }
+    public void setUploadFile05(MultipartFile uploadFile05) {
+        this.uploadFile05 = uploadFile05;
+    }
+    public MultipartFile getUploadFile06() {
+        return uploadFile06;
+    }
+    public void setUploadFile06(MultipartFile uploadFile06) {
+        this.uploadFile06 = uploadFile06;
+    }
+    public MultipartFile getUploadFile07() {
+        return uploadFile07;
+    }
+    public void setUploadFile07(MultipartFile uploadFile07) {
+        this.uploadFile07 = uploadFile07;
+    }
+    public MultipartFile getUploadFile08() {
+        return uploadFile08;
+    }
+    public void setUploadFile08(MultipartFile uploadFile08) {
+        this.uploadFile08 = uploadFile08;
+    }
+    public MultipartFile getUploadFile09() {
+        return uploadFile09;
+    }
+    public void setUploadFile09(MultipartFile uploadFile09) {
+        this.uploadFile09 = uploadFile09;
+    }
+    public MultipartFile getUploadFile10() {
+        return uploadFile10;
+    }
+    public void setUploadFile10(MultipartFile uploadFile10) {
+        this.uploadFile10 = uploadFile10;
     }
 }
