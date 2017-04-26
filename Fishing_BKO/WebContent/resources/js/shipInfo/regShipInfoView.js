@@ -59,17 +59,6 @@ var RegShipInfoView = {
             $("#"+name2).val(orgFileNm);
         }
         file = $("#"+name1)[0].files[0];
-//        var reader = new FileReader();
-//        reader.onload = function (event) {  
-////            img = new Image();
-////            img.src = event.target.result; 
-////            holder.innerHTML = '';
-////            holder.appendChild(img);  
-////            $('#image_preview img').prop('src', event.target.result);
-//            //  document.getElementById('holderMain').innerHTML = '';
-//            //  document.getElementById('holderMain').appendChild(img); 
-//        };
-//        reader.readAsDataURL(file);  
         blobURL = window.URL.createObjectURL(file);
         holder.prop('src', blobURL);
         holder.show();

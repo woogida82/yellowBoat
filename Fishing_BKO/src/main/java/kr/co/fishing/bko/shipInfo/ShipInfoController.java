@@ -21,10 +21,8 @@ import kr.co.fishing.bko.common.utils.CommonConstant.AJAX_RESULT;
 @Controller
 @RequestMapping("/bko/shipInfo")
 public class ShipInfoController {
-    
-    
     @Autowired
-    private ShipInfoService shipInfoService;    
+    private ShipInfoService shipInfoService;   
     
     @RequestMapping("")
     public String shipInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
@@ -72,6 +70,10 @@ public class ShipInfoController {
             if(("CUST").equals(bean.getAdminBean().getUserCd())) bean.setUserId(bean.getAdminBean().getUserId());
             bean.setShipCd("00");
             bean.setStatusCd("00");
+            
+            ShipInfoFile shipInfoFile = new ShipInfoFile();
+            shipInfoFile.saveFile(bean);
+            
             shipInfoService.insertShipInfo(bean);
             resultMap.put("result", AJAX_RESULT.OK);
         } catch(Exception e) {
@@ -91,6 +93,10 @@ public class ShipInfoController {
             if(("CUST").equals(bean.getAdminBean().getUserCd())) bean.setUserId(bean.getAdminBean().getUserId());
             bean.setShipCd("00");
             bean.setStatusCd("00");        	
+            
+            ShipInfoFile shipInfoFile = new ShipInfoFile();
+            shipInfoFile.saveFile(bean);
+            
             shipInfoService.updateShipInfo(bean);
             resultMap.put("result", AJAX_RESULT.OK);
         } catch(Exception e) {

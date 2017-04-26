@@ -20,7 +20,7 @@
     <div class="content">
         <h3>선박 정보</h3>
         <div class="table_write">
-            <form action="" method="post" name="regShipInfoForm" id="regShipInfoForm">
+            <form action="" method="post" name="regShipInfoForm" id="regShipInfoForm" enctype="multipart/form-data">
                 <input type="hidden" id="userId" name="userId" value="${userId}" />
                 <table width="100%">
                     <tr>
@@ -52,7 +52,7 @@
                         <td class="title">선박 Main 사진</td>
                         <td colspan="3">
                             <div style="float: left; margin-right: 1px;">
-                                <input type="text" style="width: 200px;" class="text" id="orgMainImgNm" name="orgMainImgNm" data-id="orgMainImgNm" readonly="readonly" valid="{label:'파일', method:'required'}">
+                                <input type="text" style="width: 200px;" class="text" id="orgMainImgNm" name="orgMainImgNm" data-id="orgMainImgNm" readonly="readonly"/>
                             </div>
                             <div style="float: left; margin-right: 1px; padding: 0px 6px 0px 6px;" class="fileUpload bko-gray bko-middle">
                                 <span>업로드</span>
@@ -72,7 +72,7 @@
                         <td class="title">선박 전면 사진</td>
                         <td colspan="3">
                             <div style="float: left; margin-right: 1px;">
-                                <input type="text" style="width: 200px;" class="text" id="org01ImgNm" name="org01ImgNm" data-id="org01ImgNm" readonly="readonly" valid="{label:'파일', method:'required'}">
+                                <input type="text" style="width: 200px;" class="text" id="org01ImgNm" name="org01ImgNm" data-id="org01ImgNm" readonly="readonly"/>
                             </div>
                             <div style="float: left; margin-right: 1px; padding: 0px 6px 0px 6px;" class="fileUpload bko-gray bko-middle">
                                 <span>업로드</span>
@@ -91,7 +91,7 @@
                         <td class="title">선박 후면 사진</td>
                         <td colspan="3">
                             <div style="float: left; margin-right: 1px;">
-                                <input type="text" style="width: 200px;" class="text" id="org05ImgNm" name="org05ImgNm" data-id="org05ImgNm" readonly="readonly" valid="{label:'파일', method:'required'}">
+                                <input type="text" style="width: 200px;" class="text" id="org05ImgNm" name="org05ImgNm" data-id="org05ImgNm" readonly="readonly"/>
                             </div>
                             <div style="float: left; margin-right: 1px; padding: 0px 6px 0px 6px;" class="fileUpload bko-gray bko-middle">
                                 <span>업로드</span>
