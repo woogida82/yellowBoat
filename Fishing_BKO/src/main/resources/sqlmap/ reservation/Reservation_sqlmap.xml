@@ -3,4 +3,89 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservation">
 
+    <!-- 예약일 생성 -->
+    <insert id="insertReservationDay" parameterType="ReservationDayBean" useGeneratedKeys="true" keyProperty="reservDayId">
+        INSERT INTO T_RESERVATION_DAY(
+            YEAR
+            ,MONTH
+            ,DAY
+            ,DEL_YN        
+            ,UPDATE_ID
+            ,UPDATE_TIME
+            ,CREATE_ID
+            ,CREATE_TIME        
+        )VALUES(
+            YEAR(#{reservDt})
+            ,MONTH(#{reservDt})
+            ,DAY(#{reservDt})
+            ,'N'        
+            ,#{adminBean.userId}
+            ,NOW()
+            ,#{adminBean.userId}
+            ,NOW()         
+        )
+        ON DUPLICATE KEY UPDATE UPDATE_ID = #{adminBean.userId}, UPDATE_TIME = NOW();    
+    </insert>  
+
+    <!-- 예약 등록 -->
+    <insert id="insertReservation" parameterType="ReservationBean" useGeneratedKeys="true" keyProperty="reservId">
+        INSERT INTO T_RESERVATION(
+            SHIP_ID
+            ,RESERV_DAY_ID
+            ,STATUS_CD
+            ,DEL_YN        
+            ,UPDATE_ID
+            ,UPDATE_TIME
+            ,CREATE_ID
+            ,CREATE_TIME        
+        )VALUES(
+            #{shipId}
+            ,#{reservDayId}
+            ,'00'        
+            ,'N'        
+            ,#{adminBean.userId}
+            ,NOW()
+            ,#{adminBean.userId}
+            ,NOW()        
+        )
+        ON DUPLICATE KEY UPDATE UPDATE_ID = #{adminBean.userId}, UPDATE_TIME = NOW();        
+    </insert>
+    
+    <!-- 예약상세 등록 -->
+    <insert id="insertReservationDetail" parameterType="ReservationDetailBean" useGeneratedKeys="true" keyProperty="RESERV_DTL_ID">
+        INSERT INTO T_RESERVATION_DETAIL(
+            RESERV_ID
+            ,RESERV_NM
+            ,RESERV_HP_NO
+            ,RESERV_PW
+            ,RESERV_ADULTS_NUMBER
+            ,RESERV_KIDS_NUMBER
+            ,RESERV_CD
+            ,DEPOSIT
+            ,STATUS_CD
+            ,RESERV_CONTENS        
+            ,DEL_YN
+            ,UPDATE_ID
+            ,UPDATE_TIME
+            ,CREATE_ID
+            ,CREATE_TIME        
+        )VALUES(
+            #{reservId}
+            ,#{reservNm}
+            ,#{reservHpNo}
+            ,#{reservPw}
+            ,IF(#{reservAdultsNumber} = '', 0, #{reservAdultsNumber})
+            ,IF(#{reservKidsNumber} = '', 0, #{reservKidsNumber})
+            ,'00'
+            ,#{deposit}
+            ,'00'
+            ,#{reservContens}        
+            ,'N'        
+            ,#{adminBean.userId}
+            ,NOW()
+            ,#{adminBean.userId}
+            ,NOW()         
+        )    
+    </insert>
+    
 </mapper>

@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="/css/jquery/jquery-ui-timepicker-addon.css"/>
 
 <!-- 추가 -->
-<link rel="stylesheet" type="text/css" href="/css/common/index.css?20170421" media="all" />
+<link rel="stylesheet" type="text/css" href="/css/common/index.css?20170427" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/common/reset.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/common/styles.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

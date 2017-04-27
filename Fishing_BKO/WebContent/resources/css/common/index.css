@@ -130,6 +130,9 @@ a.btn_modify { display:inline-block; width:43px; height:23px; line-height:20px; 
 a.btn_delete { display:inline-block; width:43px; height:23px; line-height:20px; background:#999; text-align:center; color:#fff; font-size:12px; margin:0 1px;}
 a.btn_postPop { display:inline-block; width:60px; height:23px; line-height:20px; background:#999; text-align:center; color:#fff; font-size:12px; margin:0 1px;}
 
+/* 추가 */
+a.btn_list { display:inline-block; width:70px; height:23px; line-height:20px; background:#f9be4c; text-align:center; color:#000; font-size:12px; margin:0 1px;}
+a.btn_reg { display:inline-block; width:70px; height:23px; line-height:20px; background:#999; text-align:center; color:#fff; font-size:12px; margin:0 1px;}
 
 a.btn_grey_bo {display:inline-block; background:#999999; color:#fff; font-size:14px; width:140px; text-align:center; height:45px; line-height:45px; border:1px solid #ccc;}
 a.btn_sky_bo {display:inline-block; background:#4c87b9; color:#fff; font-size:14px; width:140px; text-align:center; height:45px; line-height:45px; border:1px solid #ccc;}

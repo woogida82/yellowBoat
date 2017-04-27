@@ -20,7 +20,10 @@ public class ReservationDetailBean extends CommonBaseBean {
     private String createId;
     private String createTime;
     
+    /* 추가 */
     private ReservationBean reservationBean;
+    
+    private String reservDt;
     
     public String getReservDtlId() {
         return reservDtlId;
@@ -45,12 +48,6 @@ public class ReservationDetailBean extends CommonBaseBean {
     }
     public void setReservHpNo(String reservHpNo) {
         this.reservHpNo = reservHpNo;
-    }
-    public String getReservPw() {
-        return reservPw;
-    }
-    public void setReservPw(String reservPw) {
-        this.reservPw = reservPw;
     }
     public String getReservAdultsNumber() {
         return reservAdultsNumber;
@@ -123,5 +120,17 @@ public class ReservationDetailBean extends CommonBaseBean {
     }
     public void setReservationBean(ReservationBean reservationBean) {
         this.reservationBean = reservationBean;
+    }
+    public String getReservDt() {
+        return reservDt;
+    }
+    public void setReservDt(String reservDt) {
+        this.reservDt = reservDt;
+    }
+    public String getReservPw() {
+        return reservPw;
+    }
+    public void setReservPw(String reservPw) {
+        this.reservPw = reservPw;
     }
 }

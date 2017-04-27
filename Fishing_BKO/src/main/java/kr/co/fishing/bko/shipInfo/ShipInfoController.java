@@ -42,7 +42,7 @@ public class ShipInfoController {
         return "shipInfo/shipInfoList";
     }
     
-    @RequestMapping("shipInfoDetailView")
+    @RequestMapping("/shipInfoDetailView")
     public String shipInfoDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
         try {
             ShipInfoBean shipBean = new ShipInfoBean();
@@ -54,7 +54,7 @@ public class ShipInfoController {
         return "shipInfo/shipInfoDetailView";
     }   
     
-    @RequestMapping("regShipInfoView")
+    @RequestMapping("/regShipInfoView")
     public String regShipInfoView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
         
         model.addAttribute("userId", bean.getUserId());

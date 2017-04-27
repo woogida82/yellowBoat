@@ -5,7 +5,7 @@ import java.util.List;
 import kr.co.fishing.bko.common.beans.CommonBaseBean;
 
 public class ReservationDayBean extends CommonBaseBean {
-    private String reserv_Day_Id;
+    private String reservDayId;
     private String year;
     private String month;
     private String day;
@@ -15,13 +15,17 @@ public class ReservationDayBean extends CommonBaseBean {
     private String createId;
     private String createTime;
     
+    /* 추가 */
     private List<ReservationBean> reservationBeans;
     
-    public String getReserv_Day_Id() {
-        return reserv_Day_Id;
+    private String reservDt;
+    
+
+    public String getReservDayId() {
+        return reservDayId;
     }
-    public void setReserv_Day_Id(String reserv_Day_Id) {
-        this.reserv_Day_Id = reserv_Day_Id;
+    public void setReservDayId(String reservDayId) {
+        this.reservDayId = reservDayId;
     }
     public String getYear() {
         return year;
@@ -76,5 +80,11 @@ public class ReservationDayBean extends CommonBaseBean {
     }
     public void setReservationBeans(List<ReservationBean> reservationBeans) {
         this.reservationBeans = reservationBeans;
+    }
+    public String getReservDt() {
+        return reservDt;
+    }
+    public void setReservDt(String reservDt) {
+        this.reservDt = reservDt;
     }   
 }
