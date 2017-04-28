@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservation">
+    <sql id="reservDetailWhere">
+        AND RSVDTL.DEL_YN = 'N'
+        AND RSVDTL.RESERV_ID = RSV.RESERV_ID
+        AND RSV.SHIP_ID = #{shipId}
+        <if test='searchWordType != null and searchWordType != "" and (searchWord != null and searchWord != "")'>
+            <!-- 이름 -->
+            <if test='searchWordType == "reservNm"'>
+                AND RSVDTL.RESERV_NM LIKE CONCAT('%',#{searchWord},'%')
+            </if>
+        </if>        
+    </sql>
+    
 
     <!-- 예약일 생성 -->
-    <insert id="insertReservationDay" parameterType="ReservationDayBean" useGeneratedKeys="true" keyProperty="reservDayId">
+    <insert id="insertReservationDay" parameterType="kr.co.fishing.bko.beans.ReservationDayBean" useGeneratedKeys="true" keyProperty="reservDayId">
         INSERT INTO T_RESERVATION_DAY(
             YEAR
             ,MONTH
@@ -28,7 +40,7 @@
     </insert>  
 
     <!-- 예약 등록 -->
-    <insert id="insertReservation" parameterType="ReservationBean" useGeneratedKeys="true" keyProperty="reservId">
+    <insert id="insertReservation" parameterType="kr.co.fishing.bko.beans.ReservationBean" useGeneratedKeys="true" keyProperty="reservId">
         INSERT INTO T_RESERVATION(
             SHIP_ID
             ,RESERV_DAY_ID
@@ -52,7 +64,7 @@
     </insert>
     
     <!-- 예약상세 등록 -->
-    <insert id="insertReservationDetail" parameterType="ReservationDetailBean" useGeneratedKeys="true" keyProperty="RESERV_DTL_ID">
+    <insert id="insertReservationDetail" parameterType="kr.co.fishing.bko.beans.ReservationDetailBean" useGeneratedKeys="true" keyProperty="RESERV_DTL_ID">
         INSERT INTO T_RESERVATION_DETAIL(
             RESERV_ID
             ,RESERV_NM
@@ -87,5 +99,135 @@
             ,NOW()         
         )    
     </insert>
+    
+    <!-- 예약상세 건수 조회 -->
+    <select id="selectReservationDetailCnt" resultType="int">
+        SELECT COUNT(1)
+          FROM T_RESERVATION_DETAIL A
+             , T_RESERVATION B
+         WHERE 1 = 1 
+         <include refid="reservDetailWhere"/>
+    </select>
+    
+    <!-- 예약상세 목록 조회 -->
+    <select id="selectReservationDetailList" resultType="kr.co.fishing.bko.beans.ReservationDetailBean">
+       SELECT *
+            FROM (
+                SELECT ROWNUM AS RNUM, Z.*
+                    FROM (                 
+                        SELECT @RNUM := @RNUM + 1 AS ROWNUM, A.*
+                            FROM (     
+                                SELECT RSVDTL.RESERV_DTL_ID
+                                     , RSVDTL.RESERV_ID
+                                     , RSVDTL.RESERV_NM
+                                     , RSVDTL.RESERV_HP_NO
+                                     , RSVDTL.RESERV_PW
+                                     , RSVDTL.RESERV_ADULTS_NUMBER
+                                     , RSVDTL.RESERV_KIDS_NUMBER
+                                     , RSVDTL.RESERV_CD
+                                     , RSVDTL.DEPOSIT
+                                     , RSVDTL.STATUS_CD
+                                     , RSVDTL.RESERV_CONTENS       
+                                     , SHIP.SHIP_NM   
+                                     , SHIP.SHIP_ID
+                                     , CONCAT(RSVDAY.YEAR, '.', RSVDAY.MONTH,'.', RSVDAY.DAY) AS RESERV_DT   	
+                                     , RSVDTL.DEL_YN
+                                     , (SELECT USR.USER_NM FROM T_USER USR WHERE USR.USER_ID = RSVDTL.UPDATE_ID) UPDATE_ID
+                                     , DATE_FORMAT( RSVDTL.UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+                                     , (SELECT USR.USER_NM FROM T_USER USR WHERE USR.USER_ID = RSVDTL.CREATE_ID) CREATE_ID
+                                     , DATE_FORMAT( RSVDTL.CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+                                  FROM T_RESERVATION_DETAIL RSVDTL
+                                     , T_RESERVATION RSV
+                                     , T_RESERVATION_DAY RSVDAY
+                                     , T_SHIP_INFO SHIP
+                                 WHERE 1 = 1
+                                 <include refid="reservDetailWhere"/>
+                                   AND RSVDAY.RESERV_DAY_ID = RSV.RESERV_DAY_ID
+                                   AND SHIP.SHIP_ID = RSV.SHIP_ID
+                                 ORDER BY RSVDAY.YEAR DESC, RSVDAY.MONTH DESC, RSVDAY.DAY DESC, RSVDTL.CREATE_TIME DESC
+                                ) A
+                                , (SELECT @RNUM := 0) B
+                        ) Z
+                    WHERE ROWNUM <![CDATA[ <= ${end} ]]>
+                ) MainSQL
+            WHERE RNUM <![CDATA[ >= ${start} ]]>            
+    </select>
+
+    <!-- 예약상세 조회 -->
+    <select id="selectReservationDetail" resultType="kr.co.fishing.bko.beans.ReservationDetailBean">
+        SELECT A.RESERV_DTL_ID
+             , A.RESERV_ID
+             , A.RESERV_NM
+             , A.RESERV_HP_NO
+             , A.RESERV_PW
+             , A.RESERV_ADULTS_NUMBER
+             , A.RESERV_KIDS_NUMBER
+             , A.RESERV_CD
+             , A.DEPOSIT
+             , A.STATUS_CD
+             , A.RESERV_CONTENS       
+             , D.SHIP_NM   
+             , SHIP.SHIP_ID
+             , CONCAT(C.YEAR, '.', C.MONTH,'.', C.DAY) AS RESERV_DT     
+             , A.DEL_YN
+             , (SELECT USR.USER_NM FROM T_USER USR WHERE USR.USER_ID = A.UPDATE_ID) UPDATE_ID
+             , DATE_FORMAT( A.UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+             , (SELECT USR.USER_NM FROM T_USER USR WHERE USR.USER_ID = A.CREATE_ID) CREATE_ID
+             , DATE_FORMAT( A.CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+          FROM T_RESERVATION_DETAIL A
+             , T_RESERVATION B
+             , T_RESERVATION_DAY C
+             , T_SHIP_INFO D
+         WHERE 1 = 1
+           AND A.RESERV_DTL_ID = #{reservDtlId}         
+           AND B.RESERV_ID = A.RESERV_ID
+           AND C.RESERV_DAY_ID = B.RESERV_DAY_ID
+           AND D.SHIP_ID = B.SHIP_ID    
+    </select>    
+    
+    <update id="updateReservDtlStatus" parameterType="kr.co.fishing.bko.beans.ReservationDetailBean">
+        UPDATE T_RESERVATION_DETAIL
+           SET UPDATE_ID = #{adminBean.userId}
+             , UPDATE_TIME = NOW()
+             , STATUS_CD = #{statusCd}
+         WHERE RESERV_DTL_ID = #{reservDtlId}
+    </update>
+    
+    <update id="updateReservationDetail" parameterType="kr.co.fishing.bko.beans.ReservationDetailBean">
+        UPDATE T_RESERVATION_DETAIL
+           SET UPDATE_ID = #{adminBean.userId}
+             , UPDATE_TIME = NOW()
+	       <if test='reservId != null and reservId != ""'>             
+             , RESERV_ID = #{reservId}
+           </if>            
+	       <if test='reservNm != null and reservNm != ""'>              
+             , RESERV_NM = #{reservNm}
+           </if>            
+           <if test='reservHpNo != null and reservHpNo != ""'>             
+             , RESERV_HP_NO = #{reservHpNo}
+           </if>            
+           <if test='reservPw != null and reservPw != ""'>             
+             , RESERV_PW = #{reservPw}
+           </if>            
+           <if test='reservAdultsNumber != null and reservAdultsNumber != ""'>             
+             , RESERV_ADULTS_NUMBER = IF(#{reservAdultsNumber} = '', 0, #{reservAdultsNumber})
+	       </if>            
+           <if test='reservKidsNumber != null and reservKidsNumber != ""'>            
+             , RESERV_KIDS_NUMBER = IF(#{reservKidsNumber} = '', 0, #{reservKidsNumber})
+           </if>            
+           <if test='reservCd != null and reservCd != ""'>             
+             , RESERV_CD = #{reservCd}
+           </if>            
+           <if test='deposit != null and deposit != ""'>             
+             , DEPOSIT = #{deposit}
+	       </if>            
+           <if test='statusCd != null and statusCd != ""'>            
+             , STATUS_CD = #{statusCd}
+           </if>            
+           <if test='reservContens != null and reservContens != ""'>             
+             , RESERV_CONTENS = #{reservContens}              
+           </if>            
+         WHERE RESERV_DTL_ID = #{reservDtlId}
+    </update>    
     
 </mapper>

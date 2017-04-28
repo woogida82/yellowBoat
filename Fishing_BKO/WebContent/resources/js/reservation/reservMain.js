@@ -6,7 +6,7 @@ var ReservMain = {
     /* 예약리스트 */
     reservList : function(shipId){
         var reservMainForm = $("#reservMainForm");
-        var url = "/bko/reservation/reservList";
+        var url = "/bko/reservation/reservDetailList";
         reservMainForm.prop("action", url);
         $("#shipId").val(shipId);
         reservMainForm.submit();        
@@ -19,5 +19,14 @@ var ReservMain = {
         reservMainForm.prop("action", url);
         $("#shipId").val(shipId);
         reservMainForm.submit();        
-    }
+    },
+    
+    /* 검색 */
+    search : function(page) {
+        var reservMainForm = $("#reservMainForm");
+        var url = "/bko/reservation";
+        reservMainForm.prop("action", url);
+        $("#page").val(page);
+        reservMainForm.submit();
+    }    
 };

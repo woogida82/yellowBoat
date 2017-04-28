@@ -30,6 +30,15 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
     
+    /**
+     * 예약 메인
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */     
     @RequestMapping("")
     public String reservMain(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ShipInfoBean bean, ModelMap model) throws Exception {
         try {
@@ -48,6 +57,15 @@ public class ReservationController {
         return "reservation/reservMain";
     }
     
+    /**
+     * 예약 상세
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */    
     @RequestMapping("/regReservationView")
     public String regReservationView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationBean bean, ModelMap model) throws Exception {
         try {        
@@ -65,11 +83,58 @@ public class ReservationController {
         return "reservation/regReservationView";
     }
     
-    @RequestMapping("/reservList")
-    public String reservList(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationBean bean, ModelMap model) throws Exception {
+    /**
+     * 예약 상세 목록
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws Exception
+     */    
+    @RequestMapping("/reservDetailList")
+    public String reservDetailList(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationBean bean, ModelMap model) throws Exception {
+        try {        
+            int resultCnt = reservationService.selectReservationDetailCnt(bean); 
+            bean.setTotalCount(resultCnt);
+            
+            List<ReservationDetailBean> resultList = reservationService.selectReservationDetailList(bean);
+            
+            ShipInfoBean shipBean = new ShipInfoBean();
+            ShipInfoBean paramBean = new ShipInfoBean();
+            paramBean.setShipId(bean.getShipId());
+            shipBean = shipInfoService.selectShipInfo(paramBean);
+            
+            model.addAttribute("bean", bean);
+            model.addAttribute("shipBean", shipBean);
+            model.addAttribute("resultList", resultList);
+            model.addAttribute("records", resultCnt); 
+        } catch(Exception e) {
+            e.printStackTrace();
+        }        
         
-        return "reservation/reservList";
+        return "reservation/reservDetailList";
     }    
+    
+    @RequestMapping("/reservationDetailView")
+    public String reservationDetailView(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationDetailBean bean, ModelMap model) throws Exception {
+        try {   
+            ReservationDetailBean reservDtlBean = new ReservationDetailBean();
+            reservDtlBean = reservationService.selectReservationDetail(bean);
+            
+            ShipInfoBean shipBean = new ShipInfoBean();
+            ShipInfoBean paramBean = new ShipInfoBean();
+            paramBean.setShipId(reservDtlBean.getShipId());
+            shipBean = shipInfoService.selectShipInfo(paramBean);            
+            
+            model.addAttribute("reservDtlBean", reservDtlBean);  
+            model.addAttribute("shipBean", shipBean);
+            model.addAttribute("bean", bean); 
+        } catch(Exception e) {
+            e.printStackTrace();
+        }         
+        return "reservation/reservationDetailView";        
+    }
     
     @ResponseBody
     @RequestMapping("/insertReservation")
@@ -87,7 +152,34 @@ public class ReservationController {
         return resultMap;
     }    
     
+    @ResponseBody
+    @RequestMapping("/reservDtlStatus")
+    public Map<String,Object> reservDtlStatus(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationDetailBean bean) throws Exception {
+        Map<String,Object> resultMap = new HashMap<String,Object>();
+        try {  
+            
+            reservationService.updateReservDtlStatus(bean);
+            resultMap.put("result", AJAX_RESULT.OK);
+        } catch(Exception e) {
+            
+            resultMap.put("result", AJAX_RESULT.NG);
+            e.printStackTrace();
+        }        
+        return resultMap;
+    }
     
-    
-    
+    @ResponseBody
+    @RequestMapping("/updateReservation")
+    public Map<String,Object> updateReservation(HttpServletRequest request, HttpServletResponse response, @ModelAttribute ReservationDetailBean bean) throws Exception {
+        Map<String,Object> resultMap = new HashMap<String,Object>();
+        try {  
+            reservationService.updateReservation(bean);
+            resultMap.put("result", AJAX_RESULT.OK);
+        } catch(Exception e) {
+            
+            resultMap.put("result", AJAX_RESULT.NG);
+            e.printStackTrace();
+        }        
+        return resultMap;
+    }    
 }

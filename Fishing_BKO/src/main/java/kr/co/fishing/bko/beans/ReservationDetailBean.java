@@ -23,7 +23,9 @@ public class ReservationDetailBean extends CommonBaseBean {
     /* 추가 */
     private ReservationBean reservationBean;
     
-    private String reservDt;
+    private String reservDt; //예약일
+    private String shipNm; //선박명
+    private String shipId; //선박ID
     
     public String getReservDtlId() {
         return reservDtlId;
@@ -132,5 +134,17 @@ public class ReservationDetailBean extends CommonBaseBean {
     }
     public void setReservPw(String reservPw) {
         this.reservPw = reservPw;
+    }
+    public String getShipNm() {
+        return shipNm;
+    }
+    public void setShipNm(String shipNm) {
+        this.shipNm = shipNm;
+    }
+    public String getShipId() {
+        return shipId;
+    }
+    public void setShipId(String shipId) {
+        this.shipId = shipId;
     }
 }

@@ -45,7 +45,21 @@ public interface ShipInfoService {
      */   
     int deleteShipInfo(ShipInfoBean paramBean) throws Exception;
 
+    /**
+     * 보트 조회건수
+     * 
+     * @param bean
+     * @return 관리자정보
+     * @throws Exception
+     */    
     int selectShipInfoListCnt(ShipInfoBean bean) throws Exception;
 
+    /**
+     * 보트 조회목록
+     * 
+     * @param bean
+     * @return 관리자정보
+     * @throws Exception
+     */     
     List<ShipInfoBean> selectShipInfoList(ShipInfoBean bean) throws Exception;   
 }
