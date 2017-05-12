@@ -5,204 +5,250 @@
 
 	<sql id = 'userWhere'>
         AND DEL_YN = 'N'
-        
+        AND USER_CD != 'ADMN'
         <if test='searchWordType != null and searchWordType != "" and ((searchWord != null and searchWord != "") or (searchWordS != null and searchWordS != "" and searchWordE != null and searchWordE != ""))'>
-            <!-- 부서 -->
-            <if test='searchWordType == "dept"'>
-                AND DEPT LIKE CONCAT('%',#{searchWord},'%')
-            </if>
-            <!-- 팀 -->
-            <if test='searchWordType == "team"'>
-                AND TEAM LIKE CONCAT('%',#{searchWord},'%')
-            </if>
             <!-- 아이디 -->
-            <if test='searchWordType == "adminId"'>
-                AND ADMIN_ID LIKE CONCAT('%',#{searchWord},'%')
+            <if test='searchWordType == "userId"'>
+                AND USER_ID LIKE CONCAT('%',#{searchWord},'%')
             </if>
             <!-- 이름 -->
-            <if test='searchWordType == "adminNm"'>
-                AND ADMIN_NM LIKE CONCAT('%',#{searchWord},'%')
-            </if>
-            <!-- 등록자 -->
-            <if test='searchWordType == "createId"'>
-                AND EXISTS (
-                    SELECT 1 FROM T_ADMIN A
-                    WHERE A.ADMIN_ID = T_ADMIN.CREATE_ID
-                      AND A.ADMIN_NM LIKE CONCAT('%',#{searchWord},'%')
-                )
-            </if>
-            <!-- 수정자 -->
-            <if test='searchWordType == "updateId"'>
-                AND EXISTS (
-                    SELECT 1 FROM T_ADMIN A
-                    WHERE A.ADMIN_ID = T_ADMIN.UPDATE_ID
-                      AND A.ADMIN_NM LIKE CONCAT('%',#{searchWord},'%')
-                )
+            <if test='searchWordType == "userNm"'>
+                AND USER_NM LIKE CONCAT('%',#{searchWord},'%')
             </if>
         </if>
-                
     </sql>
 
 	<select id="selectUserListCnt" resultType="int">
         SELECT COUNT(1) 
-        FROM T_ADMIN
+        FROM T_USER
         WHERE 1=1
         <include refid="userWhere"/>
     </select>
     
     
     <select id="selectUserList" resultType="AdminBean">
-        SELECT 
-        	ADMIN_ID, 
-        	ADMIN_NM, 
-            (SELECT GROUP_CONCAT(COMMON_NM) FROM T_COMMON_CODE WHERE MASTER_CD='MENU_AUTH' AND FIND_IN_SET(COMMON_CD, MENU_AUTH) > 0 ORDER BY DISP_NO) MENU_AUTH,
-        	DEPT, 
-        	TEAM, 
-        	POST, 
-        	DUTY, 
-        	ADMIN_NM, 
-        	DEL_YN
-            ,(SELECT A.ADMIN_NM FROM T_ADMIN A WHERE A.ADMIN_ID = T_ADMIN.UPDATE_ID) UPDATE_ID
-            ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
-            ,(SELECT A.ADMIN_NM FROM T_ADMIN A WHERE A.ADMIN_ID = T_ADMIN.CREATE_ID) CREATE_ID
-            ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
-          FROM T_ADMIN
-         WHERE
-           1=1
-        <include refid="userWhere"/>
-        <if test='sortColumn == null or sortColumn == ""'>
-            ORDER BY CREATE_TIME DESC
-        </if>
-        <include refid="common.paging" />
+       SELECT *
+            FROM (
+                SELECT ROWNUM AS RNUM, Z.*
+                    FROM (                 
+                        SELECT @RNUM := @RNUM + 1 AS ROWNUM, A.*
+                            FROM (     
+                                SELECT 
+                                	USER_ID, 
+                                	USER_NM, 
+                                    USER_CD,
+                                    MENU_AUTH,
+                                    ZIP_CD,
+                                    ADDR,
+                                    ADDR_DETAIL,
+                                    SANGHO_NM,
+                                    TEL_NO,
+                                    HP_NO,
+                                    BANK_CD,
+                                    ACNT_NO,
+                                    ACNT_NM,
+                                	DEL_YN
+                                    ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.UPDATE_ID) UPDATE_ID
+                                    ,DATE_FORMAT( UPDATE_TIME,'%Y.%m.%d %H:%i:%s' ) UPDATE_TIME
+                                    ,(SELECT A.USER_NM FROM T_USER A WHERE A.USER_ID = T_USER.CREATE_ID) CREATE_ID
+                                    ,DATE_FORMAT( CREATE_TIME,'%Y.%m.%d %H:%i:%s' ) CREATE_TIME
+                                  FROM T_USER
+                                 WHERE
+                                   1=1
+                                <include refid="userWhere"/>
+                                    ORDER BY CREATE_TIME DESC
+                                ) A
+                                , (SELECT @RNUM := 0) B
+                        ) Z
+                    WHERE ROWNUM <![CDATA[ <= ${end} ]]>
+                ) MainSQL
+            WHERE RNUM <![CDATA[ >= ${start} ]]>            
     </select>
     
     <select id="selectUser" resultType="AdminBean">
         SELECT
-            ADMIN_ID, 
-        	ADMIN_NM, 
-        	MENU_AUTH, 
-        	DEPT, 
-        	TEAM, 
-        	POST, 
-        	DUTY, 
-        	ADMIN_NM, 
+        	USER_ID, 
+        	USER_NM, 
+            USER_CD,
+            MENU_AUTH,
+            ZIP_CD,
+            ADDR,
+            ADDR_DETAIL,
+            SANGHO_NM,
+            TEL_NO,
+            HP_NO,
+            BANK_CD,
+            ACNT_NO,
+            ACNT_NM,
         	DEL_YN
-        FROM T_ADMIN
-        WHERE ADMIN_ID = #{adminId}
+        FROM T_USER
+        WHERE USER_ID = #{userId}
+          AND DEL_YN = 'N'
     </select>
     
     <select id="selectUserAdminId" resultType="int">
         SELECT COUNT(1) 
-        FROM T_ADMIN
-        WHERE ADMIN_ID = #{adminId}
-<!--          AND DEL_YN = 'N' -->
+        FROM T_USER
+        WHERE USER_ID = #{userId}
     </select>
     
+    <select id="checkPassWord" resultType="int">
+	   SELECT COUNT(1) 
+         FROM T_USER
+        WHERE USER_ID = #{userId}
+          AND USER_PW = AES128_ENCRYPT(#{userPw})
+          AND DEL_YN = 'N'
+          AND USER_CD IN ('CUST', 'USER')
+    </select>    
+    
     <insert id="insertUser" parameterType="AdminBean">
-        INSERT INTO T_ADMIN (
+        INSERT INTO T_USER (
         	DEL_YN
-        	<if test='adminId != null and adminId != ""'>
-            ,ADMIN_ID
-            </if>
-            <if test='adminPw != null and adminPw != ""'>
-            ,ADMIN_PW
-            </if>
-            <if test='menuAuth != null and menuAuth != ""'>
+            ,USER_ID
+            ,USER_PW
+            ,USER_CD
             ,MENU_AUTH
+            ,USER_NM
+            <if test='zipCd != null and zipCd != ""'>
+            ,ZIP_CD
+            </if>            
+            <if test='addr != null and addr != ""'>            
+            ,ADDR
+            </if>            
+            <if test='addrDetail != null and addrDetail != ""'>            
+            ,ADDR_DETAIL
+            </if>            
+            <if test='sanghoNm != null and sanghoNm != ""'>            
+            ,SANGHO_NM
+            </if>            
+            <if test='telNo != null and telNo != ""'>            
+            ,TEL_NO
+            </if>            
+            <if test='hpNo != null and hpNo != ""'>            
+            ,HP_NO
+            </if>            
+            <if test='bankCd != null and bankCd != ""'>            
+            ,BANK_CD
+            </if>            
+            <if test='acntNo != null and acntNo != ""'>            
+            ,ACNT_NO
+            </if>            
+            <if test='acntNm != null and acntNm != ""'>            
+            ,ACNT_NM            
             </if>
-            <if test='dept != null and dept != ""'>
-            ,DEPT
-            </if>
-            <if test='team != null and team != ""'>
-            ,TEAM
-            </if>
-            <if test='post != null and post != ""'>
-            ,POST
-            </if>
-            <if test='duty != null and duty != ""'>
-            ,DUTY
-            </if>
-            <if test='adminNm != null and adminNm != ""'>
-            ,ADMIN_NM
-            </if>
+            
             ,UPDATE_ID
             ,UPDATE_TIME
             ,CREATE_ID
             ,CREATE_TIME
         ) VALUES (
             'N'
-            <if test='adminId != null and adminId != ""'>
-            ,#{adminId}
-            </if>
-            <if test='adminPw != null and adminPw != ""'>
-            ,AES128_ENCRYPT(#{adminPw})
-            </if>
-            <if test='menuAuth != null and menuAuth != ""'>
-            ,#{menuAuth}
-            </if>
-            <if test='dept != null and dept != ""'>
-            ,#{dept}
-            </if>
-            <if test='team != null and team != ""'>
-            ,#{team}
-            </if>
-            <if test='post != null and post != ""'>
-            ,#{post}
-            </if>
-            <if test='duty != null and duty != ""'>
-            ,#{duty}
-            </if>
-            <if test='adminNm != null and adminNm != ""'>
-            ,#{adminNm}
-            </if>
-            ,#{adminBean.adminId}
+            ,#{userId}
+            ,AES128_ENCRYPT(#{userPw})
+            ,'CUST'
+            ,'CU'
+            ,#{userNm}
+            <if test='zipCd != null and zipCd != ""'>
+            ,#{zipCd}
+            </if>            
+            <if test='addr != null and addr != ""'>            
+            ,#{addr}
+            </if>            
+            <if test='addrDetail != null and addrDetail != ""'>            
+            ,#{addrDetail}
+            </if>            
+            <if test='sanghoNm != null and sanghoNm != ""'>            
+            ,#{sanghoNm}
+            </if>            
+            <if test='telNo != null and telNo != ""'>            
+            ,#{telNo}
+            </if>            
+            <if test='hpNo != null and hpNo != ""'>            
+            ,#{hpNo}
+            </if>            
+            <if test='bankCd != null and bankCd != ""'>            
+            ,#{bankCd}
+            </if>            
+            <if test='acntNo != null and acntNo != ""'>            
+            ,#{acntNo}
+            </if>            
+            <if test='acntNm != null and acntNm != ""'>            
+            ,#{acntNm}            
+            </if>          
+            ,#{userId}
             ,NOW()
-            ,#{adminBean.adminId}
+            ,#{userId}
             ,NOW()
         )
     </insert>
     
     <update id="updateUser" parameterType="AdminBean">
-        UPDATE T_ADMIN SET
-            UPDATE_ID = #{adminBean.adminId}
+        UPDATE T_USER SET
+            UPDATE_ID = #{adminBean.userId}
             ,UPDATE_TIME = NOW()
             <if test='menuAuth != null and menuAuth != ""'>
             ,MENU_AUTH = #{menuAuth}
             </if>
-            <if test='dept != null'>
-            ,DEPT = #{dept}
+            <if test='userNm != null and userNm != ""'>
+            ,USER_NM = #{userNm}
             </if>
-            <if test='team != null'>
-            ,TEAM = #{team}
+            
+            <if test='zipCd != null and zipCd != ""'>
+            ,ZIP_CD = #{zipCd}
+            </if>            
+            <if test='addr != null and addr != ""'>            
+            ,ADDR = #{addr}
+            </if>            
+            <if test='addrDetail != null and addrDetail != ""'>            
+            ,ADDR_DETAIL = #{addrDetail}
+            </if>            
+            <if test='sanghoNm != null and sanghoNm != ""'>            
+            ,SANGHO_NM = #{sanghoNm}
+            </if>            
+            <if test='telNo != null and telNo != ""'>            
+            ,TEL_NO = #{telNo}
+            </if>            
+            <if test='hpNo != null and hpNo != ""'>            
+            ,HP_NO = #{hpNo}
+            </if>            
+            <if test='bankCd != null and bankCd != ""'>            
+            ,BANK_CD = #{bankCd}
+            </if>            
+            <if test='acntNo != null and acntNo != ""'>            
+            ,ACNT_NO = #{acntNo}
+            </if>            
+            <if test='acntNm != null and acntNm != ""'>            
+            ,ACNT_NM = #{acntNm}            
             </if>
-            <if test='post != null'>
-            ,POST = #{post}
-            </if>
-            <if test='duty != null'>
-            ,DUTY = #{duty}
-            </if>
-            <if test='adminNm != null and adminNm != ""'>
-            ,ADMIN_NM = #{adminNm}
-            </if>
-        WHERE ADMIN_ID = #{adminId}
+                         
+        WHERE USER_ID = #{userId}
     </update>
     
     <update id="updateUsetDelStatus" parameterType="AdminBean">
-        UPDATE T_ADMIN SET
-            UPDATE_ID = #{adminBean.adminId}
+        UPDATE T_USER SET
+            UPDATE_ID = #{adminBean.userId}
             ,UPDATE_TIME = NOW()
             ,DEL_YN = #{status}
-        WHERE ADMIN_ID IN
+        WHERE USER_ID IN
         <foreach item="item" index="index" collection="idxs" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
     
     <update id="updateInitPass" parameterType="AdminBean">
-        UPDATE T_ADMIN SET
-            UPDATE_ID = #{adminBean.adminId}
+        UPDATE T_USER SET
+            UPDATE_ID = #{adminBean.userId}
             ,UPDATE_TIME = NOW()
-            ,ADMIN_PW = AES128_ENCRYPT(#{adminPw})
-        WHERE ADMIN_ID = #{adminId}
+            ,USER_PW = AES128_ENCRYPT(#{userPw})
+        WHERE USER_ID = #{userId}
     </update>
+    
+    <update id="deleteUser" parameterType="AdminBean">
+        UPDATE T_USER SET
+            UPDATE_ID = #{adminBean.userId}
+            ,UPDATE_TIME = NOW()
+            ,DEL_YN = 'Y'
+        WHERE USER_ID = #{userId}
+    </update>    
+    
 </mapper>

@@ -5,7 +5,7 @@
 <%@ include file="/jsp/common/style.jsp" %>
 
 <div class="content_box">
-    <div class="util">
+    <div class="util"> 
         <ul>
             <li class="list1"><a href="#"  onclick="ContentBody.returnHome();">Home</a></li>
             <li>회원관리</li>
