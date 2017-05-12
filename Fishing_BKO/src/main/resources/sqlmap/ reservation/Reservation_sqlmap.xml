@@ -103,8 +103,8 @@
     <!-- 예약상세 건수 조회 -->
     <select id="selectReservationDetailCnt" resultType="int">
         SELECT COUNT(1)
-          FROM T_RESERVATION_DETAIL A
-             , T_RESERVATION B
+          FROM T_RESERVATION_DETAIL RSVDTL
+             , T_RESERVATION RSV
          WHERE 1 = 1 
          <include refid="reservDetailWhere"/>
     </select>
@@ -167,7 +167,7 @@
              , A.STATUS_CD
              , A.RESERV_CONTENS       
              , D.SHIP_NM   
-             , SHIP.SHIP_ID
+             , D.SHIP_ID
              , CONCAT(C.YEAR, '.', C.MONTH,'.', C.DAY) AS RESERV_DT     
              , A.DEL_YN
              , (SELECT USR.USER_NM FROM T_USER USR WHERE USR.USER_ID = A.UPDATE_ID) UPDATE_ID

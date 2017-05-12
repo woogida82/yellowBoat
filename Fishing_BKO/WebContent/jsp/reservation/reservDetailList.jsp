@@ -65,14 +65,14 @@
                             <c:forEach items="${resultList}" var="list" varStatus="status">
                                 <tr>
                                     <td>${status.index +1}</td>
-                                    <td><a href="#" class="btn_modify" onClick="ReservMain.reservDetailView('${list.reservDtlId}');">${list.shipNm }</a></td>
-                                    <td><a href="#" class="btn_modify" onClick="ReservMain.reservDetailView('${list.reservDtlId}');">${list.reservDt }</a></td>
-                                    <td><a href="#" class="btn_modify" onClick="ReservMain.reservDetailView('${list.reservDtlId}');">${list.reservNm }</a></td>
+                                    <td><a href="#" onClick="ReservDetailList.reservDetailView('${list.reservDtlId}');">${list.shipNm }</a></td>
+                                    <td><a href="#" onClick="ReservDetailList.reservDetailView('${list.reservDtlId}');">${list.reservDt }</a></td>
+                                    <td><a href="#" onClick="ReservDetailList.reservDetailView('${list.reservDtlId}');">${list.reservNm }</a></td>
                                     <td>${list.reservHpNo }</td>
                                     <td>${list.reservCd }</td>
                                     <td>${list.statusCd }</td>
-                                    <td><a href="#" class="btn_modify" onClick="ReservMain.ReservDtlStatus('${list.reservDtlId}', '01');">예약완료</a></td>
-                                    <td><a href="#" class="btn_delete" onClick="ReservMain.ReservDtlStatus('${list.reservDtlId}', '09');">예약취소</a></td>
+                                    <td><a href="#" class="btn_list" onClick="ReservDetailList.ReservDtlStatus('${list.reservDtlId}', '01');">예약완료</a></td>
+                                    <td><a href="#" class="btn_reg" onClick="ReservDetailList.ReservDtlStatus('${list.reservDtlId}', '09');">예약취소</a></td>
                                 </tr>                                
                             </c:forEach>
                         </c:when>
