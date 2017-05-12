@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>옐로우보트</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.css">
+	
+</head>
+
+<body>   
+    <!--
+    <div class="container-fluid top_banner">
+    	<div class="row top_banner_img">
+        	<img src="../images/top_banner.jpg" alt="" class="img-responsive">
+            <div class="btn_box">
+            	<a href="#" class="reserve_woman">여성전용 예약바로가기</a>
+                <a href="#" class="reserve_group">기업단체 전용 예약바로가기</a>
+                <a href="#" class="top_banner_close"><img src="../images/top_banner_close.png" alt=""></a>
+            </div>
+        </div>
+        <a href="#" class="top_banner_open"><img src="../images/top_banner_btn.png" alt="탑배너버튼"></a>
+    </div>
+    -->
+    <!--End top_banner-->
+   
+    
+    <!--Start Header-->
+    <nav class="navbar navbar-default">
+        <div class="container header_box">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <a class="navbar-brand" href="../index.html"><img src="../images/logo.png" alt="옐로우보트"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="../sub1/info.html">조황정보<span class="sr-only">(current)</span></a></li>
+                    <li><a href="../sub2/reservation.html">예약현황</a></li>
+                    <li><a href="../sub3/guide.html">고객센터</a></li>
+                    <li><a href="../sub4/event.html">이벤트</a></li>
+                </ul>
+                <div class="login_box">
+                    <a href="member/login.html">로그인</a>
+                    <a href="member/join.html">회원가입</a>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!--End Header-->
+
+<!--Start 서브컨텐츠-->
+<div class="container-fluid sub_top top_bg2">
+</div>
+
+<div class="container sub_content">
+    <div class="row title_box2">
+    	<div class="col-md-12"><h3>예약현황</h3></div>
+        <div class="rev_pop"><a href="#" data-toggle="modal" data-target="#myModal">예약방법보기</a></div>
+    </div>
+
+    
+    <!--Start 테이블-->
+	<div class="row table_wrap table_list">
+    	<div class="bbs_list">
+        	<a>리스트정렬</a>
+            <a href="#">작성일순</a>
+            <a href="#">예약일순</a>
+        </div>
+    	<div class="col-md-12">
+            <div class="search_box">
+                <select></select><input type="text"><a href="#" class="search_btn">검색</a>
+            </div>
+        </div>
+    	<table class="table">
+          <thead>
+          	<tr>
+            	<td class="tb_1">번호</td>
+                <td class="tb_2">제목</td>
+                <td class="tb_3">작성자</td>
+                <td class="tb_4">작성일</td>
+                <td class="tb_5">조회수</td>
+            </tr>
+          </thead>
+          <tbody>
+          	<tr class="notice_b">
+            	<td class="tb_1"><img src="../images/icon_notice.png" alt="공지"></td>
+                <td class="tb_2">★재입어 - 9월 24일(토) 부터 우럭 재입어합니다.★</td>
+                <td class="tb_3">대원낚시</td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr class="notice_b">
+            	<td class="tb_1"><img src="../images/icon_notice.png" alt="공지"></td>
+                <td class="tb_2">★재입어 - 9월 24일(토) 부터 우럭 재입어합니다.★</td>
+                <td class="tb_3">대원낚시</td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+          	<tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type">[일반]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type">[신규]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type">[일반]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type2">[단골]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr>
+                <td class="tb_2 secret" colspan="5">비밀번호<input type="text"><a href="#">확인</a><a href="#">취소</a></td>
+            </tr>
+            <tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type2">[독립]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type3">[초단골]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type2">[독립]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type3">[초단골]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type2">[독립]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type3">[초단골]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+            <tr>
+            	<td class="tb_1">9</td>
+                <td class="tb_2">
+                	<span class="icon_b"><img src="../images/icon_secret.gif" alt="비밀글"></span>
+                    <span class="fish_type2">[독립]</span>
+                    10월29일(토) 보람님[일반]예약완료
+                    <span class="icon_b">
+                        <img src="../images/icon_new.gif" alt="new">
+                        <img src="../images/btn_reservation_ok.gif" alt="예약완료">
+                        <img src="../images/icon_bang.gif" alt="방갈로">
+                    </span>
+                </td>
+                <td class="tb_3">김봉용<span class="member_type3">[초단골]</span></td>
+                <td class="tb_4">2016-09-13</td>
+                <td class="tb_5">133</td>
+            </tr>
+          </tbody>
+        </table>
+    </div><!--End 테이블-->
+    
+    <!--Start 페이지네이션-->
+    <nav style="text-align:center;">
+      <ul class="pagination">
+        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+   	    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav><!--End 페이지네이션-->
+
+
+    <!--Start 버튼영역-->
+    <div class="btn_box al_right">
+    	<a href="reservation_write.html" class="confirm_btn">예약하기</a>
+    </div><!--End 버튼영역--> 
+    
+</div><!--End 서브컨텐츠-->
+
+
+
+	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="row title_box2">
+            <h4>인터넷예약 안내</h4>
+        </div>
+        <div class="reserve_online_info">
+            <dl>
+                <dt>STEP 01. 예약하기 버튼 누르고 예약 요청 작성!</dt>
+                <dd>- 인터넷 예약을 하시면 예약요청으로 등록이 됩니다.</dd>
+            </dl>
+            <dl>
+                <dt>STEP 02. 입금하기</dt>
+                <dd>- 일반좌대의 경우 1인당 1만원, 독립좌대의 경우 10만원을 예약금으로 입금하여 주시면 입금확인이 되는 대로 예약완료 등록이 됩니다.</dd>
+                <dd>- 예약완료가 되어야만 예약이 확정됩니다.</dd>
+                <dd>- 예약금을 입금하지 않으시면 예약요청이 되더라도 예약이 되지를 않습니다.</dd>
+                <dd><span class="bank1"><img src="../images/reserve_bank1.png" alt="수협은행">2060-0020-9874  (예금주:박상록)</span><span class="bank1"><img src="../images/reserve_bank2.png" alt="신한은행">110-412-909895  (예금주:박상록)</span><span class="bank1"><img src="../images/reserve_bank3.png" alt="국민은행">669102-01-073785  (예금주:박상록)</span></dd>
+            </dl>
+            <dl>
+                <dt class="rev_cancle">취소/환불 안내</dt>
+                <dd>- 예약금 입금후 3일전 취소는 100%, 1-2일전 취소는 50% 환불하여 드리며 당일 취소는 환불이 되지 않습니다.  </dd>
+            </dl>
+        </div>
+        
+        <div class="row title_box2">
+            <h4>전화예약안내</h4>
+        </div>
+        <div class="reserve_online_info">
+            <dl>
+                <dt>010-2033-7471로 예약자 성함(입금자 성함)과 출조일자,인원수를 문자메세지로 보내 주시고 </dt>
+                <dd>위의 수협계좌로 일반좌대의 경우 1인당 1만원, 독립좌대의 경우 10만원을 예약금으로 입금하여 주시면 입금 확인후 예약완료 글을 등록하여 드리며 예약이 확정됩니다.</dd>
+            </dl>
+        </div>   
+        
+        <div class="row title_box2">
+            <h4>SMS 발송<h4>
+        </div>
+        <div class="reserve_online_info">
+            <dl>
+                <dt>예약이 완료되면 고객님의 핸드폰으로 "예약 완료" 문자가 전송됩니다. </dt>
+                <dd>일반좌대의 경우 1인당 1만원, 독립좌대의 경우 10만원을 예약금으로 입금하여 주시면 예약이 완료됩니다. </dd>
+            </dl>
+        </div>  
+             
+    </div>
+  </div>
+</div>
+
+<div class="container-wide m_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>옐로우보트 | 대표 : 박상록 | 충청남도 태안군 남면 당암리 | 사업자등록번호 : 316-90-43448<br> 전화 : 010-2033-7470 | 대표전화 : 064-744-1176 | 이메일 : mjyang@naver.com<br> © COPYRIGHT YELLOW BOAT. ALL RIGHT RESERVED.</p>
+                    <div class="top_btn" onclick="go_top();" style="cursor:pointer">
+                        <img src="../images/top_bt.png" alt="맨위로" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Footer-->
+
+<!--탑버튼-->
+<script>
+function go_top(orix,oriy,desx,desy) {
+    var Timer; 
+    if (document.body.scrollTop == 0) {
+         var winHeight = document.documentElement.scrollTop;
+     } else {
+         var winHeight = document.body.scrollTop;
+     }
+     if(Timer) clearTimeout(Timer);
+     startx = 0;
+     starty = winHeight;
+     if(!orix || orix < 0) orix = 0;
+     if(!oriy || oriy < 0) oriy = 0;
+     var speed = 7;
+     if(!desx) desx = 0 + startx;
+     if(!desy) desy = 0 + starty;
+     desx += (orix - startx) / speed;
+     if (desx < 0) desx = 0;
+     desy += (oriy - starty) / speed;
+     if (desy < 0) desy = 0;
+     var posX = Math.ceil(desx);
+     var posY = Math.ceil(desy);
+     window.scrollTo(posX, posY);
+     if((Math.floor(Math.abs(startx - orix)) < 1) && (Math.floor(Math.abs(starty - oriy)) < 1)){
+         clearTimeout(Timer);
+         window.scroll(orix,oriy);
+     }else if(posX != orix || posY != oriy){
+         Timer = setTimeout("go_top("+orix+","+oriy+","+desx+","+desy+")",15);
+     }else{
+         clearTimeout(Timer);
+     }
+ }
+</script>
+</body>
+</html>
