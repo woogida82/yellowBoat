@@ -3,6 +3,7 @@ package kr.co.fishing.bko.reservation;
 import java.util.List;
 
 import kr.co.fishing.bko.beans.ReservationBean;
+import kr.co.fishing.bko.beans.ReservationDayBean;
 import kr.co.fishing.bko.beans.ReservationDetailBean;
 
 public interface ReservationService {
@@ -59,5 +60,11 @@ public interface ReservationService {
      * @return int
      * @throws Exception
      */    
-    int updateReservation(ReservationDetailBean bean) throws Exception;    
+    int updateReservation(ReservationDetailBean bean) throws Exception;
+    
+    List<ReservationDayBean> selectReservCalender(ReservationDayBean bean) throws Exception;
+
+    int updateReservationDetail(ReservationDetailBean bean) throws Exception;
+
+    int deleteReservationDetail(ReservationDetailBean bean) throws Exception;
 }

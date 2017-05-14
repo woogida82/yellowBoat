@@ -17,9 +17,11 @@ public class ReservationDayBean extends CommonBaseBean {
     
     /* 추가 */
     private List<ReservationBean> reservationBeans;
+    private ReservationBean reservationBean;
+    private List<ReservationDetailBean> reservationDetailBeans;
     
     private String reservDt;
-    
+    private String shipId;
 
     public String getReservDayId() {
         return reservDayId;
@@ -86,5 +88,23 @@ public class ReservationDayBean extends CommonBaseBean {
     }
     public void setReservDt(String reservDt) {
         this.reservDt = reservDt;
+    }
+    public ReservationBean getReservationBean() {
+        return reservationBean;
+    }
+    public void setReservationBean(ReservationBean reservationBean) {
+        this.reservationBean = reservationBean;
+    }
+    public List<ReservationDetailBean> getReservationDetailBeans() {
+        return reservationDetailBeans;
+    }
+    public void setReservationDetailBeans(List<ReservationDetailBean> reservationDetailBeans) {
+        this.reservationDetailBeans = reservationDetailBeans;
+    }
+    public String getShipId() {
+        return shipId;
+    }
+    public void setShipId(String shipId) {
+        this.shipId = shipId;
     }   
 }

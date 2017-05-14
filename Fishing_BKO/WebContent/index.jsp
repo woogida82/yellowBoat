@@ -3,6 +3,6 @@
 <head>
   <title>Redirect</title>
   <%@ include file="/jsp/common/meta.jsp" %>
-  <meta http-equiv="refresh" CONTENT="0;URL=/bko/login">
+  <meta http-equiv="refresh" CONTENT="0;URL=/front">
 </head>
 </html>

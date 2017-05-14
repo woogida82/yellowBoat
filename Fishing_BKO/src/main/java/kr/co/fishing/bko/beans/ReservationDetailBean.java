@@ -27,6 +27,10 @@ public class ReservationDetailBean extends CommonBaseBean {
     private String shipNm; //선박명
     private String shipId; //선박ID
     
+    private String year;
+    private String month;
+    private String day;    
+
     public String getReservDtlId() {
         return reservDtlId;
     }
@@ -146,5 +150,23 @@ public class ReservationDetailBean extends CommonBaseBean {
     }
     public void setShipId(String shipId) {
         this.shipId = shipId;
+    }
+    public String getYear() {
+        return year;
+    }
+    public void setYear(String year) {
+        this.year = year;
+    }
+    public String getMonth() {
+        return month;
+    }
+    public void setMonth(String month) {
+        this.month = month;
+    }
+    public String getDay() {
+        return day;
+    }
+    public void setDay(String day) {
+        this.day = day;
     }
 }

@@ -103,4 +103,13 @@ public class ReservationDao {
     public int updateReservationDetail(ReservationDetailBean bean) {
         return sqlSession.update("reservation.updateReservationDetail", bean);
     } 
+    
+    public List<ReservationDayBean> selectReservCalender(ReservationDayBean bean){
+        return sqlSession.selectList("reservation.selectReservCalender", bean);
+    }
+
+    public int deleteReservationDetail(ReservationDetailBean bean) {
+        // TODO Auto-generated method stub
+        return sqlSession.update("reservation.deleteReservationDetail", bean);
+    }
 }

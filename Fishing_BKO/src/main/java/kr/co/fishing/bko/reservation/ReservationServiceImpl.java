@@ -120,4 +120,32 @@ public class ReservationServiceImpl implements ReservationService {
         
         return result;
     }
+    
+    /**
+     * 예약 수정
+     * 
+     * @param ReservationDetailBean
+     * @return int
+     * @throws Exception
+     */    
+    @Override
+    public int updateReservationDetail(ReservationDetailBean bean) throws Exception {
+        int result = 0;
+        //예약일 생성
+        result = reservationDao.updateReservationDetail(bean);
+        return result;
+    }    
+
+    @Override
+    public List<ReservationDayBean> selectReservCalender(ReservationDayBean bean) throws Exception {
+        return reservationDao.selectReservCalender(bean);
+    }
+
+    @Override
+    public int deleteReservationDetail(ReservationDetailBean bean) throws Exception {
+        int result = 0;
+        //예약일 생성
+        result = reservationDao.deleteReservationDetail(bean);
+        return result;
+    }
 }
