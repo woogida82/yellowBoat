@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
@@ -193,7 +193,7 @@
                 </div>
                 <div class="col-md-3">
                 	<div class="hot_spot_list">
-                        <div class="img_box"><a href="/front/reservCalender?shipId=4"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
+                        <div class="img_box"><a href="/front/reservCalender?shipId=1"><img src="/images/front/m_noimg.jpg" alt="" class="img-responsive center-block"></a></div>
                         <div class="txt_box">
                             <p class="name">옐로우보트</p>
                             <p class="type">우럭, 광어 배낚시</p>
